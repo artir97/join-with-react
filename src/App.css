@@ -33,3 +33,15 @@ nav {
     justify-content: center;
     align-items: center;
 }
+
+
+/*FOOTER*/
+footer {
+    height: 76px;
+    background-color: #9ca3af;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
