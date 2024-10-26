@@ -1,9 +1,14 @@
 import './App.css';
 import './output.css';
+import Navbar from './components/Navbar';
 
+// MAIN PAGE
 function App() {
   return (
-    <div>tests</div>
+    <>
+        <Navbar/>
+        <div>tests</div>
+    </>
   );
 }
 
