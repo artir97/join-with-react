@@ -1,3 +1,4 @@
+/*NAVBAR*/
 nav {
     height: 80px;
     background-color: #4589FF;
@@ -36,6 +37,30 @@ nav {
     align-items: center;
 }
 
+/*NAVBAR DROPDOWN*/
+.nav-bar-menu-dropdown {
+    background-color: #FFF;
+    box-shadow: -2px 0 6px 0 rgb(0, 0, 0, 0.2);
+    border-radius: 20px 0 20px  20px;
+    padding: 10px;
+
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 160px;
+    height: 180px;
+}
+
+.nav-bar-menu-dropdown .dropdown-item {
+    height: 40px;
+    padding: 10px;
+    font-size: 19px;
+    color: #4589FF;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
 
 /*FOOTER*/
 footer {
