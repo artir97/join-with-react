@@ -6,7 +6,7 @@ const Summary = () => {
     return (
         <div className="flex flex-col items-center p-4">
             <UrgentTaskCounter />
-            <BigTaskCounter />
+            <BigTaskCounter count={1} />
 
             <div className="flex flex-col space-y-4 justify-center">
                 <div className="space-x-4 flex">
