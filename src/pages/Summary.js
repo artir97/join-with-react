@@ -5,7 +5,7 @@ import UrgentTaskCounter from "../components/summary/UrgentTaskCounter";
 const Summary = () => {
     return (
         <div className="flex flex-col items-center space-y-4 p-4">
-            <UrgentTaskCounter />
+            <UrgentTaskCounter count={1} date={"November 27, 2024"} />
             <BigTaskCounter count={1} />
 
             <div className="flex flex-col w-full space-y-4 justify-center">
