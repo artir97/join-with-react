@@ -86,3 +86,42 @@ footer div {
     flex-direction: column;
     align-items: center;
 }
+
+
+/*ADD TEST*/
+.container-add-task {
+    height: calc(100vh - 80px - 76px);
+    overflow-y: auto;
+}
+
+.container-add-task .add-task-form {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-add-task .add-task-form .title-input {
+    height: 48px;
+    font-size: 28px;
+    width: 100%;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+label[for="description-input"] {
+    width: 100%;
+    color: #42526E;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.container-add-task .add-task-form .description-input {
+    border: 1px solid #D1D1D1;
+    padding: 18px 16px;
+    border-radius: 10px 0 10px 10px;
+    resize: none;
+
+    width: 100%;
+    height: 88px;
+}
