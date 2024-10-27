@@ -1,6 +1,4 @@
 .task-counter {
-    border: 1px solid #e5e7eb;
-    transition: 0.3s;
     background-color: #fff;
     color: #000;
 
@@ -11,7 +9,6 @@
 
 .task-counter:hover,
 .task-counter:active {
-    border-start-start-radius: 0px;
     background-color: #1d4ed8;
     color: #fff;
 }
@@ -22,5 +19,12 @@
 }
 
 .task-general {
+    border: 1px solid #e5e7eb;
     border-radius: 40px;
+    transition: 0.3s;
+}
+
+.task-general:hover,
+.task-general:active {
+    border-start-start-radius: 0px;
 }
