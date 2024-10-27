@@ -4,7 +4,7 @@ import NavbarDropdown from "./NavbarDropdown";
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const handleClickDropDown = () => {
-        setIsOpen(true);
+        setIsOpen((prevIsOpen) => !prevIsOpen);
     }
 
     return (
