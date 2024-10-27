@@ -8,7 +8,8 @@ const NameIcon = ({ name }) => {
     const values = name.split(" ").map(n => n.charAt(0).toUpperCase().charCodeAt(0) - 64);
 
     return (
-        <div className="rounded-full p-1.5 text-sm text-white" style={{ backgroundColor: `hsl(${hue(values[0], values[1])}, 50%, 50%)` }}>
+        <div className="rounded-full size-10 p-1.5 flex justify-center items-center text-sm text-white"
+            style={{ backgroundColor: `hsl(${hue(values[0], values[1])}, 50%, 50%)` }}>
             {displayedName}
         </div>
     )
