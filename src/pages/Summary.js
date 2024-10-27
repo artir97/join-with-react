@@ -4,15 +4,19 @@ import UrgentTaskCounter from "../components/summary/UrgentTaskCounter";
 
 const Summary = () => {
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center p-4">
             <UrgentTaskCounter />
             <BigTaskCounter />
 
-            <div className="flex flex-wrap justify-center">
-                <TaskCounter iconUrl="/assets/icons/summary/on-board.svg" name={"Tasks on board"} count={5} />
-                <TaskCounter iconUrl="/assets/icons/summary/in-progress.svg" name={"Tasks in progress"} count={2} />
-                <TaskCounter iconUrl="/assets/icons/summary/awaiting-feedback.svg" name={"Awaiting feedback"} count={2} />
-                <TaskCounter iconUrl="/assets/icons/summary/tasks-done.svg" name={"Tasks done"} count={5} />
+            <div className="flex flex-col space-y-4 justify-center">
+                <div className="space-x-4 flex">
+                    <TaskCounter iconUrl="/assets/icons/summary/on-board.svg" name={"Tasks on board"} count={5} />
+                    <TaskCounter iconUrl="/assets/icons/summary/in-progress.svg" name={"Tasks in progress"} count={2} />
+                </div>
+                <div className="space-x-4 flex">
+                    <TaskCounter iconUrl="/assets/icons/summary/awaiting-feedback.svg" name={"Awaiting feedback"} count={2} />
+                    <TaskCounter iconUrl="/assets/icons/summary/tasks-done.svg" name={"Tasks done"} count={5} />
+                </div>
             </div>
         </div>
     );
