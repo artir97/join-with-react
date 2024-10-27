@@ -3,6 +3,8 @@ nav {
     background-color: #4589FF;
     padding-left: 20px;
     padding-right: 20px;
+    box-shadow: -2px 0 6px 0 rgb(0, 0, 0, 0.4);
+
 
     display: flex;
     justify-content: space-between;
@@ -38,10 +40,23 @@ nav {
 /*FOOTER*/
 footer {
     height: 76px;
-    background-color: #9ca3af;
+    background-color: #FFF;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-shadow: -2px 0 6px 0 rgb(0, 0, 0, 0.4);
 
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
