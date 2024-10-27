@@ -86,3 +86,11 @@ footer div {
     flex-direction: column;
     align-items: center;
 }
+
+.flex-2 {
+    flex: 2 1 0%;
+}
+
+.page-content {
+    height: calc(100vh - 156px);
+}
