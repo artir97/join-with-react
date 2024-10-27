@@ -1,13 +1,31 @@
 .task-counter {
-    border: 1px solid #9ca3af;
+    border: 1px solid #e5e7eb;
+    transition: 0.3s;
+    background-color: #fff;
+    color: #000;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task-counter:hover,
+.task-counter:active {
+    border-radius: 0px 30px 30px 30px;
+    background-color: #1d4ed8;
+    color: #fff;
 }
 
 .task-counter-icon {
     height: 80px;
     width: 80px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-sizing: border-box;
+    object-fit: cover;
 }
 
 .task-general {
-    border-radius: 30px;
     margin: 8px;
 }
