@@ -29,6 +29,15 @@
     border-start-start-radius: 0px;
 }
 
+.big-task {
+    width: 100%;
+    background-color: #bfdbfe;
+}
+
+.big-task:hover {
+    background-color: white;
+}
+
 .urgent-task {
     background-color: #3b82f6;
     color: white;
