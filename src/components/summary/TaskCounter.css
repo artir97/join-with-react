@@ -28,3 +28,19 @@
 .task-general:active {
     border-start-start-radius: 0px;
 }
+
+.urgent-task {
+    background-color: #3b82f6;
+    color: white;
+    width: 100%;
+}
+
+.urgent-task:hover {
+    background-color: #fff;
+    color: #3b82f6;
+}
+
+.urgent-task:hover .hover-scale {
+    font-size: 1rem; /* 16px */
+    font-weight: 400;
+}

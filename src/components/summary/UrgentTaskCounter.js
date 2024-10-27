@@ -2,7 +2,7 @@ import './TaskCounter.css';
 
 const UrgentTaskCounter = ({ count, date }) => {
     return (
-        <div className="w-full p-4 bg-blue-600 text-white task-general flex space-x-2 items-center">
+        <div className="p-4 task-general flex space-x-2 urgent-task items-center">
             <div className="flex flex-col justify-center items-center px-2">
                 <div className="flex items-center space-x-1">
                     <img src="./assets/icons/summary/urgent-tasks.svg" className="task-counter-icon" alt="Urgent icon" />
@@ -14,7 +14,7 @@ const UrgentTaskCounter = ({ count, date }) => {
                 {date
                     ? <>
                         <p className="font-semibold">{date}</p>
-                        <p className="font-extralight text-sm">Incoming deadline</p>
+                        <p className="font-extralight text-sm hover-scale duration-300">Incoming deadline</p>
                     </>
                     : <p className="font-extralight text-sm">No urgent tasks</p>
                 }
