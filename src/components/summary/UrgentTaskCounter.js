@@ -1,3 +1,5 @@
+import './TaskCounter.css';
+
 const UrgentTaskCounter = ({ count, date }) => {
     return (
         <div className="w-full p-4 bg-blue-600 text-white task-general flex space-x-2 items-center">

@@ -1,3 +1,5 @@
+import './TaskCounter.css';
+
 const BigTaskCounter = ({count}) => {
     return (
         <div className="bg-blue-200 w-full py-3 px-6 task-general flex space-x-4 items-center hover:rounded-ss-none hover:bg-white">
