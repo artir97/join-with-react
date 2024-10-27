@@ -10,7 +10,7 @@ const UrgentTaskCounter = ({ count, date }) => {
                 </div>
                 <p className="font-extralight text-center">Urgent tasks</p>
             </div>
-            <div className="flex flex-col border-l border-white py-2 pl-2">
+            <div className="flex flex-col left-separator py-2 pl-2">
                 {date
                     ? <>
                         <p className="font-semibold">{date}</p>

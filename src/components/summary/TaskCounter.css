@@ -53,3 +53,11 @@
     font-size: 1rem; /* 16px */
     font-weight: 400;
 }
+
+.left-separator {
+    border-left: 1px solid #fff;
+}
+
+.urgent-task:hover .left-separator {
+    border-left: 1px solid #3b82f6;
+}
