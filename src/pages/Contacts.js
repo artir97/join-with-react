@@ -1,3 +1,4 @@
+import AddContactIcon from "../components/contacts/AddContactIcon";
 import ContactLetterList from "../components/contacts/ContactLetterList";
 
 const list = [
@@ -50,11 +51,14 @@ const Contacts = () => {
     }, {});
 
     return (
-        <div className="page-content px-8 overflow-y-scroll">
-            {[...Object.entries(map)]
-                .sort((a, b) => a[0] > b[0])
-                .map((e, i) => <ContactLetterList key={i} letter={e[0]} list={e[1]} />)}
-        </div>
+        <>
+            <div className="page-content px-8 overflow-y-scroll">
+                {[...Object.entries(map)]
+                    .sort((a, b) => a[0] > b[0])
+                    .map((e, i) => <ContactLetterList key={i} letter={e[0]} list={e[1]} />)}
+            </div>
+            <AddContactIcon className="absolute z-10 right-8 bottom-28" />
+        </>
     );
 }
 

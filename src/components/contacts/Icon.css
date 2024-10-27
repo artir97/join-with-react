@@ -1,0 +1,11 @@
+.add-contact-icon {
+    background-color: #3b82f6;
+    transition: 0.3s;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.add-contact-icon:hover,
+.add-contact-icon:active {
+    background-color: #1d4ed8;
+}
