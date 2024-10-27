@@ -11,9 +11,7 @@ function App() {
   return (
     <>
       <Navbar />
-        <AddTask/>
-      <Contacts />
-
+      <AddTask/>
       <Footer />
     </>
   );

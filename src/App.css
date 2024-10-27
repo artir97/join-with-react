@@ -98,7 +98,7 @@ footer div {
 
 /*ADD TEST*/
 .container-add-task {
-    height: calc(100vh - 80px - 76px);
+    height: calc(100vh - 80px - 76px - 60px);
     overflow-y: auto;
 }
 
@@ -163,4 +163,35 @@ footer div {
     align-items: center;
     justify-content: space-between;
     padding-top: 12px;
+}
+
+
+.buttons-container {
+    position: fixed;
+    bottom: 76px;
+    height: 60px;
+    width: 100%;
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.button {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 12px 8px;
+    border-radius: 10px;
+
+    display: flex;
+}
+
+.button-white {
+    background-color: #FFF;
+    border: 1px solid #42526E;
+}
+
+.button-blue {
+    color: #FFF;
+    background-color: #4589FF;
 }

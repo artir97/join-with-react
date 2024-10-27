@@ -122,6 +122,17 @@ const AddTask = () => {
                 <div>
 
                 </div>
+
+                <div className="buttons-container">
+                    <div className="button button-white">
+                        <div>Clear</div>
+                        <img src={'./assets/icon/add-task/clear.png'} alt={"a cross icon"}/>
+                    </div>
+                    <button className="button button-blue">
+                        <div>Create Task</div>
+                        <img src={'./assets/icon/add-task/check.png'} alt={"a checkmark icon"}/>
+                    </button>
+                </div>
             </form>
         </div>
       </>
