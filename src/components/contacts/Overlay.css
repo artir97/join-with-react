@@ -1,0 +1,18 @@
+.mask {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    z-index: 20;
+}
+
+.overlay {
+    height: calc(100% - 160px);
+    width: calc(100% - 64px);
+}
+
+.input-contact {
+    outline: none;
+    border-bottom: 1px solid lightgray;
+    padding: 4px 16px;
+}

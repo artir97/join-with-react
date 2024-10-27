@@ -1,5 +1,8 @@
+import { useState } from "react";
+
 import AddContactIcon from "../components/contacts/AddContactIcon";
 import ContactLetterList from "../components/contacts/ContactLetterList";
+import AddContactOverlay from "../components/contacts/AddContactOverlay";
 
 const list = [
     { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },
@@ -39,7 +42,8 @@ const list = [
 ];
 
 const Contacts = () => {
-    const map = list.reduce((acc, info) => {
+    const [showOverlay, setShowOverlay] = useState(false);
+    const [map, _] = useState(() => list.reduce((acc, info) => {
         const initial = info.name.charAt(0).toUpperCase();
 
         if (!acc[initial]) {
@@ -48,7 +52,7 @@ const Contacts = () => {
 
         acc[initial].push(info);
         return acc;
-    }, {});
+    }, {}));
 
     return (
         <>
@@ -57,7 +61,8 @@ const Contacts = () => {
                     .sort((a, b) => a[0] > b[0])
                     .map((e, i) => <ContactLetterList key={i} letter={e[0]} list={e[1]} />)}
             </div>
-            <AddContactIcon className="absolute z-10 right-8 bottom-28" />
+            <AddContactIcon className="absolute z-10 right-8 bottom-28" onClick={() => setShowOverlay(true)}/>
+            {showOverlay && <AddContactOverlay onExit={() => setShowOverlay(false)}/>}
         </>
     );
 }

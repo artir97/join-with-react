@@ -1,0 +1,2 @@
+.icon-input {display: inline-block} /* prevent 100% width */
+.icon-input .icon {left: auto; right: 10px;}
