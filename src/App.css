@@ -40,7 +40,7 @@ nav {
 /*NAVBAR DROPDOWN*/
 .nav-bar-menu-dropdown {
     background-color: #FFF;
-    box-shadow: -2px 0 6px 0 rgb(0, 0, 0, 0.2);
+    box-shadow: 0 0 6px 0 rgb(0, 0, 0, 0.2);
     border-radius: 20px 0 20px  20px;
     padding: 10px;
 
@@ -88,9 +88,79 @@ footer div {
 }
 
 .flex-2 {
-    flex: 2 1 0%;
-}
+     flex: 2 1 0%;
+ }
 
 .page-content {
     height: calc(100vh - 156px);
+}
+
+
+/*ADD TEST*/
+.container-add-task {
+    height: calc(100vh - 80px - 76px);
+    overflow-y: auto;
+}
+
+.container-add-task .add-task-form {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-add-task .add-task-form input {
+    height: 48px;
+    font-size: 28px;
+    width: 100%;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+.add-task-form label {
+    color: #42526E;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.container-add-task .add-task-form .description-input {
+    border: 1px solid #D1D1D1;
+    padding: 18px 16px;
+    border-radius: 10px 0 10px 10px;
+    resize: none;
+
+    width: 100%;
+    height: 88px;
+}
+
+.container-add-task .priority-selection {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+}
+
+.container-add-task .priority-button {
+    width: 120px;
+    height: 48px;
+    border-radius: 10px;
+    box-shadow: 0 0 6px 0 rgb(0, 0, 0, 0.2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.contacts-selection {
+    width: 100%;
+    height: 200px;
+    overflow-y: auto;
+}
+
+.contacts-selection .contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
 }
