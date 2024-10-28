@@ -1,10 +1,6 @@
 import './Icon.css';
 
 const ClickableIcon = ({ url, name, className, onClick }) => {
-    console.log(onClick);
-    console.log(url);
-
-
     return (
         <img src={url}
             alt={name}

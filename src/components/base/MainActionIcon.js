@@ -1,8 +1,6 @@
 import ClickableIcon from "./ClickableIcon";
 
 const MainActionIcon = ({ onClick, url, name }) => {
-    console.log(onClick);
-
     return (
         <ClickableIcon
             url={url}

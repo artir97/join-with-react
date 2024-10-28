@@ -1,5 +1,5 @@
 const hue = (v1, v2) => {
-    console.log(v1, v2, "=>", Math.floor((v1 * 25 + v2) * 255 / (25 * 25)));
+    // console.log(v1, v2, "=>", Math.floor((v1 * 25 + v2) * 255 / (25 * 25)));
     return Math.floor((v1 * 25 + v2) * 255 / (25 * 25));
 }
 
