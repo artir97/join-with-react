@@ -31,8 +31,8 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                     }
                 </form>
                 <div className='center-icon bg-gray-300'>
-                    {isEditing
-                        ? <NameIcon name={name} large />
+                    {isEditing && inputName.trim() !== ""
+                        ? <NameIcon name={inputName} large />
                         : <img alt="Person icon"
                             src="./assets/icons/contacts/person.svg" />
                     }
