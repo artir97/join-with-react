@@ -40,6 +40,8 @@ const AddTask = () => {
         { name: "Scarlett Cooper", mail: "scarlett.cooper@example.com", phone: "+49 3434 33 678 1" }
     ];
 
+    const [selectedContacts, setSelectedContacts ] = useState([]);
+
     const [selectTaskIsOpen, setSelectTaskIsOpen] = useState(false);
     const handleClickSelectTaskDropDown = () => {
         setSelectTaskIsOpen((toggleOpen) => !toggleOpen);
@@ -53,6 +55,14 @@ const AddTask = () => {
     const filteredContacts = contacts.filter(contact =>
         contact.name.toLowerCase().includes(searchContact.toLowerCase())
     );
+
+    const selectContact = (currentContact) => {
+        if (!selectedContacts.some(contact => contact.mail === currentContact.mail)) {
+            setSelectedContacts([...selectedContacts, currentContact])
+        } else {
+            setSelectedContacts(selectedContacts.filter(contact => contact.mail !== currentContact.mail));
+        }
+    }
 
     const clearAddTaskForm = () => {
         setTitle('');
@@ -155,7 +165,7 @@ const AddTask = () => {
                         </>
                     }
                 </div>
-                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts}/>}
+                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts} selectContact={selectContact}/>}
 
                 <label><b>Category</b></label>
                 <div onClick={handleClickSelectTaskDropDown}
@@ -188,11 +198,11 @@ const AddTask = () => {
     );
 }
 
-const ContactsSelection = ({contacts}) => {
+const ContactsSelection = ({contacts, selectContact}) => {
     return (
         <div className="contacts-selection">
             {contacts.map((contact, index) => (
-                <div className="contact" key={index}>
+                <div onClick={ () => selectContact(contact)} className="contact" key={index}>
                     <div className="flex gap-5">
                         <div>
                         <NameIcon name={contact.name}/>
