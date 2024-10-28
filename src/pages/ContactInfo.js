@@ -20,7 +20,7 @@ const ContactInfo = ({ name, mail, phone }) => {
                 <div>
                     <div className="flex items-center">
                         <h2 className="font-bold flex-1">Contact information</h2>
-                        <span className="p-4 text-blue-500">{"<"}</span>
+                        <span className="p-4 text-blue-500 cursor-pointer">{"<"}</span>
                     </div>
                     <div className="flex items-center space-x-4">
                         <NameIcon name={name} large className={"border border-white shadow-md"} />

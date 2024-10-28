@@ -10,7 +10,7 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
 
     return (
         <div className="bg-opacity-50 bg-white mask">
-            <div className="p-4 absolute top-20 z-30 text-white right-10" onClick={onExit}>
+            <div className="p-4 absolute top-20 z-30 text-white right-10 cursor-pointer" onClick={onExit}>
                 X
             </div>
             <div className="rounded-2xl flex flex-col items-center mx-8 my-20 shadow-lg overlay bg-white box-border">
