@@ -12,16 +12,16 @@ const AddContactOverlay = ({ onExit }) => {
                     <p className='font-bold text-4xl'>Add contact</p>
                     <p className='font-light'>Tasks are better with a team!</p>
                 </div>
-                <div className='size-32 bg-gray-300 outline outline-white rounded-full flex justify-center items-center'>
+                <form className='flex flex-col items-center space-y-4 px-6 py-12'>
+                    <IconInput className="input-contact" iconUrl="" placeholder="Name" />
+                    <IconInput className="input-contact" iconUrl="" placeholder="Mail address" />
+                    <IconInput className="input-contact" iconUrl="" placeholder="Phone number" />
+                    <button className='rounded bg-blue-500 text-white p-2 mt-4'>Create contact V</button>
+                </form>
+                <div className='center-icon bg-gray-300'>
                     <img alt="Person icon"
                         src="./assets/icons/contacts/person.svg" />
                 </div>
-                <form className='flex flex-col items-center space-y-4 p-6'>
-                    <IconInput className="input-contact" iconUrl="" placeholder="Name"/>
-                    <IconInput className="input-contact" iconUrl="" placeholder="Mail address"/>
-                    <IconInput className="input-contact" iconUrl="" placeholder="Phone number"/>
-                    <button className='rounded bg-blue-500 text-white p-2 mt-4'>Create contact V</button>
-                </form>
             </div>
         </div>
     );

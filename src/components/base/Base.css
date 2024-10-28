@@ -1,2 +1,4 @@
-.icon-input {display: inline-block} /* prevent 100% width */
-.icon-input .icon {left: auto; right: 10px;}
+.icon-input {
+    display: inline-block;
+    border-bottom: 1px solid lightgray;
+}
