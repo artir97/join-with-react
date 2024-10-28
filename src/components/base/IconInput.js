@@ -2,11 +2,11 @@ import "./Base.css";
 
 const IconInput = ({ className, value, placeholder, onChange, iconUrl = "" }) => {
     return (
-        <div className="icon-input">
-            <input className={`${className} w-5/6`} value={value} placeholder={placeholder} onChange={onChange}/>
+        <div className="icon-input flex">
+            <input className={`${className} flex-1`} value={value} placeholder={placeholder} onChange={onChange}/>
             {iconUrl
-                ? <img src={iconUrl} alt="Input icon" className="icon"/>
-                : <span className="icon">lll</span>
+                ? <img src={iconUrl} alt="Input icon" className="m-4"/>
+                : <span className="m-4">lll</span>
             }
         </div>
     );
