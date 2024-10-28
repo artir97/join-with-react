@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import AddContactIcon from "../components/contacts/AddContactIcon";
 import ContactLetterList from "../components/contacts/ContactLetterList";
 import AddContactOverlay from "../components/contacts/AddContactOverlay";
+import MainActionIcon from "../components/base/MainActionIcon";
 
 const list = [
     { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },
@@ -61,8 +61,11 @@ const Contacts = () => {
                     .sort((a, b) => a[0] > b[0])
                     .map((e, i) => <ContactLetterList key={i} letter={e[0]} list={e[1]} />)}
             </div>
-            <AddContactIcon className="absolute z-10 right-8 bottom-28" onClick={() => setShowOverlay(true)}/>
-            {showOverlay && <AddContactOverlay onExit={() => setShowOverlay(false)}/>}
+            <MainActionIcon
+                url="./assets/icons/contacts/add-contact.svg"
+                name={"Add contact icon"}
+                onClick={() => setShowOverlay(true)} />
+            {showOverlay && <AddContactOverlay onExit={() => setShowOverlay(false)} />}
         </>
     );
 }

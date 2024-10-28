@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import IconInput from '../base/IconInput';
+import NameIcon from './NameIcon';
 import './Overlay.css';
 
 const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing }) => {
+    const [name, setName] = useState("");
+
     return (
         <div className="bg-opacity-50 bg-white mask">
             <div className="p-4 absolute top-20 z-30 text-white right-10" onClick={onExit}>
@@ -13,20 +17,23 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing }) 
                     <p className='font-light'>{flavorText}</p>
                 </div>
                 <form className='flex flex-col items-center space-y-4 px-6 py-12'>
-                    <IconInput className="input-contact" iconUrl="" placeholder="Name" />
+                    <IconInput className="input-contact" iconUrl="" placeholder="Name" onChange={e => setName(e.target.value)} />
                     <IconInput className="input-contact" iconUrl="" placeholder="Mail address" />
                     <IconInput className="input-contact" iconUrl="" placeholder="Phone number" />
                     {isEditing
-                        ? <>
+                        ? <div className='flex space-x-4'>
                             <button className='rounded bg-white p-2 mt-4'>Delete</button>
                             <button className='rounded bg-blue-500 text-white p-2 mt-4'>Save V</button>
-                        </>
+                        </div>
                         : <button className='rounded bg-blue-500 text-white p-2 mt-4'>Create contact V</button>
                     }
                 </form>
                 <div className='center-icon bg-gray-300'>
-                    <img alt="Person icon"
-                        src="./assets/icons/contacts/person.svg" />
+                    {isEditing
+                        ? <NameIcon name={name} large />
+                        : <img alt="Person icon"
+                            src="./assets/icons/contacts/person.svg" />
+                    }
                 </div>
             </div>
         </div>
