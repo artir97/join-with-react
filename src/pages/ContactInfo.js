@@ -34,7 +34,12 @@ const ContactInfo = ({ name, mail, phone }) => {
                 url="./assets/icons/contacts/more.svg"
                 name={"Add contact icon"}
                 onClick={() => setShowOverlay(true)} />
-            {showOverlay && <EditContactOverlay onExit={() => setShowOverlay(false)}/>}
+            {showOverlay && <EditContactOverlay
+                onExit={() => setShowOverlay(false)}
+                name={name}
+                mail={mail}
+                phone={phone}
+            />}
         </>
     );
 }
