@@ -569,6 +569,10 @@ video {
   z-index: 10;
 }
 
+.z-30 {
+  z-index: 30;
+}
+
 .mx-8 {
   margin-left: 2rem;
   margin-right: 2rem;
