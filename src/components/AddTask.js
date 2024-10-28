@@ -6,6 +6,7 @@ const AddTask = () => {
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
     const [priority, setPriority] = useState('');
+    const [searchContact, setSearchContact] = useState('');
     const contacts = [
         { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },
         { name: "John Doe", mail: "john.doe@example.com", phone: "+49 1234 56 789 0" },
@@ -49,6 +50,18 @@ const AddTask = () => {
         setSelectContactsIsOpen((toggleOpen) => !toggleOpen);
     }
 
+    const filteredContacts = contacts.filter(contact =>
+        contact.name.toLowerCase().includes(searchContact.toLowerCase())
+    );
+
+    const clearAddTaskForm = () => {
+        setTitle('');
+        setDescription('');
+        setDate('');
+        setPriority('');
+        setSearchContact('');
+    }
+
     return (
       <>
         <div className="container-add-task">
@@ -80,50 +93,69 @@ const AddTask = () => {
 
                 <label><b>Priority</b></label>
                 <div className="priority-selection">
-                    {priority === 'high' && <SelectedHighPriority/>}
+                    {
+                        priority === 'high' &&
+                        <SelectedPriority priority={'Urgent'} priorityClass={'priority-high'} priorityImageUrl={'./assets/icon/add-task/prio-high-white.png'} alt={'high priority icon'}/>
+                    }
                     {
                         priority !== 'high' &&
-                        <div className="priority-button" onClick={() => {
-                            setPriority('high')
-                        }}>
+                        <div className="priority-button" onClick={() => {setPriority('high')}}>
                             <div>Urgent</div>
                             <img src={'./assets/icon/add-task/prio-high.png'} alt={"high priority icon"}/>
                         </div>
                     }
 
-                    {priority === 'medium' && <SelectedMediumPriority/>}
+                    {
+                        priority === 'medium' &&
+                        <SelectedPriority priority={'Medium'} priorityClass={'priority-medium'} priorityImageUrl={'./assets/icon/add-task/prio-medium-white.png'} alt={'medium priority icon'}/>
+                    }
                     {
                         priority !== 'medium' &&
-                        <div className="priority-button" onClick={() => {
-                            setPriority('medium')
-                        }}>
+                        <div className="priority-button" onClick={() => {setPriority('medium')}}>
                             <div>Medium</div>
                             <img src={'./assets/icon/add-task/prio-medium.png'} alt={"medium priority icon"}/>
                         </div>
                     }
 
-                    {priority === 'low' && <SelectedLowPriority/>}
+                    {
+                        priority === 'low' &&
+                        <SelectedPriority priority={'Low'} priorityClass={'priority-low'} priorityImageUrl={'./assets/icon/add-task/prio-low-white.png'} alt={'low priority icon'}/>
+                    }
                     {
                         priority !== 'low' &&
-                        <div className="priority-button" onClick={() => {
-                            setPriority('low')
-                        }}>
+                        <div className="priority-button" onClick={() => {setPriority('low')}}>
                             <div>Low</div>
                             <img src={'./assets/icon/add-task/prio-low.png'} alt={"low priority icon"}/>
                         </div>
                     }
-
                 </div>
 
 
                 <label><b>Assigned to</b> (optional)</label>
-                <div onClick={handleClickSelectContactsDropDown}
+                <div
                      className="flex justify-between items-center w-full h-12 border-b border-gray-300">
-                <div>Select contacts to assign</div>
-                    {!selectContactsIsOpen && <img src={'./assets/icon/add-task/arrow-drop-down.png'} alt={"arrow pointing down"}/>}
-                    {selectContactsIsOpen && <img src={'./assets/icon/add-task/arrow-drop-down-up.png'} alt={"arrow pointing up"}/>}
+                    {
+                        !selectContactsIsOpen &&
+                        <>
+                            <div onClick={handleClickSelectContactsDropDown}>Select contacts to assign</div>
+                            <img onClick={handleClickSelectContactsDropDown} src={'./assets/icon/add-task/arrow-drop-down.png'} alt={"arrow pointing down"}/>
+                        </>
+                    }
+                    {
+                        selectContactsIsOpen &&
+                        <>
+                            <input
+                                value={searchContact}
+                                onChange={(e) => setSearchContact(e.target.value)}
+                                type="text"
+                                placeholder="search a contact"
+                            />
+                            <img onClick={handleClickSelectContactsDropDown}
+                                 src={'./assets/icon/add-task/arrow-drop-down-up.png'} alt={"arrow pointing up"}/>
+                        </>
+                    }
                 </div>
-                {selectContactsIsOpen && <ContactsSelection contacts={contacts}/>}
+                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts}/>}
 
                 <label><b>Category</b></label>
                 <div onClick={handleClickSelectTaskDropDown}
@@ -142,10 +174,10 @@ const AddTask = () => {
 
                 <div className="buttons-container">
                     <div className="button button-white">
-                        <div>Clear</div>
+                        <div onClick={clearAddTaskForm}>Clear</div>
                         <img src={'./assets/icon/add-task/clear.png'} alt={"a cross icon"}/>
                     </div>
-                    <button className="button button-blue">
+                    <button onClick={(e) => {e.preventDefault(); console.log('test')}} className="button button-blue">
                         <div>Create Task</div>
                         <img src={'./assets/icon/add-task/check.png'} alt={"a checkmark icon"}/>
                     </button>
@@ -187,31 +219,14 @@ const SelectTaskDropDown = () => {
     );
 }
 
-const SelectedHighPriority = () => {
+const SelectedPriority = ({ priority, priorityClass, priorityImageUrl, alt }) => {
     return (
-        <div className="priority-button priority-high">
-            <div>Urgent</div>
-            <img src={'./assets/icon/add-task/prio-high-white.png'} alt={"high priority icon"}/>
+        <div className={"priority-button " + priorityClass}>
+            <div>{priority}</div>
+            <img src={priorityImageUrl} alt={alt} />
         </div>
-    )
+    );
 }
 
-const SelectedMediumPriority = () => {
-    return (
-        <div className="priority-button priority-medium">
-            <div>Medium</div>
-            <img src={'./assets/icon/add-task/prio-medium-white.png'} alt={"high priority icon"}/>
-        </div>
-    )
-}
-
-const SelectedLowPriority = () => {
-    return (
-        <div className="priority-button priority-low">
-            <div>Low</div>
-            <img src={'./assets/icon/add-task/prio-low-white.png'} alt={"high priority icon"}/>
-        </div>
-    )
-}
 
 export default AddTask
