@@ -56,7 +56,7 @@ const Contacts = () => {
 
     return (
         <>
-            <div className="page-content px-8 overflow-y-scroll">
+            <div className="page-content overflow-y-scroll">
                 {[...Object.entries(map)]
                     .sort((a, b) => a[0] > b[0])
                     .map((e, i) => <ContactLetterList key={i} letter={e[0]} list={e[1]} />)}

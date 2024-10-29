@@ -93,6 +93,7 @@ footer div {
 
 .page-content {
     height: calc(100vh - 156px);
+    padding: 0 16px;
 }
 
 
