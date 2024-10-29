@@ -16,8 +16,10 @@ const TaskCard = ({ category, name, description = "", subtasks, assignees, prior
             </div>
             {/** Subtask progress gauge */}{/** Subtask text */}
             <div className="flex items-center space-x-2">
-                <div className="flex-1 rounded-md h-2 bg-blue-500" />
-                <p>{0}/{subtasks.length} subtasks</p>
+                <div className="h-2 flex-1 rounded-md bg-gray-200">
+                    <div className="rounded-md h-full bg-blue-500" style={{width: `${Math.floor(progress * 100)}%`}}/>
+                </div>
+                <p>{subtasks.filter(s => s.done).length}/{subtasks.length} subtasks</p>
             </div>
 
             <div className="flex items-center">
