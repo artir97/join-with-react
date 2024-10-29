@@ -177,8 +177,16 @@ footer div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 12px;
+    padding: 7px 16px;
+    margin-top: 8px;
+    border-radius: 10px;
 }
+
+.contacts-selection .contact.contact-selected {
+    background-color: #005DFF;
+    color: #FFF;
+}
+
 
 
 .buttons-container {

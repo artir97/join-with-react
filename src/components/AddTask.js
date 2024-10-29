@@ -8,6 +8,7 @@ const AddTask = () => {
     const [priority, setPriority] = useState('');
     const [searchContact, setSearchContact] = useState('');
     const contacts = [
+        { name: "Artir Guri", mail: "artir.guri@outlook.de", phone: "+49 160 93885857"},
         { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },
         { name: "John Doe", mail: "john.doe@example.com", phone: "+49 1234 56 789 0" },
         { name: "Alice Smith", mail: "alice.smith@example.com", phone: "+49 9876 54 321 0" },
@@ -165,7 +166,7 @@ const AddTask = () => {
                         </>
                     }
                 </div>
-                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts} selectContact={selectContact}/>}
+                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts} selectContact={selectContact} selectedContacts={selectedContacts} />}
 
                 <label><b>Category</b></label>
                 <div onClick={handleClickSelectTaskDropDown}
@@ -198,24 +199,33 @@ const AddTask = () => {
     );
 }
 
-const ContactsSelection = ({contacts, selectContact}) => {
+const ContactsSelection = ({contacts, selectContact, selectedContacts}) => {
+    // contact-selected add this class if a contact is selected
     return (
         <div className="contacts-selection">
-            {contacts.map((contact, index) => (
-                <div onClick={ () => selectContact(contact)} className="contact" key={index}>
+            {contacts.map((contact, index) => {
+                const isSelected = selectedContacts.some(selected => selected.mail === contact.mail);
+                const selectedImg = './assets/icon/add-task/check-button-checked-white.png';
+                const defaultImg = './assets/icon/add-task/check-button.png';
+
+                return (
+                   <div onClick={() => selectContact(contact)}
+                     className={`contact ${isSelected ? 'contact-selected' : ''}`}
+                     key={index}>
                     <div className="flex gap-5">
                         <div>
-                        <NameIcon name={contact.name}/>
+                            <NameIcon name={contact.name}/>
                         </div>
                         <div className="flex items-center">
                             {contact.name}
                         </div>
                     </div>
                     <div>
-                        <img src={'./assets/icon/add-task/check-button.png'} alt={"empty checkbox"}/>
+                        <img src={isSelected ? selectedImg : defaultImg} alt={"empty checkbox"}/>
                     </div>
                 </div>
-            ))}
+               )
+            })}
         </div>
     )
 }
