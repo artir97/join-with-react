@@ -105,7 +105,7 @@ const AddTask = () => {
                 <div className="priority-selection">
                     {
                         priority === 'high' &&
-                        <SelectedPriority priority={'Urgent'} priorityClass={'priority-high'} priorityImageUrl={'./assets/icon/add-task/prio-high-white.png'} alt={'high priority icon'}/>
+                        <SelectedPriority priority={'Urgent'} priorityClass={'priority-high'} priorityImageUrl={'./assets/icon/add-task/prio-high-white.png'} alt={'high priority icon'} setPriority={setPriority}/>
                     }
                     {
                         priority !== 'high' &&
@@ -117,7 +117,7 @@ const AddTask = () => {
 
                     {
                         priority === 'medium' &&
-                        <SelectedPriority priority={'Medium'} priorityClass={'priority-medium'} priorityImageUrl={'./assets/icon/add-task/prio-medium-white.png'} alt={'medium priority icon'}/>
+                        <SelectedPriority priority={'Medium'} priorityClass={'priority-medium'} priorityImageUrl={'./assets/icon/add-task/prio-medium-white.png'} alt={'medium priority icon'} setPriority={setPriority}/>
                     }
                     {
                         priority !== 'medium' &&
@@ -129,7 +129,7 @@ const AddTask = () => {
 
                     {
                         priority === 'low' &&
-                        <SelectedPriority priority={'Low'} priorityClass={'priority-low'} priorityImageUrl={'./assets/icon/add-task/prio-low-white.png'} alt={'low priority icon'}/>
+                        <SelectedPriority priority={'Low'} priorityClass={'priority-low'} priorityImageUrl={'./assets/icon/add-task/prio-low-white.png'} alt={'low priority icon'} setPriority={setPriority}/>
                     }
                     {
                         priority !== 'low' &&
@@ -229,9 +229,9 @@ const SelectTaskDropDown = () => {
     );
 }
 
-const SelectedPriority = ({ priority, priorityClass, priorityImageUrl, alt }) => {
+const SelectedPriority = ({ priority, priorityClass, priorityImageUrl, alt, setPriority }) => {
     return (
-        <div className={"priority-button " + priorityClass}>
+        <div onClick={ () => {setPriority('')}} className={"priority-button " + priorityClass}>
             <div>{priority}</div>
             <img src={priorityImageUrl} alt={alt} />
         </div>
