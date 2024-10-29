@@ -1,4 +1,4 @@
-import NameIcon from "./NameIcon";
+import NameIcon from "../icons/NameIcon";
 
 const ContactLetterList = ({ letter, list }) => {
     return (

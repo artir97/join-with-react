@@ -1,0 +1,37 @@
+.mask {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    z-index: 20;
+}
+
+.overlay {
+    height: calc(100% - 160px);
+    width: calc(100% - 64px);
+    position: relative;
+}
+
+.input-contact {
+    outline: none;
+    padding: 4px 16px;
+}
+
+.center-icon {
+    height: 80px;
+    width: 80px;
+
+    top: 40%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    outline: 3px solid white;
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 9999px;
+}
