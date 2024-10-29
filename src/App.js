@@ -18,7 +18,6 @@ function App() {
         name={"Anton Meyer"}
         mail={"anton.meyer@somemail.com"}
         phone={"This should not be a phone"} /> */}
-
       <Footer />
     </>
   );
