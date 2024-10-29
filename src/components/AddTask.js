@@ -167,7 +167,16 @@ const AddTask = () => {
                         </>
                     }
                 </div>
-                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts} selectContact={selectContact} selectedContacts={selectedContacts} />}
+                {
+                    !selectContactsIsOpen &&
+                    <div className="selected-contacts-list">
+                        {selectedContacts.map(selectedContact => (
+                            <NameIcon name={selectedContact.name}/>
+                        ))}
+                    </div>
+                }
+                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts} selectContact={selectContact}
+                                                            selectedContacts={selectedContacts}/>}
 
                 <label><b>Category</b></label>
                 <div onClick={handleClickSelectTaskDropDown}
@@ -222,7 +231,7 @@ const ContactsSelection = ({contacts, selectContact, selectedContacts}) => {
                         </div>
                     </div>
                     <div>
-                        <img src={isSelected ? selectedImg : defaultImg} alt={"empty checkbox"}/>
+                        <img src={isSelected ? selectedImg : defaultImg} alt={isSelected ? "checked checkbox" : "empty checkbox"}/>
                     </div>
                 </div>
                )

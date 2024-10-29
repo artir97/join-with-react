@@ -187,6 +187,13 @@ footer div {
     color: #FFF;
 }
 
+.selected-contacts-list {
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    margin-top: 8px;
+    gap: 8px;
+}
 
 
 .buttons-container {
