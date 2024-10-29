@@ -1,5 +1,6 @@
 import {useState} from "react";
 import NameIcon from "./NameIcon";
+import React from "react";
 
 const AddTask = () => {
     const [title, setTitle] = useState('');
@@ -41,6 +42,8 @@ const AddTask = () => {
         { name: "Scarlett Cooper", mail: "scarlett.cooper@example.com", phone: "+49 3434 33 678 1" }
     ];
     const [selectedContacts, setSelectedContacts ] = useState([]);
+    const [subtask, setSubtask] = useState('');
+    const [subtasks, setSubtasks] = useState([]);
     const [category, setCategory] = useState('Select task category');
     const [selectTaskIsOpen, setSelectTaskIsOpen] = useState(false);
     const handleClickSelectTaskDropDown = () => {
@@ -62,6 +65,21 @@ const AddTask = () => {
         } else {
             setSelectedContacts(selectedContacts.filter(contact => contact.mail !== currentContact.mail));
         }
+    }
+
+    const addSubtask = (subtask) => {
+        console.log(subtasks);
+        if(!subtasks.includes(subtask)){
+            setSubtasks([...subtasks, subtask]);
+            setSubtask('');
+        } else {
+            console.error('you can\'t add the same subtask twice');
+        }
+    }
+
+    const deleteSubtask = (index) => {
+        subtasks.splice(index, 1);
+        setSubtasks([...subtasks]);
     }
 
     const selectTask = (category) => {
@@ -193,8 +211,24 @@ const AddTask = () => {
 
                 <label><b>Subtasks</b> (optional)</label>
                 <div className="flex items-center w-full h-12 border-b border-gray-300">
-                    <input type="text"/>
-                    <img src={'./assets/icon/add-task/plus.png'} alt={"a plus icon"}/>
+                    <input value={subtask} onChange={(e) => setSubtask(e.target.value)} placeholder="Add new subtask" type="text"/>
+                    <img onClick={() => {addSubtask(subtask)}} src={'./assets/icon/add-task/plus.png'} alt={"a plus icon"}/>
+                </div>
+                <div className="w-full flex flex-col justify-between">
+                    {subtasks.map((subtask, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                <div className="flex justify-between">
+                                    <li>{subtask}</li>
+                                    <div className="flex">
+                                        <img src={'./assets/icon/add-task/edit-icon.png'} alt={"plus icon"}/>
+                                        <img src={'./assets/icon/add-task/dr-icon.png'} alt={"plus icon"}/>
+                                        <img onClick={() => {deleteSubtask(index)}} src={'./assets/icon/add-task/trash-icon.png'} alt={"plus icon"}/>
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        )
+                    })}
                 </div>
 
                 <div className="buttons-container">
@@ -202,7 +236,8 @@ const AddTask = () => {
                         <div onClick={clearAddTaskForm}>Clear</div>
                         <img src={'./assets/icon/add-task/clear.png'} alt={"a cross icon"}/>
                     </div>
-                    <button onClick={(e) => {e.preventDefault(); console.log('test')}} className="button button-blue">
+                    <button onClick={(e) => {
+                        e.preventDefault(); console.log('test')}} className="button button-blue">
                         <div>Create Task</div>
                         <img src={'./assets/icon/add-task/check.png'} alt={"a checkmark icon"}/>
                     </button>
