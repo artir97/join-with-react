@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import ContactLetterList from "../components/contacts/ContactLetterList";
 import AddContactOverlay from "../components/contacts/AddContactOverlay";
-import MainActionIcon from "../components/base/MainActionIcon";
+import MainActionIcon from "../components/icons/MainActionIcon";
 
 const list = [
     { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },

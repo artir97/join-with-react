@@ -1,6 +1,6 @@
 import { useState } from "react";
-import NameIcon from "../components/contacts/NameIcon";
-import MainActionIcon from "../components/base/MainActionIcon";
+import NameIcon from "../components/icons/NameIcon";
+import MainActionIcon from "../components/icons/MainActionIcon";
 import EditContactOverlay from "../components/contacts/EditContactOverlay";
 
 const Section = ({ title, value, colorClass = "" }) => (

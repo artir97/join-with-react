@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import IconInput from '../base/IconInput';
-import NameIcon from './NameIcon';
+import NameIcon from '../icons/NameIcon';
 import './Overlay.css';
 
 const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, name = "", mail = "", phone = "" }) => {
