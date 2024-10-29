@@ -40,9 +40,8 @@ const AddTask = () => {
         { name: "Charlotte Evans", mail: "charlotte.evans@example.com", phone: "+49 4545 77 234 4" },
         { name: "Scarlett Cooper", mail: "scarlett.cooper@example.com", phone: "+49 3434 33 678 1" }
     ];
-
     const [selectedContacts, setSelectedContacts ] = useState([]);
-
+    const [category, setCategory] = useState('Select task category');
     const [selectTaskIsOpen, setSelectTaskIsOpen] = useState(false);
     const handleClickSelectTaskDropDown = () => {
         setSelectTaskIsOpen((toggleOpen) => !toggleOpen);
@@ -63,6 +62,11 @@ const AddTask = () => {
         } else {
             setSelectedContacts(selectedContacts.filter(contact => contact.mail !== currentContact.mail));
         }
+    }
+
+    const selectTask = (category) => {
+        setCategory(category);
+        setSelectTaskIsOpen((toggleOpen) => !toggleOpen);
     }
 
     const clearAddTaskForm = () => {
@@ -98,6 +102,7 @@ const AddTask = () => {
 
                 <label><b>Due Date</b></label>
                 <input
+                    required
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
@@ -170,22 +175,21 @@ const AddTask = () => {
                 {
                     !selectContactsIsOpen &&
                     <div className="selected-contacts-list">
-                        {selectedContacts.map(selectedContact => (
-                            <NameIcon name={selectedContact.name}/>
+                        {selectedContacts.map((selectedContact, index) => (
+                            <NameIcon key={index} name={selectedContact.name}/>
                         ))}
                     </div>
                 }
-                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts} selectContact={selectContact}
-                                                            selectedContacts={selectedContacts}/>}
+                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts} selectContact={selectContact} selectedContacts={selectedContacts}/>}
 
                 <label><b>Category</b></label>
                 <div onClick={handleClickSelectTaskDropDown}
                      className="flex justify-between items-center w-full h-12 border-b border-gray-300">
-                    <div>Select task category</div>
+                    <div>{category}</div>
                     {!selectTaskIsOpen && <img src={'./assets/icon/add-task/arrow-drop-down.png'} alt={"arrow pointing down"}/>}
                     {selectTaskIsOpen && <img src={'./assets/icon/add-task/arrow-drop-down-up.png'} alt={"arrow pointing up"}/>}
                 </div>
-                {selectTaskIsOpen && <SelectTaskDropDown/>}
+                {selectTaskIsOpen && <SelectTaskDropDown selectTask={selectTask}/>}
 
                 <label><b>Subtasks</b> (optional)</label>
                 <div className="flex items-center w-full h-12 border-b border-gray-300">
@@ -210,7 +214,6 @@ const AddTask = () => {
 }
 
 const ContactsSelection = ({contacts, selectContact, selectedContacts}) => {
-    // contact-selected add this class if a contact is selected
     return (
         <div className="contacts-selection">
             {contacts.map((contact, index) => {
@@ -240,11 +243,11 @@ const ContactsSelection = ({contacts, selectContact, selectedContacts}) => {
     )
 }
 
-const SelectTaskDropDown = () => {
+const SelectTaskDropDown = ({selectTask}) => {
     return (
         <div className="w-full">
-            <div className="h-12 flex items-center">Technical Task</div>
-            <div className="h-12 flex items-center">User Story</div>
+            <div onClick={ () => {selectTask('Technical Task')}} className="h-12 flex items-center">Technical Task</div>
+            <div onClick={ () => {selectTask('User Story')}} className="h-12 flex items-center">User Story</div>
         </div>
     );
 }
