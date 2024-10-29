@@ -3,8 +3,10 @@ import NameIcon from "../icons/NameIcon";
 import PriorityIcon from "../icons/PriorityIcon";
 
 const TaskCard = ({ category, name, description = "", subtasks, assignees, priority }) => {
+    const progress = subtasks.filter(s => s.done).length / subtasks.length;
+
     return (
-        <div className="flex flex-col space-y-4 rounded-md w-64 p-4">
+        <div className="flex flex-col space-y-4 rounded-2xl w-64 min-w-64 p-4 shadow-lg">
             {/** Category */}
             <CategoryIcon name={category} />
             {/** Task color thing */}
