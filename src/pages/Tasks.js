@@ -24,6 +24,10 @@ const Tasks = () => {
         <div className="page-content overflow-y-scroll">
             <div className="flex flex-col space-y-4">
                 <StatusTasks
+                    status={'To do'}
+                    tasks={[]}
+                />
+                <StatusTasks
                     status={'In progress'}
                     tasks={tasks}
                 />
