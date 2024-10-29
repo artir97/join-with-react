@@ -4,7 +4,7 @@ const Tasks = () => {
     return (
         <div className="page-content">
             <TaskCard
-                category="User story"
+                category="Technical task"
                 name={"Find a remote job"}
                 description={"We're gonna roll in moneeeey"}
                 assignees={[{
@@ -17,7 +17,7 @@ const Tasks = () => {
                     phone: '...'
                 }]}
                 subtasks={["test", "test2"]}
-                priority={'urgent'}
+                priority={'low'}
             />
         </div>
     );
