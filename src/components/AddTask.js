@@ -71,6 +71,7 @@ const AddTask = () => {
         setDate('');
         setPriority('');
         setSearchContact('');
+        setSelectedContacts([]);
     }
 
     return (
