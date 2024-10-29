@@ -6,13 +6,15 @@ import Summary from './pages/Summary';
 import Contacts from './pages/Contacts';
 import AddTask from "./components/AddTask";
 import ContactInfo from './pages/ContactInfo';
+import Tasks from './pages/Tasks';
 
 // MAIN PAGE
 function App() {
   return (
     <>
       <Navbar />
-      <AddTask />
+      <Tasks />
+      {/* <AddTask /> */}
       {/* <Contacts /> */}
       {/* <ContactInfo
         name={"Anton Meyer"}
