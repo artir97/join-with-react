@@ -13,7 +13,7 @@ const TaskInfoOverlay = ({ task, onExit }) => {
                 <div className='flex items-center'>
                     <CategoryIcon name={task.category} />
                     <div className='flex-1'/>
-                    <p className='p-4 self-end' onClick={onExit}>X</p>
+                    <p className='p-4 self-end text-blue-500' onClick={onExit}>X</p>
                 </div>
 
                 <h2 className='text-3xl font-bold'>{task.name}</h2>
