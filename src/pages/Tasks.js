@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import StatusTasks from "../components/tasks/StatusTasks";
+import IconInput from "../components/base/IconInput";
 
 const task = {
     category: "Technical task",
@@ -39,8 +40,15 @@ const Tasks = () => {
     }, [tasks]);
 
     return (
-        <div className="page-content overflow-y-scroll">
+        <div className="page-content overflow-y-scroll pt-4">
             <div className="flex flex-col space-y-4">
+                {/** Search bar */}
+                <IconInput
+                    containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
+                    iconUrl="./assets/icons/forms/search.svg"
+                    placeholder="Find task..."/>
+
+                {/** Sorted cards */}
                 {status.map((s, i) => <StatusTasks
                     key={i}
                     status={s}
