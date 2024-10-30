@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import IconInput from '../base/IconInput';
 import NameIcon from '../icons/NameIcon';
-import './Overlay.css';
+import '../base/Overlay.css';
 
 const OverlayFormInput = ({ value, iconUrl, placeholder, onChange }) => (
     <IconInput value={value} iconUrl={iconUrl}
