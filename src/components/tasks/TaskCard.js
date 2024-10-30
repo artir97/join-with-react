@@ -2,11 +2,13 @@ import CategoryIcon from "../icons/CategoryIcon";
 import NameIcon from "../icons/NameIcon";
 import PriorityIcon from "../icons/PriorityIcon";
 
-const TaskCard = ({ category, name, description = "", subtasks, assignees, priority }) => {
+import './TaskCard.css';
+
+const TaskCard = ({ category, name, description = "", subtasks = [], assignees, priority }) => {
     const progress = subtasks.filter(s => s.done).length / subtasks.length;
 
     return (
-        <div className="flex flex-col space-y-4 rounded-2xl w-64 min-w-64 p-4 shadow-lg">
+        <div className="space-y-4 task-card shadow-lg">
             {/** Category */}
             <CategoryIcon name={category} />
             {/** Task color thing */}
@@ -17,7 +19,7 @@ const TaskCard = ({ category, name, description = "", subtasks, assignees, prior
             {/** Subtask progress gauge */}{/** Subtask text */}
             <div className="flex items-center space-x-2">
                 <div className="h-2 flex-1 rounded-md bg-gray-200">
-                    <div className="rounded-md h-full bg-blue-500" style={{width: `${Math.floor(progress * 100)}%`}}/>
+                    <div className="rounded-md h-full bg-blue-500" style={{ width: `${Math.floor(progress * 100)}%` }} />
                 </div>
                 <p>{subtasks.filter(s => s.done).length}/{subtasks.length} subtasks</p>
             </div>
