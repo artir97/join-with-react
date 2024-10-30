@@ -27,17 +27,18 @@ const Tasks = () => {
     { ...task, status: "Awaiting feedback", id: 2 }, { ...task, status: "Awaiting feedback", id: 3 }, { ...task, status: "Awaiting feedback", id: 4 },
     { ...task, status: "Done", id: 5 }
     ]);
+    const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
 
     useEffect(() => {
-        setSortedTasks(tasks.reduce((acc, t) => {
+        setSortedTasks(tasks.filter(t => t.name.toLowerCase().includes(search.trim().toLowerCase())).reduce((acc, t) => {
             if (!acc[t.status]) {
                 acc[t.status] = [];
             }
             acc[t.status].push(t);
             return acc;
         }, {}));
-    }, [tasks]);
+    }, [tasks, search]);
 
     return (
         <div className="page-content overflow-y-scroll pt-4">
@@ -46,7 +47,8 @@ const Tasks = () => {
                 <IconInput
                     containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
                     iconUrl="./assets/icons/forms/search.svg"
-                    placeholder="Find task..."/>
+                    placeholder="Find task..."
+                    onChange={e => setSearch(e.target.value)}/>
 
                 {/** Sorted cards */}
                 {status.map((s, i) => <StatusTasks
