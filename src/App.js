@@ -7,11 +7,12 @@ import Contacts from './pages/Contacts';
 import AddTask from "./components/AddTask";
 import ContactInfo from './pages/ContactInfo';
 import Tasks from './pages/Tasks';
+import { DragProvider } from './contexts/DragContext';
 
 // MAIN PAGE
 function App() {
   return (
-    <>
+    <DragProvider>
       <Navbar />
       <Tasks />
       {/* <AddTask /> */}
@@ -22,7 +23,7 @@ function App() {
         phone={"This should not be a phone"} /> */}
 
       <Footer />
-    </>
+    </DragProvider>
   );
 }
 

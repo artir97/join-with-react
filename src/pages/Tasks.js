@@ -38,8 +38,6 @@ const Tasks = () => {
         }, {}));
     }, [tasks]);
 
-    console.log(sortedTasks);
-
     return (
         <div className="page-content overflow-y-scroll">
             <div className="flex flex-col space-y-4">
