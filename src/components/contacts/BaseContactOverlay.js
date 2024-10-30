@@ -3,6 +3,13 @@ import IconInput from '../base/IconInput';
 import NameIcon from '../icons/NameIcon';
 import './Overlay.css';
 
+const OverlayFormInput = ({ value, iconUrl, placeholder, onChange }) => (
+    <IconInput value={value} iconUrl={iconUrl}
+        placeholder={placeholder}
+        onChange={onChange}
+        className="input-contact" containerClassName="input-container" />
+);
+
 const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, name = "", mail = "", phone = "" }) => {
     const [inputName, setName] = useState(name);
     const [inputMail, setMail] = useState(mail);
@@ -19,9 +26,9 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                     <p className='font-light'>{flavorText}</p>
                 </div>
                 <form className='flex flex-col items-center space-y-4 px-6 py-12'>
-                    <IconInput value={inputName} className="input-contact" iconUrl="./assets/icons/forms/person.svg" placeholder="Name" onChange={e => setName(e.target.value)} />
-                    <IconInput value={inputMail} className="input-contact" iconUrl="./assets/icons/forms/mail.svg" placeholder="Mail address" onChange={e => setMail(e.target.value)}/>
-                    <IconInput value={inputPhone} className="input-contact" iconUrl="./assets/icons/forms/phone.svg" placeholder="Phone number" onChange={e => setPhone(e.target.value)}/>
+                    <OverlayFormInput value={inputName} iconUrl="./assets/icons/forms/person.svg" placeholder="Name" onChange={e => setName(e.target.value)} />
+                    <OverlayFormInput value={inputMail} iconUrl="./assets/icons/forms/mail.svg" placeholder="Mail address" onChange={e => setMail(e.target.value)} />
+                    <OverlayFormInput value={inputPhone} iconUrl="./assets/icons/forms/phone.svg" placeholder="Phone number" onChange={e => setPhone(e.target.value)} />
                     {isEditing
                         ? <div className='flex space-x-4'>
                             <button className='rounded bg-white p-2 mt-4'>Delete</button>

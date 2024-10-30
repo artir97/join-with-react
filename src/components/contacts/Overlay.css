@@ -35,3 +35,7 @@
 
     border-radius: 9999px;
 }
+
+.input-container {
+    border-bottom: 1px solid lightgray;
+}
