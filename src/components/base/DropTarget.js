@@ -1,3 +1,7 @@
+/**
+ * See ./Drag.js for the special prop: `children`.
+ */
+
 const DropTarget = ({ onItemDropped, dropEffect, children }) => {
     function handleDrop(e) {
         const droppedItem = e.dataTransfer.getData("drag-item");
