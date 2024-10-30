@@ -20,7 +20,7 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
             <div className="p-4 absolute top-20 z-30 text-white right-10 cursor-pointer" onClick={onExit}>
                 X
             </div>
-            <div className="rounded-2xl flex flex-col items-center mx-8 my-20 shadow-lg overlay bg-white box-border">
+            <div className="rounded-2xl flex flex-col items-center mx-8 my-20 shadow-lg overlay fixed-h-overlay bg-white box-border">
                 <div className="h-2/5 flex flex-col w-full space-y-2 items-center text-white justify-center bg-blue-600 rounded-t-2xl">
                     <p className='font-bold text-4xl'>{title}</p>
                     <p className='font-light'>{flavorText}</p>

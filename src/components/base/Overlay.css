@@ -7,9 +7,12 @@
 }
 
 .overlay {
-    height: calc(100% - 160px);
     width: calc(100% - 64px);
     position: relative;
+}
+
+.fixed-h-overlay {
+    height: calc(100% - 160px);
 }
 
 .input-contact {
