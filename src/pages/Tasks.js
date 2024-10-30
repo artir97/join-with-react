@@ -31,7 +31,11 @@ const Tasks = () => {
     const [sortedTasks, setSortedTasks] = useState([]);
 
     useEffect(() => {
-        setSortedTasks(tasks.filter(t => t.name.toLowerCase().includes(search.trim().toLowerCase())).reduce((acc, t) => {
+        const filterByNameOrPerson = t => (
+            t.name.toLowerCase().includes(search.trim().toLowerCase())
+            || t.assignees.some(a => a.name.toLowerCase().includes(search.trim().toLowerCase())));
+
+        setSortedTasks(tasks.filter(filterByNameOrPerson).reduce((acc, t) => {
             if (!acc[t.status]) {
                 acc[t.status] = [];
             }
@@ -48,7 +52,7 @@ const Tasks = () => {
                     containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
                     iconUrl="./assets/icons/forms/search.svg"
                     placeholder="Find task..."
-                    onChange={e => setSearch(e.target.value)}/>
+                    onChange={e => setSearch(e.target.value)} />
 
                 {/** Sorted cards */}
                 {status.map((s, i) => <StatusTasks
