@@ -4,6 +4,7 @@ import PriorityIcon from '../icons/PriorityIcon';
 import Subtask from './Subtask';
 
 import '../base/Overlay.css';
+import ButtonIcon from '../icons/ButtonIcon';
 
 function capitalize(val) {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
@@ -37,6 +38,10 @@ const TaskInfoOverlay = ({ task, onExit }) => {
                 <div>
                     <p className='font-semibold'>Subtasks</p>
                     {task.subtasks.map((s, i) => <Subtask key={i} done={s.done} name={s.name} />)}
+                </div>
+                <div className='flex self-end'>
+                    <ButtonIcon imageUrl={"./assets/icons/forms/trash.svg"} name={"Delete"} className='px-2 py-1'/>
+                    <ButtonIcon imageUrl={"./assets/icons/forms/edit.svg"} name={"Edit"} className='px-2 py-1 border-l border-gray-200'/>
                 </div>
             </div>
         </div>
