@@ -4,11 +4,11 @@ import PriorityIcon from "../icons/PriorityIcon";
 
 import './TaskCard.css';
 
-const TaskCard = ({ category, name, description = "", subtasks = [], assignees, priority }) => {
+const TaskCard = ({ category, name, description = "", subtasks = [], assignees, priority, onClick }) => {
     const progress = subtasks.filter(s => s.done).length / subtasks.length;
 
     return (
-        <div className="space-y-4 task-card shadow-lg">
+        <div className="space-y-4 task-card shadow-lg" onClick={onClick}>
             {/** Category */}
             <CategoryIcon name={category} className="self-start"/>
             {/** Task color thing */}

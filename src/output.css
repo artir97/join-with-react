@@ -622,6 +622,11 @@ video {
   height: 5rem;
 }
 
+.size-4 {
+  width: 1rem;
+  height: 1rem;
+}
+
 .size-8 {
   width: 2rem;
   height: 2rem;
@@ -737,6 +742,10 @@ video {
 
 .self-start {
   align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
 }
 
 .overflow-x-auto {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import StatusTasks from "../components/tasks/StatusTasks";
 import IconInput from "../components/base/IconInput";
+import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
 
 const task = {
     category: "Technical task",
@@ -16,6 +17,7 @@ const task = {
         phone: '...'
     }],
     subtasks: [{ name: "test", done: false }, { name: "test2", done: true }],
+    dueDate: "31/12/2024",
     priority: 'low',
     status: 'In progress'
 };
@@ -29,6 +31,7 @@ const Tasks = () => {
     ]);
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
+    const [overlayTask, setOverlayTask] = useState(null);
 
     /**
      * Videos #14+: `useEffect` is used when you want to use a callback any time a state changes.
@@ -93,24 +96,29 @@ const Tasks = () => {
     }, [tasks, search]);
 
     return (
-        <div className="page-content overflow-y-scroll pt-4">
-            <div className="flex flex-col space-y-4">
-                {/** Search bar */}
-                <IconInput
-                    containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
-                    iconUrl="./assets/icons/forms/search.svg"
-                    placeholder="Find task..."
-                    onChange={e => setSearch(e.target.value)} />
+        <>
+            <div className="page-content overflow-y-scroll pt-4">
+                <div className="flex flex-col space-y-4">
+                    {/** Search bar */}
+                    <IconInput
+                        containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
+                        iconUrl="./assets/icons/forms/search.svg"
+                        placeholder="Find task..."
+                        onChange={e => setSearch(e.target.value)} />
 
-                {/** Sorted cards */}
-                {status.map((s, i) => <StatusTasks
-                    key={i}
-                    status={s}
-                    tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
-                    updateTask={(task) => setTasks(tasks => [...tasks.filter(t => t.id !== task.id), { ...task, status: s }])}
-                />)}
+                    {/** Sorted cards */}
+                    {status.map((s, i) => <StatusTasks
+                        key={i}
+                        status={s}
+                        tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
+                        updateTask={(task) => setTasks(tasks => [...tasks.filter(t => t.id !== task.id), { ...task, status: s }])}
+                        showOverlay={setOverlayTask}
+                    />)}
+                </div>
             </div>
-        </div>
+            {/** Task Info Overlay */}
+            {overlayTask && <TaskInfoOverlay task={task} onExit={() => setOverlayTask(null)} />}
+        </>
     );
 }
 

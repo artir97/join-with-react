@@ -4,7 +4,7 @@ import { Move } from "../base/DropEffectValues";
 import TaskCard from "./TaskCard";
 import TaskDrop from "./TaskDrop";
 
-const StatusTasks = ({ status, tasks, updateTask }) => {
+const StatusTasks = ({ status, tasks, updateTask, showOverlay }) => {
     const { isDragging } = useDrag();
 
     return (
@@ -24,8 +24,10 @@ const StatusTasks = ({ status, tasks, updateTask }) => {
                             subtasks={t.subtasks}
                             assignees={t.assignees}
                             priority={t.priority}
+                            onClick={() => showOverlay(t)}
                         />
                     </Drag>
+
                 ))}
                 {tasks.length === 0 && !isDragging && (
                     <div className="border-dashed border w-full border-gray-300 bg-gray-100 rounded-lg text-center py-3">
