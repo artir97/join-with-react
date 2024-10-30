@@ -30,11 +30,59 @@ const Tasks = () => {
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
 
+    /**
+     * Videos #14+: `useEffect` is used when you want to use a callback any time a state changes.
+     * 
+     * `useEffect` takes two arguments: the callback and a list of dependencies.
+     * 
+     * In any case, at the first render, `useEffect` will be called.
+     * Then, it watches for any change in the list of dependencies (which can be empty: in that case,
+     * it's never called again), and if it detects a change, the callback is used again.
+     * 
+     * Examples of main uses:
+     * - Empty dependencies: Fetching data. You want it to happen only once when you render a component.
+     * - Here, we rerender the tasks if the tasks are modified (on status changes), because they need
+     * to be sorted first before displaying, or if the search bar content is changed.
+     * - Saving data (Local storage, *Firebase*): watch for the data you want to save, and write any change
+     * that happens.
+     * 
+     * Note: The more you can do things without useEffect, the better it is.
+     * You can get easily confused with too much useEffects.
+     */
     useEffect(() => {
         const filterByNameOrPerson = t => (
             t.name.toLowerCase().includes(search.trim().toLowerCase())
             || t.assignees.some(a => a.name.toLowerCase().includes(search.trim().toLowerCase())));
 
+        /**
+         * `reduce` : This sorts the tasks array into an object like this:
+         * {
+         *     "In progress": [task1, task2, ...],
+         *     "Awaiting feedback": [task3, task4, ...],
+         *     ...
+         * }
+         * 
+         * The first argument is a function that takes two arguments:
+         * - acc : the object built, also called the **accumulator**,
+         * - t : representing the object currently dealt with. (t is for task btw)
+         * I'll go over the contents of the function in a bit.
+         * 
+         * The second argument is the initializer.
+         * An initial state for the object we want to build is... an empty object: {}
+         * 
+         * Now for the function. Since we want to have an array of items for each 'status',
+         * and the initial state is {} (empty object), we need to create an empty array if we didn't encounter
+         * a specific status.
+         * Then it's just adding the task to the array.
+         * And finally, it needs to return the modified accumulator.
+         * 
+         * The function given as the first argument is applied for all elements in the array (here it's the
+         * filtered tasks), akin to the methods of filter, map, etc.
+         * 
+         * For a random information: `reduce` is the strongest function of all this group,
+         * we can write any of the other functions (map, filter, forEach, etc.) with reduce.
+         * But that's another story. 
+         */
         setSortedTasks(tasks.filter(filterByNameOrPerson).reduce((acc, t) => {
             if (!acc[t.status]) {
                 acc[t.status] = [];
