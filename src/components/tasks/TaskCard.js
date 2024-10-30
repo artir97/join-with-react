@@ -10,7 +10,7 @@ const TaskCard = ({ category, name, description = "", subtasks = [], assignees, 
     return (
         <div className="space-y-4 task-card shadow-lg">
             {/** Category */}
-            <CategoryIcon name={category} />
+            <CategoryIcon name={category} className="self-start"/>
             {/** Task color thing */}
             <div>
                 <p className="text-blue-500 font-semibold">{name}</p>
