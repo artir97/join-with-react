@@ -1,5 +1,5 @@
 import BaseContactOverlay from './BaseContactOverlay';
-import './Overlay.css';
+import '../base/Overlay.css';
 
 const AddContactOverlay = ({ onExit }) => {
     return (
