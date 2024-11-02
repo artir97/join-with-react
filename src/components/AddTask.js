@@ -1,12 +1,15 @@
 import {useState} from "react";
 import NameIcon from "./NameIcon";
+import React from "react";
 
 const AddTask = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
     const [priority, setPriority] = useState('');
+    const [searchContact, setSearchContact] = useState('');
     const contacts = [
+        { name: "Artir Guri", mail: "artir.guri@outlook.de", phone: "+49 160 93885857"},
         { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },
         { name: "John Doe", mail: "john.doe@example.com", phone: "+49 1234 56 789 0" },
         { name: "Alice Smith", mail: "alice.smith@example.com", phone: "+49 9876 54 321 0" },
@@ -38,6 +41,60 @@ const AddTask = () => {
         { name: "Charlotte Evans", mail: "charlotte.evans@example.com", phone: "+49 4545 77 234 4" },
         { name: "Scarlett Cooper", mail: "scarlett.cooper@example.com", phone: "+49 3434 33 678 1" }
     ];
+    const [selectedContacts, setSelectedContacts ] = useState([]);
+    const [subtask, setSubtask] = useState('');
+    const [subtasks, setSubtasks] = useState([]);
+    const [category, setCategory] = useState('Select task category');
+    const [selectTaskIsOpen, setSelectTaskIsOpen] = useState(false);
+    const handleClickSelectTaskDropDown = () => {
+        setSelectTaskIsOpen((toggleOpen) => !toggleOpen);
+    }
+
+    const [selectContactsIsOpen, setSelectContactsIsOpen] = useState(false);
+    const handleClickSelectContactsDropDown = () => {
+        setSelectContactsIsOpen((toggleOpen) => !toggleOpen);
+    }
+
+    const filteredContacts = contacts.filter(contact =>
+        contact.name.toLowerCase().includes(searchContact.toLowerCase())
+    );
+
+    const selectContact = (currentContact) => {
+        if (!selectedContacts.some(contact => contact.mail === currentContact.mail)) {
+            setSelectedContacts([...selectedContacts, currentContact])
+        } else {
+            setSelectedContacts(selectedContacts.filter(contact => contact.mail !== currentContact.mail));
+        }
+    }
+
+    const addSubtask = (subtask) => {
+        console.log(subtasks);
+        if(!subtasks.includes(subtask)){
+            setSubtasks([...subtasks, subtask]);
+            setSubtask('');
+        } else {
+            console.error('you can\'t add the same subtask twice');
+        }
+    }
+
+    const deleteSubtask = (index) => {
+        subtasks.splice(index, 1);
+        setSubtasks([...subtasks]);
+    }
+
+    const selectTask = (category) => {
+        setCategory(category);
+        setSelectTaskIsOpen((toggleOpen) => !toggleOpen);
+    }
+
+    const clearAddTaskForm = () => {
+        setTitle('');
+        setDescription('');
+        setDate('');
+        setPriority('');
+        setSearchContact('');
+        setSelectedContacts([]);
+    }
 
     return (
       <>
@@ -63,6 +120,7 @@ const AddTask = () => {
 
                 <label><b>Due Date</b></label>
                 <input
+                    required
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
@@ -70,62 +128,173 @@ const AddTask = () => {
 
                 <label><b>Priority</b></label>
                 <div className="priority-selection">
-                    <div className="priority-button" onClick={() => {setPriority('high')}}>
-                        <div>Urgent</div>
-                        <img src={'./assets/icon/add-task/prio-high.png'} alt={"high priority icon"}/>
-                    </div>
-                    <div className="priority-button" onClick={() => {setPriority('medium')}}>
-                        <div>Medium</div>
-                        <img src={'./assets/icon/add-task/prio-medium.png'} alt={"medium priority icon"}/>
-                    </div>
-                    <div className="priority-button" onClick={() => {setPriority('low')}}>
-                        <div>Low</div>
-                        <img src={'./assets/icon/add-task/prio-low.png'} alt={"low priority icon"}/>
-                    </div>
+                    {
+                        priority === 'high' &&
+                        <SelectedPriority priority={'Urgent'} priorityClass={'priority-high'} priorityImageUrl={'./assets/icon/add-task/prio-high-white.png'} alt={'high priority icon'} setPriority={setPriority}/>
+                    }
+                    {
+                        priority !== 'high' &&
+                        <div className="priority-button" onClick={() => {setPriority('high')}}>
+                            <div>Urgent</div>
+                            <img src={'./assets/icon/add-task/prio-high.png'} alt={"high priority icon"}/>
+                        </div>
+                    }
+
+                    {
+                        priority === 'medium' &&
+                        <SelectedPriority priority={'Medium'} priorityClass={'priority-medium'} priorityImageUrl={'./assets/icon/add-task/prio-medium-white.png'} alt={'medium priority icon'} setPriority={setPriority}/>
+                    }
+                    {
+                        priority !== 'medium' &&
+                        <div className="priority-button" onClick={() => {setPriority('medium')}}>
+                            <div>Medium</div>
+                            <img src={'./assets/icon/add-task/prio-medium.png'} alt={"medium priority icon"}/>
+                        </div>
+                    }
+
+                    {
+                        priority === 'low' &&
+                        <SelectedPriority priority={'Low'} priorityClass={'priority-low'} priorityImageUrl={'./assets/icon/add-task/prio-low-white.png'} alt={'low priority icon'} setPriority={setPriority}/>
+                    }
+                    {
+                        priority !== 'low' &&
+                        <div className="priority-button" onClick={() => {setPriority('low')}}>
+                            <div>Low</div>
+                            <img src={'./assets/icon/add-task/prio-low.png'} alt={"low priority icon"}/>
+                        </div>
+                    }
                 </div>
+
 
                 <label><b>Assigned to</b> (optional)</label>
-                <input/>
-                <div className="contacts-selection">
-                    {contacts.map((contact, index) => (
-                        <div className="contact" key={index}>
-                            <div className="flex gap-5">
-                                <div>
-                                    <NameIcon name={contact.name} />
-                                </div>
-                                <div className="flex items-center">
-                                    {contact.name}
-                                </div>
-                            </div>
-                            <div>
-                                <img src={'./assets/icon/add-task/check-button.png'} alt={"empty checkbox"}/>
-                            </div>
-                        </div>
-                    ))}
+                <div
+                     className="flex justify-between items-center w-full h-12 border-b border-gray-300">
+                    {
+                        !selectContactsIsOpen &&
+                        <>
+                            <div onClick={handleClickSelectContactsDropDown}>Select contacts to assign</div>
+                            <img onClick={handleClickSelectContactsDropDown} src={'./assets/icon/add-task/arrow-drop-down.png'} alt={"arrow pointing down"}/>
+                        </>
+                    }
+                    {
+                        selectContactsIsOpen &&
+                        <>
+                            <input
+                                value={searchContact}
+                                onChange={(e) => setSearchContact(e.target.value)}
+                                type="text"
+                                placeholder="search a contact"
+                            />
+                            <img onClick={handleClickSelectContactsDropDown}
+                                 src={'./assets/icon/add-task/arrow-drop-down-up.png'} alt={"arrow pointing up"}/>
+                        </>
+                    }
                 </div>
+                {
+                    !selectContactsIsOpen &&
+                    <div className="selected-contacts-list">
+                        {selectedContacts.map((selectedContact, index) => (
+                            <NameIcon key={index} name={selectedContact.name}/>
+                        ))}
+                    </div>
+                }
+                {selectContactsIsOpen && <ContactsSelection contacts={filteredContacts} selectContact={selectContact} selectedContacts={selectedContacts}/>}
 
                 <label><b>Category</b></label>
-                <div className="flex justify-between items-center w-full h-12 border-b border-gray-300">
-                    <div>Select task category</div>
-                    <img src={'./assets/icon/add-task/arrow-drop-down.png'} alt={"arrow pointing down"}/>
+                <div onClick={handleClickSelectTaskDropDown}
+                     className="flex justify-between items-center w-full h-12 border-b border-gray-300">
+                    <div>{category}</div>
+                    {!selectTaskIsOpen && <img src={'./assets/icon/add-task/arrow-drop-down.png'} alt={"arrow pointing down"}/>}
+                    {selectTaskIsOpen && <img src={'./assets/icon/add-task/arrow-drop-down-up.png'} alt={"arrow pointing up"}/>}
                 </div>
-                <div className="w-full">
-                    <div className="h-12 flex items-center">Technical Task</div>
-                    <div className="h-12 flex items-center">User Story</div>
-                </div>
+                {selectTaskIsOpen && <SelectTaskDropDown selectTask={selectTask}/>}
 
                 <label><b>Subtasks</b> (optional)</label>
                 <div className="flex items-center w-full h-12 border-b border-gray-300">
-                    <input type="text"/>
-                    <img src={'./assets/icon/add-task/plus.png'} alt={"a plus icon"}/>
+                    <input value={subtask} onChange={(e) => setSubtask(e.target.value)} placeholder="Add new subtask" type="text"/>
+                    <img onClick={() => {addSubtask(subtask)}} src={'./assets/icon/add-task/plus.png'} alt={"a plus icon"}/>
                 </div>
-                <div>
+                <div className="w-full flex flex-col justify-between">
+                    {subtasks.map((subtask, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                <div className="flex justify-between">
+                                    <li>{subtask}</li>
+                                    <div className="flex">
+                                        <img src={'./assets/icon/add-task/edit-icon.png'} alt={"plus icon"}/>
+                                        <img src={'./assets/icon/add-task/dr-icon.png'} alt={"plus icon"}/>
+                                        <img onClick={() => {deleteSubtask(index)}} src={'./assets/icon/add-task/trash-icon.png'} alt={"plus icon"}/>
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        )
+                    })}
+                </div>
 
+                <div className="buttons-container">
+                    <div className="button button-white">
+                        <div onClick={clearAddTaskForm}>Clear</div>
+                        <img src={'./assets/icon/add-task/clear.png'} alt={"a cross icon"}/>
+                    </div>
+                    <button onClick={(e) => {
+                        e.preventDefault(); console.log('test')}} className="button button-blue">
+                        <div>Create Task</div>
+                        <img src={'./assets/icon/add-task/check.png'} alt={"a checkmark icon"}/>
+                    </button>
                 </div>
             </form>
         </div>
       </>
     );
 }
+
+const ContactsSelection = ({contacts, selectContact, selectedContacts}) => {
+    return (
+        <div className="contacts-selection">
+            {contacts.map((contact, index) => {
+                const isSelected = selectedContacts.some(selected => selected.mail === contact.mail);
+                const selectedImg = './assets/icon/add-task/check-button-checked-white.png';
+                const defaultImg = './assets/icon/add-task/check-button.png';
+
+                return (
+                   <div onClick={() => selectContact(contact)}
+                     className={`contact ${isSelected ? 'contact-selected' : ''}`}
+                     key={index}>
+                    <div className="flex gap-5">
+                        <div>
+                            <NameIcon name={contact.name}/>
+                        </div>
+                        <div className="flex items-center">
+                            {contact.name}
+                        </div>
+                    </div>
+                    <div>
+                        <img src={isSelected ? selectedImg : defaultImg} alt={isSelected ? "checked checkbox" : "empty checkbox"}/>
+                    </div>
+                </div>
+               )
+            })}
+        </div>
+    )
+}
+
+const SelectTaskDropDown = ({selectTask}) => {
+    return (
+        <div className="w-full">
+            <div onClick={ () => {selectTask('Technical Task')}} className="h-12 flex items-center">Technical Task</div>
+            <div onClick={ () => {selectTask('User Story')}} className="h-12 flex items-center">User Story</div>
+        </div>
+    );
+}
+
+const SelectedPriority = ({ priority, priorityClass, priorityImageUrl, alt, setPriority }) => {
+    return (
+        <div onClick={ () => {setPriority('')}} className={"priority-button " + priorityClass}>
+            <div>{priority}</div>
+            <img src={priorityImageUrl} alt={alt} />
+        </div>
+    );
+}
+
 
 export default AddTask
