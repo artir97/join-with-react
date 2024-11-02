@@ -18,7 +18,7 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
     return (
         <div className="bg-opacity-50 bg-white mask">
             <div className="p-4 absolute top-20 z-30 text-white right-10 cursor-pointer" onClick={onExit}>
-                X
+                <img src='./assets/icons/forms/close-white.svg' alt="Close icon" />
             </div>
             <div className="rounded-2xl flex flex-col items-center mx-8 my-20 shadow-lg overlay fixed-h-overlay bg-white box-border">
                 <div className="h-2/5 flex flex-col w-full space-y-2 items-center text-white justify-center bg-blue-600 rounded-t-2xl">
@@ -32,9 +32,13 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                     {isEditing
                         ? <div className='flex space-x-4'>
                             <button className='rounded bg-white p-2 mt-4'>Delete</button>
-                            <button className='rounded bg-blue-500 text-white p-2 mt-4'>Save V</button>
+                            <button className='rounded flex space-x-2 bg-blue-500 text-white p-2 mt-4'>
+                                Save <img src="./assets/icons/forms/check.svg" alt="Check icon" />
+                            </button>
                         </div>
-                        : <button className='rounded bg-blue-500 text-white p-2 mt-4'>Create contact V</button>
+                        : <button className='rounded flex space-x-2 bg-blue-500 text-white p-2 mt-4'>
+                            <p>Create contact </p><img src="./assets/icons/forms/check.svg" alt="Check icon" />
+                        </button>
                     }
                 </form>
                 <div className='center-icon bg-gray-300'>
