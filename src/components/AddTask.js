@@ -70,7 +70,7 @@ const AddTask = () => {
     const addSubtask = (subtask) => {
         console.log(subtasks);
         if(!subtasks.includes(subtask)){
-            setSubtasks([...subtasks, subtask]);
+            setSubtasks([...subtasks, {subtask, editOpen: false}]);
             setSubtask('');
         } else {
             console.error('you can\'t add the same subtask twice');
@@ -80,6 +80,20 @@ const AddTask = () => {
     const deleteSubtask = (index) => {
         subtasks.splice(index, 1);
         setSubtasks([...subtasks]);
+    }
+
+    const editSubtask = (index) => {
+        subtasks[index].editOpen = true;
+        setSubtasks([...subtasks]);
+    }
+
+    const cancelEdit = (index) => {
+        subtasks[index].editOpen = false;
+        setSubtasks([...subtasks]);
+    }
+
+    const acceptEdit = () => {
+
     }
 
     const selectTask = (category) => {
@@ -94,7 +108,10 @@ const AddTask = () => {
         setPriority('');
         setSearchContact('');
         setSelectedContacts([]);
+        setSubtasks([]);
     }
+
+    console.log(subtasks);
 
     return (
       <>
@@ -218,13 +235,43 @@ const AddTask = () => {
                     {subtasks.map((subtask, index) => {
                         return (
                             <React.Fragment key={index}>
+
                                 <div className="flex justify-between">
-                                    <li>{subtask}</li>
-                                    <div className="flex">
-                                        <img src={'./assets/icon/add-task/edit-icon.png'} alt={"plus icon"}/>
-                                        <img src={'./assets/icon/add-task/dr-icon.png'} alt={"plus icon"}/>
-                                        <img onClick={() => {deleteSubtask(index)}} src={'./assets/icon/add-task/trash-icon.png'} alt={"plus icon"}/>
-                                    </div>
+                                    {
+                                        subtasks[index].editOpen &&
+                                        <div className="flex items-center w-full h-12 border-b border-gray-300">
+                                            <input value={subtasks[index].subtask}/>
+                                            <div className="flex">
+                                                <img onClick={() => {
+                                                    cancelEdit(index)
+                                                }} src={'./assets/icon/add-task/x-cross.blue.svg'}
+                                                     alt={"X icon in blue"}/>
+                                                <img src={'./assets/icon/add-task/dr-icon.png'} alt={"plus icon"}/>
+                                                <img onClick={() => {
+                                                    acceptEdit(index)
+                                                }} src={'./assets/icon/add-task/checkmark-blue.svg'}
+                                                     alt={"checkmark icon in blue"}/>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                    {
+                                        !subtasks[index].editOpen &&
+                                        <>
+                                            <li>{subtask.subtask}</li>
+                                            <div className="flex">
+                                                <img onClick={() => {
+                                                    editSubtask(index)
+                                                }} src={'./assets/icon/add-task/edit-icon.png'} alt={"plus icon"}/>
+                                                <img src={'./assets/icon/add-task/dr-icon.png'} alt={"plus icon"}/>
+                                                <img onClick={() => {
+                                                    deleteSubtask(index)
+                                                }} src={'./assets/icon/add-task/trash-icon.png'} alt={"plus icon"}/>
+                                            </div>
+                                        </>
+
+                                    }
                                 </div>
                             </React.Fragment>
                         )
