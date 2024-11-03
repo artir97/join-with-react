@@ -10,10 +10,29 @@ const OverlayFormInput = ({ value, iconUrl, placeholder, onChange }) => (
         className="input-contact" containerClassName="input-container" />
 );
 
+/**
+ * Base contact overlay component
+ * @param {Object} props - Component props
+ * @param {Function} props.onSubmit - Function to handle form submission. It takes one argument: {name, mail, phone}.
+ * @param {Function} props.onExit - Function to handle exit action. Triggered on the X icon.
+ * @param {string} props.title - Title of the overlay
+ * @param {string} props.flavorText - Additional descriptive text
+ * @param {boolean} props.isEditing - Flag indicating if the overlay is in editing mode
+ * @param {string} [props.name=""] - Name input value
+ * @param {string} [props.mail=""] - Mail input value
+ * @param {string} [props.phone=""] - Phone input value
+ */
 const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, name = "", mail = "", phone = "" }) => {
     const [inputName, setName] = useState(name);
     const [inputMail, setMail] = useState(mail);
     const [inputPhone, setPhone] = useState(phone);
+
+    const handleSubmit = (ev) => {
+        ev.preventDefault();
+
+        onSubmit({ name: inputName.trim(), mail: inputMail.trim(), phone: inputPhone.trim() });
+        onExit();
+    }
 
     return (
         <div className="bg-opacity-50 bg-white mask">
@@ -25,18 +44,18 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                     <p className='font-bold text-4xl'>{title}</p>
                     <p className='font-light'>{flavorText}</p>
                 </div>
-                <form className='flex flex-col items-center space-y-4 px-6 py-12'>
+                <form className='flex flex-col items-center space-y-4 px-6 py-12' onSubmit={handleSubmit}>
                     <OverlayFormInput value={inputName} iconUrl="./assets/icons/forms/person.svg" placeholder="Name" onChange={e => setName(e.target.value)} />
                     <OverlayFormInput value={inputMail} iconUrl="./assets/icons/forms/mail.svg" placeholder="Mail address" onChange={e => setMail(e.target.value)} />
                     <OverlayFormInput value={inputPhone} iconUrl="./assets/icons/forms/phone.svg" placeholder="Phone number" onChange={e => setPhone(e.target.value)} />
                     {isEditing
-                        ? <div className='flex space-x-4'>
+                        ? <div className='flex space-x-4 mt-8'>
                             <button className='rounded bg-white p-2 mt-4'>Delete</button>
-                            <button className='rounded flex space-x-2 bg-blue-500 text-white p-2 mt-4'>
+                            <button className='rounded flex space-x-6 bg-blue-500 text-white p-2 mt-4'>
                                 Save <img src="./assets/icons/forms/check.svg" alt="Check icon" />
                             </button>
                         </div>
-                        : <button className='rounded flex space-x-2 bg-blue-500 text-white p-2 mt-4'>
+                        : <button className='rounded flex space-x-2 bg-blue-500 text-white p-2 mt-8'>
                             <p>Create contact </p><img src="./assets/icons/forms/check.svg" alt="Check icon" />
                         </button>
                     }
