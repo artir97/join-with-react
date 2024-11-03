@@ -69,7 +69,6 @@ const AddTask = () => {
     }
 
     const addSubtask = (subtask) => {
-        console.log(subtasks);
         if(!subtasks.includes(subtask)){
             setSubtasks([...subtasks, {subtask, editOpen: false}]);
             setSubtask('');
@@ -119,8 +118,6 @@ const AddTask = () => {
         setSelectedContacts([]);
         setSubtasks([]);
     }
-
-    console.log(subtasks);
 
     return (
       <>
@@ -292,8 +289,7 @@ const AddTask = () => {
                         <div onClick={clearAddTaskForm}>Clear</div>
                         <img src={'./assets/icon/add-task/clear.png'} alt={"a cross icon"}/>
                     </div>
-                    <button onClick={(e) => {
-                        e.preventDefault(); console.log('test')}} className="button button-blue">
+                    <button onClick={(e) => {e.preventDefault()}} className="button button-blue">
                         <div>Create Task</div>
                         <img src={'./assets/icon/add-task/check.png'} alt={"a checkmark icon"}/>
                     </button>
