@@ -49,6 +49,7 @@ const AddTask = () => {
     const handleClickSelectTaskDropDown = () => {
         setSelectTaskIsOpen((toggleOpen) => !toggleOpen);
     }
+    const [editSubtaskValue, setEditSubtaskValue] = useState('');
 
     const [selectContactsIsOpen, setSelectContactsIsOpen] = useState(false);
     const handleClickSelectContactsDropDown = () => {
@@ -83,8 +84,13 @@ const AddTask = () => {
     }
 
     const editSubtask = (index) => {
-        subtasks[index].editOpen = true;
-        setSubtasks([...subtasks]);
+        if(subtasks.some(subtask => subtask.editOpen === true)) {
+            console.error('you can\'t edit two subtasks at once');
+        } else {
+            subtasks[index].editOpen = true;
+            setEditSubtaskValue(subtasks[index].subtask);
+            setSubtasks([...subtasks]);
+        }
     }
 
     const cancelEdit = (index) => {
@@ -92,7 +98,10 @@ const AddTask = () => {
         setSubtasks([...subtasks]);
     }
 
-    const acceptEdit = () => {
+    const acceptEdit = (index, value) => {
+        subtasks[index].subtask = value;
+        subtasks[index].editOpen = false;
+        setSubtasks([...subtasks]);
 
     }
 
@@ -240,7 +249,7 @@ const AddTask = () => {
                                     {
                                         subtasks[index].editOpen &&
                                         <div className="flex items-center w-full h-12 border-b border-gray-300">
-                                            <input value={subtasks[index].subtask}/>
+                                            <input value={editSubtaskValue} onChange={(e) => setEditSubtaskValue(e.target.value)}/>
                                             <div className="flex">
                                                 <img onClick={() => {
                                                     cancelEdit(index)
@@ -248,7 +257,7 @@ const AddTask = () => {
                                                      alt={"X icon in blue"}/>
                                                 <img src={'./assets/icon/add-task/dr-icon.png'} alt={"plus icon"}/>
                                                 <img onClick={() => {
-                                                    acceptEdit(index)
+                                                    acceptEdit(index, editSubtaskValue)
                                                 }} src={'./assets/icon/add-task/checkmark-blue.svg'}
                                                      alt={"checkmark icon in blue"}/>
                                             </div>
