@@ -41,18 +41,39 @@ const list = [
     { name: "Victoria Campbell", mail: "victoria.campbell@example.com", phone: "+49 2525 25 252 5" }
 ];
 
+const codeA = 'A'.charCodeAt(0);
+
 const Contacts = () => {
     const [showOverlay, setShowOverlay] = useState(false);
-    const [map, _] = useState(() => list.reduce((acc, info) => {
+
+    const [contacts, setContacts] = useState([...list]);
+    const [map, setMap] = useState(() => {
+        let map = contacts.reduce((acc, info) => {
+            const initial = info.name.charAt(0).toUpperCase();
+
+            if (!acc[initial]) {
+                acc[initial] = [];
+            }
+
+            acc[initial].push(info);
+            return acc;
+        }, {});
+
+        // Fill all empty letters in the map with [] (empty array).
+        Array.from({ length: 26 }, (_, i) => String.fromCharCode(codeA + i))
+            .filter(letter => !map[letter])
+            .forEach(letter => map[letter] = []);
+
+        console.log(map);
+
+        return map;
+    });
+
+    const handleAddSubmit = (info) => {
         const initial = info.name.charAt(0).toUpperCase();
-
-        if (!acc[initial]) {
-            acc[initial] = [];
-        }
-
-        acc[initial].push(info);
-        return acc;
-    }, {}));
+        setMap(map => {return {...map, [initial]: [...map[initial], info]}});
+        setContacts(contacts => [...contacts, info]);
+    }
 
     return (
         <>
@@ -65,7 +86,9 @@ const Contacts = () => {
                 url="./assets/icons/contacts/add-contact.svg"
                 name={"Add contact icon"}
                 onClick={() => setShowOverlay(true)} />
-            {showOverlay && <AddContactOverlay onExit={() => setShowOverlay(false)} />}
+            {showOverlay && <AddContactOverlay
+                onAddSubmit={handleAddSubmit}
+                onExit={() => setShowOverlay(false)} />}
         </>
     );
 }

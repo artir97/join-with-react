@@ -11,8 +11,13 @@ const Section = ({ title, value, colorClass = "" }) => (
 );
 
 const ContactInfo = ({ name, mail, phone }) => {
-    // const {name} = useParams();
     const [showOverlay, setShowOverlay] = useState(false);
+    const [info, setInfo] = useState({name, mail, phone});
+
+    const handleEditSubmit = (info) => {
+        // TODO Modify actual data
+        setInfo(info);
+    }
 
     return (
         <>
@@ -23,22 +28,21 @@ const ContactInfo = ({ name, mail, phone }) => {
                         <span className="p-4 text-blue-500 cursor-pointer">{"<"}</span>
                     </div>
                     <div className="flex items-center space-x-4">
-                        <NameIcon name={name} large className={"border border-white shadow-md"} />
-                        <p className="text-3xl font-light">{name}</p>
+                        <NameIcon name={info.name} large className={"border border-white shadow-md"} />
+                        <p className="text-3xl font-light">{info.name}</p>
                     </div>
                 </div>
-                <Section title={"Mail address"} value={mail} colorClass="text-blue-500" />
-                <Section title={"Phone"} value={phone} />
+                <Section title={"Mail address"} value={info.mail} colorClass="text-blue-500" />
+                <Section title={"Phone"} value={info.phone} />
             </div>
             <MainActionIcon
                 url="./assets/icons/contacts/more.svg"
                 name={"Add contact icon"}
                 onClick={() => setShowOverlay(true)} />
             {showOverlay && <EditContactOverlay
+                onEditSubmit={handleEditSubmit}
                 onExit={() => setShowOverlay(false)}
-                name={name}
-                mail={mail}
-                phone={phone}
+                info={info}
             />}
         </>
     );
