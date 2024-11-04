@@ -35,7 +35,7 @@ const getTimeOfDay = () => {
 }
 
 const DesktopSummary = () => (
-    <div className="flex flex-col items-center space-y-4 p-4">
+    <div className="flex flex-col items-center space-y-10 p-4">
         <h1 className="text-5xl font-bold">Good {getTimeOfDay()}</h1>
         <div className="grid grid-cols-4 grid-rows-2 gap-4">
             <UrgentTaskCounter count={1} date={"November 27, 2024"} className="col-span-3" />
