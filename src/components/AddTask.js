@@ -68,9 +68,9 @@ const AddTask = () => {
         }
     }
 
-    const addSubtask = (subtask) => {
-        if(!subtasks.includes(subtask)){
-            setSubtasks([...subtasks, {subtask, editOpen: false}]);
+    const addSubtask = (name) => {
+        if(!subtasks.some(s => s.name === name)) {
+            setSubtasks([...subtasks, {name, editOpen: false}]);
             setSubtask('');
         } else {
             console.error('you can\'t add the same subtask twice');
@@ -87,7 +87,7 @@ const AddTask = () => {
             console.error('you can\'t edit two subtasks at once');
         } else {
             subtasks[index].editOpen = true;
-            setEditSubtaskValue(subtasks[index].subtask);
+            setEditSubtaskValue(subtasks[index].name);
             setSubtasks([...subtasks]);
         }
     }
@@ -98,7 +98,7 @@ const AddTask = () => {
     }
 
     const acceptEdit = (index, value) => {
-        subtasks[index].subtask = value;
+        subtasks[index].name = value;
         subtasks[index].editOpen = false;
         setSubtasks([...subtasks]);
 
@@ -265,7 +265,7 @@ const AddTask = () => {
                                     {
                                         !subtasks[index].editOpen &&
                                         <>
-                                            <li>{subtask.subtask}</li>
+                                            <li>{subtask.name}</li>
                                             <div className="flex">
                                                 <img onClick={() => {
                                                     editSubtask(index)
