@@ -22,6 +22,15 @@
     border: 1px solid #e5e7eb;
     border-radius: 40px;
     transition: 0.3s;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .task-general {
+        padding: 24px;
+    }
 }
 
 .task-general:hover,
@@ -49,9 +58,11 @@
     color: #3b82f6;
 }
 
-.urgent-task:hover .hover-scale {
-    font-size: 1rem; /* 16px */
-    font-weight: 400;
+@media (max-width: 1024px) {
+    .urgent-task:hover .hover-scale {
+        font-size: 1rem; /* 16px */
+        font-weight: 400;
+    }
 }
 
 .left-separator {
