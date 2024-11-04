@@ -1,8 +1,8 @@
 import './TaskCounter.css';
 
-const UrgentTaskCounter = ({ count, date }) => {
+const UrgentTaskCounter = ({ count, date, className = "" }) => {
     return (
-        <div className="p-4 task-general flex space-x-2 urgent-task items-center">
+        <div className={`p-4 task-general flex space-x-2 urgent-task items-center ${className}`}>
             <div className="flex flex-col justify-center items-center px-2">
                 <div className="flex items-center space-x-1">
                     <img src="./assets/icons/summary/urgent-tasks.svg" className="task-counter-icon" alt="Urgent icon" />
