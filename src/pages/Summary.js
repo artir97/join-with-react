@@ -24,15 +24,14 @@ const MobileSummary = () => (
 const DesktopSummary = () => (
     <div className="flex flex-col items-center space-y-4 p-4">
         <h1 className="text-2xl font-bold">Welcome !</h1>
-        <div className="flex w-full space-x-4 align-center">
-            <UrgentTaskCounter count={1} date={"November 27, 2024"} className="flex-3" />
-            <TaskCounter iconUrl="/assets/icons/summary/on-board.svg" name={"Tasks on board"} className="flex-1" count={5} />
-        </div>
-        <div className="flex w-full space-x-4 align-center">
-            <BigTaskCounter count={1} className="flex-1"/>
-            <TaskCounter iconUrl="/assets/icons/summary/in-progress.svg" name={"Tasks in progress"} count={2} className="flex-1" />
-            <TaskCounter iconUrl="/assets/icons/summary/awaiting-feedback.svg" name={"Awaiting feedback"} count={2} className="flex-1" />
-            <TaskCounter iconUrl="/assets/icons/summary/tasks-done.svg" name={"Tasks done"} count={5} className="flex-1"/>
+        <div className="grid grid-cols-4 grid-rows-2 gap-4">
+            <UrgentTaskCounter count={1} date={"November 27, 2024"} className="col-span-3" />
+            <TaskCounter iconUrl="/assets/icons/summary/on-board.svg" name={"Tasks on board"} count={5} />
+
+            <BigTaskCounter count={1} />
+            <TaskCounter iconUrl="/assets/icons/summary/in-progress.svg" name={"Tasks in progress"} count={2} />
+            <TaskCounter iconUrl="/assets/icons/summary/awaiting-feedback.svg" name={"Awaiting feedback"} count={2} />
+            <TaskCounter iconUrl="/assets/icons/summary/tasks-done.svg" name={"Tasks done"} count={5} />
         </div>
     </div>
 );
