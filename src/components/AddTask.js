@@ -49,6 +49,7 @@ const AddTask = () => {
     const handleClickSelectTaskDropDown = () => {
         setSelectTaskIsOpen((toggleOpen) => !toggleOpen);
     }
+    const [editSubtaskValue, setEditSubtaskValue] = useState('');
 
     const [selectContactsIsOpen, setSelectContactsIsOpen] = useState(false);
     const handleClickSelectContactsDropDown = () => {
@@ -67,10 +68,9 @@ const AddTask = () => {
         }
     }
 
-    const addSubtask = (subtask) => {
-        console.log(subtasks);
-        if(!subtasks.includes(subtask)){
-            setSubtasks([...subtasks, subtask]);
+    const addSubtask = (name) => {
+        if(!subtasks.some(s => s.name === name)) {
+            setSubtasks([...subtasks, {name, editOpen: false}]);
             setSubtask('');
         } else {
             console.error('you can\'t add the same subtask twice');
@@ -80,6 +80,28 @@ const AddTask = () => {
     const deleteSubtask = (index) => {
         subtasks.splice(index, 1);
         setSubtasks([...subtasks]);
+    }
+
+    const editSubtask = (index) => {
+        if(subtasks.some(subtask => subtask.editOpen === true)) {
+            console.error('you can\'t edit two subtasks at once');
+        } else {
+            subtasks[index].editOpen = true;
+            setEditSubtaskValue(subtasks[index].name);
+            setSubtasks([...subtasks]);
+        }
+    }
+
+    const cancelEdit = (index) => {
+        subtasks[index].editOpen = false;
+        setSubtasks([...subtasks]);
+    }
+
+    const acceptEdit = (index, value) => {
+        subtasks[index].name = value;
+        subtasks[index].editOpen = false;
+        setSubtasks([...subtasks]);
+
     }
 
     const selectTask = (category) => {
@@ -94,6 +116,7 @@ const AddTask = () => {
         setPriority('');
         setSearchContact('');
         setSelectedContacts([]);
+        setSubtasks([]);
     }
 
     return (
@@ -218,13 +241,43 @@ const AddTask = () => {
                     {subtasks.map((subtask, index) => {
                         return (
                             <React.Fragment key={index}>
+
                                 <div className="flex justify-between">
-                                    <li>{subtask}</li>
-                                    <div className="flex">
-                                        <img src={'./assets/icon/add-task/edit-icon.png'} alt={"plus icon"}/>
-                                        <img src={'./assets/icon/add-task/dr-icon.png'} alt={"plus icon"}/>
-                                        <img onClick={() => {deleteSubtask(index)}} src={'./assets/icon/add-task/trash-icon.png'} alt={"plus icon"}/>
-                                    </div>
+                                    {
+                                        subtasks[index].editOpen &&
+                                        <div className="flex items-center w-full h-12 border-b border-gray-300">
+                                            <input value={editSubtaskValue} onChange={(e) => setEditSubtaskValue(e.target.value)}/>
+                                            <div className="flex">
+                                                <img onClick={() => {
+                                                    cancelEdit(index)
+                                                }} src={'./assets/icon/add-task/x-cross.blue.svg'}
+                                                     alt={"X icon in blue"}/>
+                                                <img src={'./assets/icon/add-task/dr-icon.png'} alt={"plus icon"}/>
+                                                <img onClick={() => {
+                                                    acceptEdit(index, editSubtaskValue)
+                                                }} src={'./assets/icon/add-task/checkmark-blue.svg'}
+                                                     alt={"checkmark icon in blue"}/>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                    {
+                                        !subtasks[index].editOpen &&
+                                        <>
+                                            <li>{subtask.name}</li>
+                                            <div className="flex">
+                                                <img onClick={() => {
+                                                    editSubtask(index)
+                                                }} src={'./assets/icon/add-task/edit-icon.png'} alt={"plus icon"}/>
+                                                <img src={'./assets/icon/add-task/dr-icon.png'} alt={"plus icon"}/>
+                                                <img onClick={() => {
+                                                    deleteSubtask(index)
+                                                }} src={'./assets/icon/add-task/trash-icon.png'} alt={"plus icon"}/>
+                                            </div>
+                                        </>
+
+                                    }
                                 </div>
                             </React.Fragment>
                         )
@@ -236,8 +289,7 @@ const AddTask = () => {
                         <div onClick={clearAddTaskForm}>Clear</div>
                         <img src={'./assets/icon/add-task/clear.png'} alt={"a cross icon"}/>
                     </div>
-                    <button onClick={(e) => {
-                        e.preventDefault(); console.log('test')}} className="button button-blue">
+                    <button onClick={(e) => {e.preventDefault()}} className="button button-blue">
                         <div>Create Task</div>
                         <img src={'./assets/icon/add-task/check.png'} alt={"a checkmark icon"}/>
                     </button>
