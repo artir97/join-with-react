@@ -21,9 +21,22 @@ const MobileSummary = () => (
     </div>
 );
 
+const getTimeOfDay = () => {
+    const now = new Date();
+    const hours = now.getHours();
+
+    if (hours >= 4 && hours < 12) {
+        return 'morning';
+    } else if (hours >= 12 && hours < 18) {
+        return 'afternoon';
+    } else {
+        return 'evening';
+    }
+}
+
 const DesktopSummary = () => (
     <div className="flex flex-col items-center space-y-4 p-4">
-        <h1 className="text-2xl font-bold">Welcome !</h1>
+        <h1 className="text-5xl font-bold">Good {getTimeOfDay()}</h1>
         <div className="grid grid-cols-4 grid-rows-2 gap-4">
             <UrgentTaskCounter count={1} date={"November 27, 2024"} className="col-span-3" />
             <TaskCounter iconUrl="/assets/icons/summary/on-board.svg" name={"Tasks on board"} count={5} />
