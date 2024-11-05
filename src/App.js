@@ -17,32 +17,34 @@ import Sidebar from './components/Sidebar';
 function App() {
   return (
     <Router>
-      <div className='h-screen'>
+      <div className='h-screen w-screen'>
         <Navbar />
         <div className='lg:flex lg:h-full'>
           <MobileSwitch desktopComponent={<Sidebar />} />
-          <Switch>
-            <ContactsProvider>
-              <Route path="/summary">
-                <Summary />
-              </Route>
-              <Route path="/tasks">
-                <DragProvider>
-                  <Tasks />
-                </DragProvider>
-              </Route>
-              <Route path="/addTask">
-                <AddTask />
-              </Route>
+          <div className='lg:flex-1'>
+            <Switch>
+              <ContactsProvider>
+                <Route path="/summary">
+                  <Summary />
+                </Route>
+                <Route path="/tasks">
+                  <DragProvider>
+                    <Tasks />
+                  </DragProvider>
+                </Route>
+                <Route path="/addTask">
+                  <AddTask />
+                </Route>
 
-              <Route path="/contacts">
-                <Contacts />
-              </Route>
-              <Route path="/contact-info/:email">
-                <ContactInfo />
-              </Route>
-            </ContactsProvider>
-          </Switch>
+                <Route path="/contacts">
+                  <Contacts />
+                </Route>
+                <Route path="/contact-info/:email">
+                  <ContactInfo />
+                </Route>
+              </ContactsProvider>
+            </Switch>
+          </div>
           <MobileSwitch mobileComponent={<Footer />} />
         </div>
       </div>
