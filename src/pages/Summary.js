@@ -34,9 +34,11 @@ const getTimeOfDay = () => {
     }
 }
 
-const DesktopSummary = () => (
+const DesktopSummary = ({ name = "" }) => (
     <div className="flex flex-col items-center space-y-10 p-4">
-        <h1 className="text-5xl font-bold">Good {getTimeOfDay()}</h1>
+        {name
+            ? <h1 className="text-5xl font-extralight">Good {getTimeOfDay()}, <span className="text-blue-500 font-bold">{name}</span></h1>
+            : <h1 className="text-5xl font-bold">Good {getTimeOfDay()}</h1>}
         <div className="grid grid-cols-4 grid-rows-2 gap-4">
             <UrgentTaskCounter count={1} date={"November 27, 2024"} className="col-span-3" />
             <TaskCounter iconUrl="/assets/icons/summary/on-board.svg" name={"Tasks on board"} count={5} />
@@ -54,7 +56,7 @@ const Summary = () => {
         <div className="page-content flex items-center justify-center">
             <MobileSwitch
                 mobileComponent={<MobileSummary />}
-                desktopComponent={<DesktopSummary />} />
+                desktopComponent={<DesktopSummary name="Artir Guri"/>} />
         </div>
     );
 }
