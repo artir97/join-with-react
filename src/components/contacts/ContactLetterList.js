@@ -9,9 +9,8 @@ const ContactLetterList = ({ letter, list }) => {
             </div>
             <div>
                 {list.sort((a, b) => a.name > b.name)
-                    .map((info, i) => <div key={i} className="flex items-center py-4 space-x-4">
-
-                        <Link to={`/contact-info/${info.mail}`}>
+                    .map((info, i) => <div key={i} className="py-4">
+                        <Link to={`/contact-info/${info.mail}`} className="flex space-x-4">
                             <NameIcon name={info.name} />
                             <div className="flex flex-col">
                                 <p>{info.name}</p>
