@@ -12,7 +12,7 @@ const Section = ({ title, value, colorClass = "" }) => (
     </div>
 );
 
-const ContactInfo = ({ name, mail, phone }) => {
+const ContactInfo = () => {
     const { list } = useContext(ContactsContext);
 
     const {email} = useParams();

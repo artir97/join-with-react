@@ -9,46 +9,37 @@ import ContactInfo from './pages/ContactInfo';
 import Tasks from './pages/Tasks';
 import { DragProvider } from './contexts/DragContext';
 import { ContactsProvider } from "./contexts/contactsContext";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MobileSwitch from './components/base/MobileSwitch';
 import Sidebar from './components/Sidebar';
 
 // MAIN PAGE
 function App() {
   return (
-    <Router>
-      <div className='h-screen w-screen'>
-        <Navbar />
-        <div className='lg:flex lg:h-full'>
-          <MobileSwitch desktopComponent={<Sidebar />} />
-          <div className='lg:flex-1'>
-            <Switch>
-              <ContactsProvider>
-                <Route path="/summary">
-                  <Summary />
-                </Route>
-                <Route path="/tasks">
-                  <DragProvider>
-                    <Tasks />
-                  </DragProvider>
-                </Route>
-                <Route path="/addTask">
-                  <AddTask />
-                </Route>
-
-                <Route path="/contacts">
-                  <Contacts />
-                </Route>
-                <Route path="/contact-info/:email">
-                  <ContactInfo />
-                </Route>
-              </ContactsProvider>
-            </Switch>
+      <BrowserRouter>
+        <ContactsProvider> {/* Move ContactsProvider here */}
+          <div className='h-screen w-screen'>
+            <Navbar />
+            <div className='lg:flex lg:h-full'>
+              <MobileSwitch desktopComponent={<Sidebar />} />
+              <div className='lg:flex-1'>
+                <Routes>
+                  <Route path="/summary" element={<Summary />}/>
+                  <Route path="/tasks" element={
+                    <DragProvider>
+                      <Tasks />
+                    </DragProvider>
+                  }/>
+                  <Route path="/addTask" element={<AddTask />}/>
+                  <Route path="/contacts" element={<Contacts />}/>
+                  <Route path="/contact-info/:email" element={<ContactInfo />}/>
+                </Routes>
+              </div>
+              <MobileSwitch mobileComponent={<Footer />} />
+            </div>
           </div>
-          <MobileSwitch mobileComponent={<Footer />} />
-        </div>
-      </div>
-    </Router>
+        </ContactsProvider>
+      </BrowserRouter>
   );
 }
 
