@@ -11,6 +11,9 @@
 # production
 /build
 
+# dev
+src/output.css
+
 # misc
 .idea
 .DS_Store
