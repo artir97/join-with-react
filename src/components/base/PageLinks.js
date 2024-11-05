@@ -3,22 +3,22 @@ import { Link, useLocation } from "react-router-dom";
 const links = [
     {
         path: "/summary",
-        iconUrl: "./assets/icon/footer/summary-icon.png",
+        iconUrl: "./assets/icons/navigation/summary.svg",
         name: "Summary"
     },
     {
         path: "/tasks",
-        iconUrl: "./assets/icon/footer/board-icon.png",
+        iconUrl: "./assets/icons/navigation/tasks.svg",
         name: "Board"
     },
     {
         path: "/addtask",
-        iconUrl: "./assets/icon/footer/add-task-icon.png",
+        iconUrl: "./assets/icons/navigation/add-task.svg",
         name: "Add Task"
     },
     {
         path: "/contacts",
-        iconUrl: "./assets/icon/footer/contacts-icon.png",
+        iconUrl: "./assets/icons/navigation/contacts.svg",
         name: "Contacts"
     }
 ];
