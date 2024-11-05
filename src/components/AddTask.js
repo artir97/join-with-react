@@ -158,7 +158,7 @@ const AddTask = () => {
                             ['urgent', 'medium', 'low'].map(p => (
                                 <div onClick={() => setPriority(priority === p ? '' : p)} className={`priority-button ${priority === p && `priority-${p}`}`}>
                                     <div className="capitalize">{p}</div>
-                                    <ReactSVG src={`./assets/icons/priorities/${p}.svg`} beforeInjection={svg => handleColorInjection(svg, () => priority === p, 'white')} />
+                                    <ReactSVG src={`./assets/icons/priorities/${p}.svg`} beforeInjection={svg => handleColorInjection(svg, 'white', () => priority === p)} />
                                 </div>
                             ))
                         }
@@ -260,13 +260,13 @@ const AddTask = () => {
                     </div>
 
                     <div className="buttons-container">
-                        <div className="button button-white">
+                        <div className="button button-white flex items-center space-x-2">
                             <div onClick={clearAddTaskForm}>Clear</div>
-                            <img src={'./assets/icon/add-task/clear.png'} alt={"a cross icon"} />
+                            <ReactSVG src={'./assets/icons/forms/close-white.svg'} beforeInjection={svg => handleColorInjection(svg, 'black')} />
                         </div>
-                        <button onClick={(e) => { e.preventDefault() }} className="button button-blue">
+                        <button onClick={(e) => { e.preventDefault() }} className="button button-blue flex items-center space-x-2">
                             <div>Create Task</div>
-                            <img src={'./assets/icon/add-task/check.png'} alt={"a checkmark icon"} />
+                            <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"} />
                         </button>
                     </div>
                 </form >
