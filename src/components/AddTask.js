@@ -164,7 +164,6 @@ const AddTask = () => {
                         }
                     </div>
 
-
                     <label><b>Assigned to</b> (optional)</label>
                     <div
                         className="flex justify-between items-center w-full h-12 border-b border-gray-300">
@@ -315,14 +314,4 @@ const SelectTaskDropDown = ({ selectTask }) => {
     );
 }
 
-const SelectedPriority = ({ priority, priorityClass, priorityImageUrl, alt, setPriority }) => {
-    return (
-        <div onClick={() => { setPriority('') }} className={"priority-button " + priorityClass}>
-            <div>{priority}</div>
-            <img src={priorityImageUrl} alt={alt} />
-        </div>
-    );
-}
-
-
-export default AddTask
+export default AddTask;
