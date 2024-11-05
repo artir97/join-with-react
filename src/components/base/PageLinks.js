@@ -1,4 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
+import { ReactSVG } from "react-svg";
+import useViewport from "../../hooks/useViewport";
+
+import { handleColorInjection } from "../../tools/svg";
 
 const links = [
     {
@@ -25,16 +29,15 @@ const links = [
 
 const PageLinks = () => {
     const location = useLocation();
-
-    console.log(location.pathname);
+    const { isMobile } = useViewport();
 
     return (
         <>
             {links.map(l => (
                 <Link key={l.path} to={l.path}>
                     <div className={`${location.pathname === l.path ? "lg:bg-blue-200" : ""} lg:flex lg:space-x-2 lg:p-2 rounded`}>
-                        <img src={l.iconUrl} alt={`${l.name} icon`} />
-                        <span>{l.name}</span>
+                        <ReactSVG src={l.iconUrl} beforeInjection={svg => handleColorInjection(svg, () => location.pathname === l.path && isMobile(), '#3b82f6')} />
+                        <span className={isMobile && location.pathname === l.path ? "max-lg:text-blue-500" : ""}>{l.name}</span>
                     </div>
                 </Link>
             ))}

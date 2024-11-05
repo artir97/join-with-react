@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+ /** It's the laptop threshold from Tailwind. */
+const threshold = 1024;
 
 /**
  * Custom hook to get window width and keep it updated on window resize.
@@ -12,6 +15,10 @@ const useViewport = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight);
 
+    const isMobile = useCallback(() => {
+        return width < threshold;
+    }, [width]);
+
     useEffect(() => {
         const handleResize = () => {
             setWidth(window.innerWidth);
@@ -22,7 +29,7 @@ const useViewport = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    return { width, height };
+    return { width, height, isMobile };
 }
 
 export default useViewport;
