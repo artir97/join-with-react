@@ -1,7 +1,9 @@
-import { useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import NameIcon from "../components/icons/NameIcon";
 import MainActionIcon from "../components/icons/MainActionIcon";
 import EditContactOverlay from "../components/contacts/EditContactOverlay";
+import {useParams} from "react-router-dom";
+import {ContactsContext} from "../contexts/contactsContext";
 
 const Section = ({ title, value, colorClass = "" }) => (
     <div className="flex flex-col space-y-2">
@@ -11,8 +13,21 @@ const Section = ({ title, value, colorClass = "" }) => (
 );
 
 const ContactInfo = ({ name, mail, phone }) => {
+    const list = useContext(ContactsContext);
+    const {email} = useParams();
     const [showOverlay, setShowOverlay] = useState(false);
-    const [info, setInfo] = useState({name, mail, phone});
+    const [info, setInfo] = useState({name: '', mail: '', phone: ''});
+
+    const getContact = () => {
+        const contact = list.find((contact) => contact.mail === email);
+        if (contact) {
+            setInfo(contact);
+        }
+    }
+
+    useEffect(() => {
+        getContact();
+    }, [getContact, email]);
 
     const handleEditSubmit = (info) => {
         // TODO Modify actual data
@@ -32,7 +47,7 @@ const ContactInfo = ({ name, mail, phone }) => {
                         <p className="text-3xl font-light">{info.name}</p>
                     </div>
                 </div>
-                <Section title={"Mail address"} value={info.mail} colorClass="text-blue-500" />
+                <Section title={"Mail address"} value={email} colorClass="text-blue-500" />
                 <Section title={"Phone"} value={info.phone} />
             </div>
             <MainActionIcon

@@ -8,6 +8,7 @@ import AddTask from "./components/AddTask";
 import ContactInfo from './pages/ContactInfo';
 import Tasks from './pages/Tasks';
 import {DragProvider} from './contexts/DragContext';
+import {ContactsProvider} from "./contexts/contactsContext";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 // MAIN PAGE
@@ -15,7 +16,8 @@ function App() {
     return (
         <Router>
             <Navbar/>
-                <Switch>
+            <Switch>
+                <ContactsProvider>
                     <Route path="/summary">
                         <Summary/>
                     </Route>
@@ -27,16 +29,15 @@ function App() {
                     <Route path="/addTask">
                         <AddTask/>
                     </Route>
+
                     <Route path="/contacts">
                         <Contacts/>
                     </Route>
-                    <Route path="/contactInfo">
-                        <ContactInfo
-                            name={"Anton Meyer"}
-                            mail={"anton.meyer@somemail.com"}
-                            phone={"This should not be a phone"}/>
+                    <Route path="/contact-info/:email">
+                        <ContactInfo/>
                     </Route>
-                </Switch>
+                </ContactsProvider>
+            </Switch>
             <Footer/>
         </Router>
     );
