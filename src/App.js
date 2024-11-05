@@ -7,40 +7,47 @@ import Contacts from './pages/Contacts';
 import AddTask from "./components/AddTask";
 import ContactInfo from './pages/ContactInfo';
 import Tasks from './pages/Tasks';
-import {DragProvider} from './contexts/DragContext';
-import {ContactsProvider} from "./contexts/contactsContext";
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { DragProvider } from './contexts/DragContext';
+import { ContactsProvider } from "./contexts/contactsContext";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import MobileSwitch from './components/base/MobileSwitch';
+import Sidebar from './components/Sidebar';
 
 // MAIN PAGE
 function App() {
-    return (
-        <Router>
-            <Navbar/>
-            <Switch>
-                <ContactsProvider>
-                    <Route path="/summary">
-                        <Summary/>
-                    </Route>
-                    <Route path="/tasks">
-                        <DragProvider>
-                            <Tasks/>
-                        </DragProvider>
-                    </Route>
-                    <Route path="/addTask">
-                        <AddTask/>
-                    </Route>
+  return (
+    <Router>
+      <div className='h-screen'>
+        <Navbar />
+        <div className='lg:flex lg:h-full'>
+          <MobileSwitch desktopComponent={<Sidebar />} />
+          <Switch>
+            <ContactsProvider>
+              <Route path="/summary">
+                <Summary />
+              </Route>
+              <Route path="/tasks">
+                <DragProvider>
+                  <Tasks />
+                </DragProvider>
+              </Route>
+              <Route path="/addTask">
+                <AddTask />
+              </Route>
 
-                    <Route path="/contacts">
-                        <Contacts/>
-                    </Route>
-                    <Route path="/contact-info/:email">
-                        <ContactInfo/>
-                    </Route>
-                </ContactsProvider>
-            </Switch>
-            <Footer/>
-        </Router>
-    );
+              <Route path="/contacts">
+                <Contacts />
+              </Route>
+              <Route path="/contact-info/:email">
+                <ContactInfo />
+              </Route>
+            </ContactsProvider>
+          </Switch>
+          <MobileSwitch mobileComponent={<Footer />} />
+        </div>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
