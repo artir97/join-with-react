@@ -18,7 +18,8 @@ const EditContactOverlay = ({ onEditSubmit, onExit, info }) => {
             name={info.name}
             mail={info.mail}
             phone={info.phone}
-            onSubmit={onEditSubmit} />
+            onSubmit={onEditSubmit}
+        />
     );
 }
 

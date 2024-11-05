@@ -2,6 +2,9 @@ import { useState } from 'react';
 import IconInput from '../base/IconInput';
 import NameIcon from '../icons/NameIcon';
 import '../base/Overlay.css';
+import {useContactList} from "../../hooks/useContactList";
+import { useNavigate } from "react-router-dom";
+
 
 const OverlayFormInput = ({ value, iconUrl, placeholder, onChange }) => (
     <IconInput value={value} iconUrl={iconUrl}
@@ -22,15 +25,24 @@ const OverlayFormInput = ({ value, iconUrl, placeholder, onChange }) => (
  * @param {string} [props.mail=""] - Mail input value
  * @param {string} [props.phone=""] - Phone input value
  */
-const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, name = "", mail = "", phone = "" }) => {
+const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, name = "", mail = "", phone = ""}) => {
     const [inputName, setName] = useState(name);
     const [inputMail, setMail] = useState(mail);
     const [inputPhone, setPhone] = useState(phone);
+    const { deleteContact } = useContactList();
+    const navigateTo = useNavigate();
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
 
         onSubmit({ name: inputName.trim(), mail: inputMail.trim(), phone: inputPhone.trim() });
+        onExit();
+    }
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        deleteContact(mail);
+        navigateTo('/contacts');
         onExit();
     }
 
@@ -50,7 +62,7 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                     <OverlayFormInput value={inputPhone} iconUrl="./assets/icons/forms/phone.svg" placeholder="Phone number" onChange={e => setPhone(e.target.value)} />
                     {isEditing
                         ? <div className='flex space-x-4 mt-8'>
-                            <button className='rounded bg-white p-2 mt-4'>Delete</button>
+                            <button className='rounded bg-white p-2 mt-4' onClick={handleDelete}>Delete</button>
                             <button className='rounded flex space-x-6 bg-blue-500 text-white p-2 mt-4'>
                                 Save <img src="./assets/icons/forms/check.svg" alt="Check icon" />
                             </button>

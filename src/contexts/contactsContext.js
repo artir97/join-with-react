@@ -43,6 +43,8 @@ const contactsReducer = (state, action) => {
     switch (action.type) {
         case 'CHANGE_CONTACT_LIST':
             return {...state, list: action.payload };
+        case 'delete':
+            return {...state, list: state.list.filter((contact) => contact.mail !== action.payload)};
         default:
             return state;
     }
@@ -57,8 +59,12 @@ export const ContactsProvider = ({children}) => {
         dispatch({type: 'CHANGE_CONTACT_LIST', payload: list})
     }
 
+    const deleteContact = (contactMail) => {
+        dispatch({ type: 'delete', payload: contactMail }); // Pass the mail of the contact to delete
+    };
+
     return (
-        <ContactsContext.Provider value={{...state, changeContactList}}>
+        <ContactsContext.Provider value={{ ...state, changeContactList, deleteContact }}>
             {children}
         </ContactsContext.Provider>
     )
