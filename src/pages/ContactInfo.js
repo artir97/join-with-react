@@ -13,7 +13,8 @@ const Section = ({ title, value, colorClass = "" }) => (
 );
 
 const ContactInfo = ({ name, mail, phone }) => {
-    const list = useContext(ContactsContext);
+    const { list } = useContext(ContactsContext);
+
     const {email} = useParams();
     const [showOverlay, setShowOverlay] = useState(false);
     const [info, setInfo] = useState({name: '', mail: '', phone: ''});

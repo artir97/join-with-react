@@ -1,4 +1,4 @@
-import {createContext} from 'react';
+import {createContext, useReducer} from 'react';
 
 const list = [
     { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },
@@ -39,10 +39,26 @@ const list = [
 
 export const ContactsContext = createContext(list);
 
+const contactsReducer = (state, action) => {
+    switch (action.type) {
+        case 'CHANGE_CONTACT_LIST':
+            return {...state, list: action.payload };
+        default:
+            return state;
+    }
+}
+
 export const ContactsProvider = ({children}) => {
+    const [state, dispatch] = useReducer(contactsReducer, {
+        list
+    })
+
+    const changeContactList = (list) => {
+        dispatch({type: 'CHANGE_CONTACT_LIST', payload: list})
+    }
 
     return (
-        <ContactsContext.Provider value={list}>
+        <ContactsContext.Provider value={{...state, changeContactList}}>
             {children}
         </ContactsContext.Provider>
     )

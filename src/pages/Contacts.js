@@ -1,17 +1,21 @@
 import { useState } from "react";
-import { useContext } from "react";
+import { useContactList } from "../hooks/useContactList";
 
 import ContactLetterList from "../components/contacts/ContactLetterList";
 import AddContactOverlay from "../components/contacts/AddContactOverlay";
 import MainActionIcon from "../components/icons/MainActionIcon";
-import {ContactsContext} from "../contexts/contactsContext";
-
-
 
 const codeA = 'A'.charCodeAt(0);
 
+const list2 = [
+    { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },
+    { name: "John Doe", mail: "john.doe@example.com", phone: "+49 1234 56 789 0" },
+    { name: "Alice Smith", mail: "alice.smith@example.com", phone: "+49 9876 54 321 0" },
+    { name: "Artir Guri", mail: "artir.guri@test.de", phone: "+49 5555 55 555 5" },
+];
+
 const Contacts = () => {
-    const list = useContext(ContactsContext);
+    const {list, changeContactList} = useContactList();
     const [showOverlay, setShowOverlay] = useState(false);
 
     const [contacts, setContacts] = useState([...list]);
@@ -45,6 +49,8 @@ const Contacts = () => {
 
     return (
         <>
+            <button onClick={() => changeContactList(list2)} className="border-4 bg-black text-white">TEST</button>
+            <button onClick={() => console.log(list)}>CLICK</button>
             <div className="page-content overflow-y-scroll">
                 {[...Object.entries(map)]
                     .filter(e => e[1].length > 0)
