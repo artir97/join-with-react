@@ -1,13 +1,9 @@
 import useViewport from "../../hooks/useViewport";
 
- /** It's the laptop threshold from Tailwind. */
-const threshold = 1024;
-
 const MobileSwitch = ({mobileComponent = <></>, desktopComponent = <></>}) => {
-    const { width } = useViewport();
+    const { isMobile } = useViewport();
 
-    console.log(width);
-    return width < threshold ? mobileComponent : desktopComponent;
+    return isMobile() ? mobileComponent : desktopComponent;
 }
  
 export default MobileSwitch;
