@@ -7,7 +7,7 @@ const MobileSwitch = ({mobileComponent = <></>, desktopComponent = <></>}) => {
     const { width } = useViewport();
 
     console.log(width);
-    return width <= threshold ? mobileComponent : desktopComponent;
+    return width < threshold ? mobileComponent : desktopComponent;
 }
  
 export default MobileSwitch;
