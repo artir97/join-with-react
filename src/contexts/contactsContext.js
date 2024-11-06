@@ -51,6 +51,9 @@ const contactsReducer = (state, action) => {
                  contact.mail = action.payload.mail;
                  contact.phone = action.payload.phone;
             return {...state};
+        case 'add':
+            state.list.push(action.payload);
+            return {...state};
         default:
             return state;
 
@@ -74,8 +77,12 @@ export const ContactsProvider = ({children}) => {
         dispatch({ type: 'edit', payload: contact})
     }
 
+    const addContact = (contact) => {
+        dispatch({ type: 'add', payload: contact})
+    }
+
     return (
-        <ContactsContext.Provider value={{ ...state, changeContactList, deleteContact, editContact}}>
+        <ContactsContext.Provider value={{ ...state, changeContactList, deleteContact, editContact, addContact}}>
             {children}
         </ContactsContext.Provider>
     )
