@@ -7,7 +7,7 @@ import MainActionIcon from "../components/icons/MainActionIcon";
 
 
 const Contacts = () => {
-    const {list, changeContactList} = useContactList();
+    const {list} = useContactList();
     const [showOverlay, setShowOverlay] = useState(false);
     const [contactsByInitial, setContactsByInitial] = useState({});
 
