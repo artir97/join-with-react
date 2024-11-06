@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NameIcon from "./NameIcon";
+import NameIcon from "../components/icons/NameIcon";
 import React from "react";
 import { ReactSVG } from "react-svg";
 import { handleColorInjection, handleRotateInjection } from "../tools/svg";
