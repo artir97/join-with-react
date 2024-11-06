@@ -12,6 +12,7 @@ import { ContactsProvider } from "./contexts/contactsContext";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MobileSwitch from './components/base/MobileSwitch';
 import Sidebar from './components/Sidebar';
+import Help from './pages/Help';
 
 // MAIN PAGE
 function App() {
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/addTask" element={<AddTask />} />
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/contact-info/:email" element={<ContactInfo />} />
+                <Route path="/help" element={<Help />} />
               </Routes>
             </div>
           </div>
