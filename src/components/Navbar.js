@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 import NavbarDropdown from "./NavbarDropdown";
 import MobileSwitch from "./base/MobileSwitch";
 
@@ -16,7 +18,9 @@ const Navbar = () => {
                 <MobileSwitch desktopComponent={
                     <>
                         <span className="text-sm text-white font-light">Kanban Project Management Tool</span>
-                        <img src="./assets/icons/navbar/help.svg" alt="Help logo" />
+                        <Link to="/help">
+                            <img src="./assets/icons/navbar/help.svg" alt="Help logo" />
+                        </Link>
                     </>
                 } />
                 <div onClick={handleClickDropDown} className="nav-bar-user">
