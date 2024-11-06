@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const IconInput = ({ className = "", containerClassName = "", onFocusClassName = "", onFocusContainerClassName = "", value, placeholder, onChange, iconUrl = "", icon = null }) => {
+const IconInput = ({ className = "", containerClassName = "", onFocusClassName = "", onFocusContainerClassName = "", value, type, placeholder, onChange, iconUrl = "", icon = null }) => {
     const [isFocus, setFocus] = useState(false);
 
     return (
@@ -9,6 +9,7 @@ const IconInput = ({ className = "", containerClassName = "", onFocusClassName =
                 value={value}
                 placeholder={placeholder}
                 onChange={onChange}
+                type={type}
                 onFocus={() => setFocus(true)}
                 onBlur={() => setFocus(false)}/>
             {!icon && (iconUrl

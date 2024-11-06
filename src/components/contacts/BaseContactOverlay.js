@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useContactList } from "../../hooks/useContactList";
 import IconInput from '../base/IconInput';
 import NameIcon from '../icons/NameIcon';
+
 import '../base/Overlay.css';
-import { useContactList } from "../../hooks/useContactList";
-import { useNavigate } from "react-router-dom";
 
-
-const OverlayFormInput = ({ value, iconUrl, placeholder, onChange }) => (
+const OverlayFormInput = ({ value, iconUrl, placeholder, onChange, type = "text" }) => (
     <IconInput value={value} iconUrl={iconUrl}
         placeholder={placeholder}
         onChange={onChange}
+        type={type}
         className="input-contact w-full" containerClassName="input-container w-full text-sm lg:text-base lg:w-3/4" />
 );
 
@@ -60,7 +61,7 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                 </div>
                 <form className='flex flex-col items-center space-y-4 w-full px-6 py-12' onSubmit={handleSubmit}>
                     <OverlayFormInput value={inputName} iconUrl="./assets/icons/forms/person.svg" placeholder="Name" onChange={e => setName(e.target.value)} />
-                    <OverlayFormInput value={inputMail} iconUrl="./assets/icons/forms/mail.svg" placeholder="Mail address" onChange={e => setMail(e.target.value)} />
+                    <OverlayFormInput value={inputMail} type="email" iconUrl="./assets/icons/forms/mail.svg" placeholder="Mail address" onChange={e => setMail(e.target.value)} />
                     <OverlayFormInput value={inputPhone} iconUrl="./assets/icons/forms/phone.svg" placeholder="Phone number" onChange={e => setPhone(e.target.value)} />
                     {isEditing
                         ? <div className='flex space-x-4 mt-8'>
