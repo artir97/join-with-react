@@ -173,7 +173,7 @@ const AddTask = () => {
                     <div className="priority-selection">
                         {
                             ['urgent', 'medium', 'low'].map(p => (
-                                <div onClick={() => setPriority(priority === p ? '' : p)} className={`priority-button ${priority === p && `priority-${p}`}`}>
+                                <div onClick={() => setPriority(priority === p ? '' : p)} className={`priority-button ${priority === p ? `priority-${p}` : ""}`}>
                                     <div className="capitalize">{p}</div>
                                     <ReactSVG src={`./assets/icons/priorities/${p}.svg`} beforeInjection={svg => handleColorInjection(svg, 'white', () => priority === p)} />
                                 </div>

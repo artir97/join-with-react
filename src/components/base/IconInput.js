@@ -4,8 +4,8 @@ const IconInput = ({ className = "", containerClassName = "", onFocusClassName =
     const [isFocus, setFocus] = useState(false);
 
     return (
-        <div className={`${containerClassName} flex items-center ${isFocus && onFocusContainerClassName}`}>
-            <input className={`${className} flex-1 ${isFocus && onFocusClassName}`}
+        <div className={`${containerClassName} flex items-center ${isFocus ? onFocusContainerClassName : ""}`}>
+            <input className={`${className} flex-1 ${isFocus ? onFocusClassName : ""}`}
                 value={value}
                 placeholder={placeholder}
                 onChange={onChange}
