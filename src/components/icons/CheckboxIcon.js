@@ -6,14 +6,14 @@ const CheckboxIcon = ({ defaultValue = false }) => {
     return (
         <>
             {checked && <img
-                src="./assets/icon/add-task/check-button.png"
+                src="./assets/icons/forms/checkbox-checked.svg"
                 alt="Empty checkbox"
-                onClick={() => setChecked(true)}
+                onClick={() => setChecked(false)}
             />}
             {!checked && <img
-                src="./assets/icon/add-task/check-button-checked.png"
+                src="./assets/icons/forms/checkbox-empty.svg"
                 alt="Checked checkbox"
-                onClick={() => setChecked(false)}
+                onClick={() => setChecked(true)}
             />}
         </>
     );
