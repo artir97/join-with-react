@@ -1,10 +1,14 @@
+import { ReactSVG } from 'react-svg';
+
+import Subtask from './Subtask';
+
 import CategoryIcon from '../icons/CategoryIcon';
 import NameIcon from '../icons/NameIcon';
 import PriorityIcon from '../icons/PriorityIcon';
-import Subtask from './Subtask';
+import ButtonIcon from '../icons/ButtonIcon';
 
 import '../base/Overlay.css';
-import ButtonIcon from '../icons/ButtonIcon';
+
 
 const TaskInfoOverlay = ({ task, onExit }) => {
     return (
@@ -13,7 +17,8 @@ const TaskInfoOverlay = ({ task, onExit }) => {
                 <div className='flex items-center'>
                     <CategoryIcon name={task.category} />
                     <div className='flex-1'/>
-                    <p className='p-4 self-end text-blue-500 cursor-pointer' onClick={onExit}>X</p>
+                    <ReactSVG className='p-4 self-end text-blue-500 cursor-pointer' onClick={onExit}
+                        src="./assets/icons/forms/close-blue.svg"/>
                 </div>
 
                 <h2 className='text-3xl font-bold'>{task.name}</h2>
