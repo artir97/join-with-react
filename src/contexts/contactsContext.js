@@ -52,8 +52,7 @@ const contactsReducer = (state, action) => {
                  contact.phone = action.payload.phone;
             return {...state};
         case 'add':
-            state.list.push(action.payload);
-            return {...state};
+            return {...state, list: [...state.list, action.payload]};
         default:
             return state;
 

@@ -33,9 +33,6 @@ const Contacts = () => {
 
 
     const handleAddSubmit = (info) => {
-
-        const initial = info.name.charAt(0).toUpperCase();
-        setContactsByInitial(map => {return {...map, [initial]: [...map[initial], info]}});
         addContact(info);
     }
 
