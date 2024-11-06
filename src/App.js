@@ -16,30 +16,30 @@ import Sidebar from './components/Sidebar';
 // MAIN PAGE
 function App() {
   return (
-      <BrowserRouter>
-        <ContactsProvider> {/* Move ContactsProvider here */}
-          <div className='h-screen w-screen'>
-            <Navbar />
-            <div className='lg:flex lg:h-full'>
-              <MobileSwitch desktopComponent={<Sidebar />} />
-              <div className='lg:flex-1'>
-                <Routes>
-                  <Route path="/summary" element={<Summary />}/>
-                  <Route path="/tasks" element={
-                    <DragProvider>
-                      <Tasks />
-                    </DragProvider>
-                  }/>
-                  <Route path="/addTask" element={<AddTask />}/>
-                  <Route path="/contacts" element={<Contacts />}/>
-                  <Route path="/contact-info/:email" element={<ContactInfo />}/>
-                </Routes>
-              </div>
-              <MobileSwitch mobileComponent={<Footer />} />
+    <BrowserRouter>
+      <ContactsProvider> {/* Move ContactsProvider here */}
+        <div className='h-screen w-screen'>
+          <Navbar />
+          <div className='lg:flex lg:full-page-fit'>
+            <MobileSwitch desktopComponent={<Sidebar />} />
+            <div className='lg:flex-1'>
+              <Routes>
+                <Route path="/summary" element={<Summary />} />
+                <Route path="/tasks" element={
+                  <DragProvider>
+                    <Tasks />
+                  </DragProvider>
+                } />
+                <Route path="/addTask" element={<AddTask />} />
+                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/contact-info/:email" element={<ContactInfo />} />
+              </Routes>
             </div>
           </div>
-        </ContactsProvider>
-      </BrowserRouter>
+          <MobileSwitch mobileComponent={<Footer />} />
+        </div>
+      </ContactsProvider>
+    </BrowserRouter>
   );
 }
 

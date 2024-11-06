@@ -2,6 +2,13 @@ body {
     font-family: "Open Sans", sans-serif;
 }
 
+/* Page */
+@media (min-width: 1024px) {
+    .lg\:full-page-fit {
+        height: calc(100% - 80px); /* 80 for the navbar */
+    }
+}
+
 /*NAVBAR*/
 nav {
     height: 80px;
