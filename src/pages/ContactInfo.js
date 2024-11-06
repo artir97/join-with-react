@@ -2,6 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import NameIcon from "../components/icons/NameIcon";
 import MainActionIcon from "../components/icons/MainActionIcon";
 import EditContactOverlay from "../components/contacts/EditContactOverlay";
+import {useContactList} from "../hooks/useContactList";
 import {useParams} from "react-router-dom";
 import {ContactsContext} from "../contexts/contactsContext";
 
@@ -18,6 +19,7 @@ const ContactInfo = () => {
     const {email} = useParams();
     const [showOverlay, setShowOverlay] = useState(false);
     const [info, setInfo] = useState({name: '', mail: '', phone: ''});
+    const { editContact } = useContactList()
 
     const getContact = () => {
         const contact = list.find((contact) => contact.mail === email);
@@ -31,8 +33,7 @@ const ContactInfo = () => {
     }, [getContact, email]);
 
     const handleEditSubmit = (info) => {
-        // TODO Modify actual data
-        setInfo(info);
+        editContact(info)
     }
 
     return (
