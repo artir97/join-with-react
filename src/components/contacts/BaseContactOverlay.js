@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useContactList } from "../../hooks/useContactList";
 import IconInput from '../base/IconInput';
 import NameIcon from '../icons/NameIcon';
+import { capitalize } from '../../tools/format';
 
 import '../base/Overlay.css';
 
@@ -36,7 +37,7 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
     const handleSubmit = (ev) => {
         ev.preventDefault();
 
-        onSubmit({ name: inputName.trim(), mail: inputMail.trim(), phone: inputPhone.trim() });
+        onSubmit({ name: capitalize(inputName), mail: inputMail.trim(), phone: inputPhone.trim() });
         onExit();
     }
 
