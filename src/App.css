@@ -100,8 +100,14 @@ footer div {
 }
 
 .page-content {
-    height: calc(100vh - 156px);
+    height: calc(100vh - 80px - 76px);
     padding: 0 16px;
+}
+
+@media (min-width: 1024px) {
+    .page-content {
+        height: calc(100vh - 80px);
+    }    
 }
 
 
@@ -109,6 +115,13 @@ footer div {
 .container-add-task {
     height: calc(100vh - 80px - 76px - 72px);
     overflow-y: auto;
+}
+
+@media (min-width: 1024px) {
+    .container-add-task {
+        height: calc(100vh - 80px - 72px);
+        overflow-y: auto;
+    }
 }
 
 .container-add-task .add-task-form {
@@ -120,9 +133,8 @@ footer div {
 }
 
 .container-add-task .add-task-form input {
-    height: 48px;
-    font-size: 28px;
     width: 100%;
+    padding: 8px;
     border-bottom: 1px solid #D1D1D1;
 }
 
@@ -210,11 +222,17 @@ footer div {
     bottom: 76px;
     height: 72px;
     width: 100%;
-    background-color: #FFF;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 32px;
+}
+
+@media (min-width: 1024px) {
+    .buttons-container {
+        right: 64px;
+        justify-content: end;
+    }
 }
 
 .button {

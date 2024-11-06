@@ -1,8 +1,9 @@
-import { useState } from "react";
-import NameIcon from "../components/icons/NameIcon";
-import React from "react";
+import React, { useState } from "react";
+
 import { ReactSVG } from "react-svg";
 import { handleColorInjection, handleRotateInjection } from "../tools/svg";
+
+import NameIcon from "../components/icons/NameIcon";
 
 const AddTask = () => {
     const [title, setTitle] = useState('');
@@ -129,7 +130,7 @@ const AddTask = () => {
                         required
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="title-input"
+                        className="text-2xl"
                         type="text"
                         placeholder="Enter a title"
                     />
@@ -140,7 +141,6 @@ const AddTask = () => {
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="Enter a description"
                         className="description-input"
-                        id="description-input"
                     />
 
                     <label><b>Due Date</b></label>
@@ -148,6 +148,7 @@ const AddTask = () => {
                         required
                         type="date"
                         value={date}
+                        className={`${date === "" && "text-gray-300"} font-light`}
                         onChange={(e) => setDate(e.target.value)}
                     />
 
@@ -168,7 +169,7 @@ const AddTask = () => {
                         className="flex justify-between items-center w-full h-12 border-b border-gray-300">
                         {
                             !selectContactsIsOpen &&
-                            <div onClick={handleClickSelectContactsDropDown}>Select contacts to assign</div>
+                            <div onClick={handleClickSelectContactsDropDown} className="p-2">Select contacts to assign</div>
                         }
                         {
                             selectContactsIsOpen &&
@@ -196,7 +197,7 @@ const AddTask = () => {
                     <label><b>Category</b></label>
                     <div onClick={handleClickSelectTaskDropDown}
                         className="flex justify-between items-center w-full h-12 border-b border-gray-300">
-                        <div>{category}</div>
+                        <div className="p-2">{category}</div>
                         <ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
                             beforeInjection={svg => handleRotateInjection(svg, 180, () => selectTaskIsOpen)} />
                     </div>
