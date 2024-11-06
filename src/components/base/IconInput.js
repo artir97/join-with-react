@@ -1,11 +1,21 @@
-const IconInput = ({ className, containerClassName, value, placeholder, onChange, iconUrl = "" }) => {
+import { useState } from "react";
+
+const IconInput = ({ className = "", containerClassName = "", onFocusClassName = "", onFocusContainerClassName = "", value, placeholder, onChange, iconUrl = "", icon = null }) => {
+    const [isFocus, setFocus] = useState(false);
+
     return (
-        <div className={`${containerClassName} flex`}>
-            <input className={`${className} flex-1`} value={value} placeholder={placeholder} onChange={onChange}/>
-            {iconUrl
+        <div className={`${containerClassName} flex items-center ${isFocus && onFocusContainerClassName}`}>
+            <input className={`${className} flex-1 ${isFocus && onFocusClassName}`}
+                value={value}
+                placeholder={placeholder}
+                onChange={onChange}
+                onFocus={() => setFocus(true)}
+                onBlur={() => setFocus(false)}/>
+            {!icon && (iconUrl
                 ? <img src={iconUrl} alt="Input icon" className="m-4"/>
-                : <span className="m-4">lll</span>
+                : <span className="m-4">lll</span>)
             }
+            {icon !== null && icon}
         </div>
     );
 }

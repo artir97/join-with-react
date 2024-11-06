@@ -107,7 +107,7 @@ footer div {
 @media (min-width: 1024px) {
     .page-content {
         height: calc(100vh - 80px);
-    }    
+    }
 }
 
 
@@ -132,10 +132,17 @@ footer div {
     align-items: center;
 }
 
-.container-add-task .add-task-form input {
+.container-add-task .add-task-form .no-icon-input,
+textarea {
     width: 100%;
     padding: 8px;
-    border-bottom: 1px solid #D1D1D1;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.container-add-task .add-task-form .no-icon-input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
 }
 
 .add-task-form label {
@@ -146,7 +153,6 @@ footer div {
 }
 
 .container-add-task .add-task-form .description-input {
-    border: 1px solid #D1D1D1;
     padding: 18px 16px;
     border-radius: 10px 0 10px 10px;
     resize: none;
@@ -221,7 +227,6 @@ footer div {
     position: fixed;
     bottom: 76px;
     height: 72px;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
