@@ -1,7 +1,7 @@
-import {createContext, useReducer} from "react";
+import {createContext, useReducer, useState} from "react";
 
 const taskList = [];
-
+let taskId = 0;
 export const TasksContext = createContext(taskList);
 
 
@@ -24,7 +24,9 @@ export const TasksProvider = ({children}) => {
     });
 
     const addTask = (task) => {
-        dispatch({type: 'add', payload: task});
+        const nextId = taskId++;
+        dispatch({type: 'add', payload: {...task, id: nextId}});
+        console.log(taskList);
     }
 
     return (
