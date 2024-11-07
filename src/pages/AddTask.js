@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { ReactSVG } from "react-svg";
-import { handleColorInjection, handleRotateInjection } from "../tools/svg";
+import { handleColorInjection, handleRotateInjection, handleSizeInjection } from "../tools/svg";
 
 import NameIcon from "../components/icons/NameIcon";
 import IconInput from "../components/base/IconInput";
@@ -238,14 +238,18 @@ const AddTask = () => {
                                     {
                                         subtasks[index].editOpen &&
                                         <div className="flex items-center w-full h-12 border-b border-gray-300">
-                                            <input value={editSubtaskValue} onChange={(e) => setEditSubtaskValue(e.target.value)} />
+                                            <input value={editSubtaskValue} className='w-full' onChange={(e) => setEditSubtaskValue(e.target.value)} />
                                             <div className="flex items-center">
                                                 <ReactSVG onClick={() => cancelEdit(index)}
-                                                    src={'./assets/icons/forms/close-blue.svg'} />
+                                                    src={'./assets/icons/forms/close-blue.svg'}
+                                                    beforeInjection={svg => handleSizeInjection(svg, 'lg')} />
                                                 <Separator />
                                                 <ReactSVG onClick={() => acceptEdit(index, editSubtaskValue)}
                                                     src={'./assets/icons/forms/check.svg'}
-                                                    beforeInjection={svg => handleColorInjection(svg, '#3b82f6')}
+                                                    beforeInjection={svg => {
+                                                        handleSizeInjection(svg, 'lg');
+                                                        handleColorInjection(svg, '#3b82f6')
+                                                    }}
                                                 />
                                             </div>
                                         </div>

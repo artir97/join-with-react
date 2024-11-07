@@ -38,3 +38,23 @@ export const handleRotateInjection = (svg, angle, predicate = () => true) => {
         });
     }
 }
+
+const sizeList = ['sm', 'md', 'lg'];
+
+/**
+ * Injects a rotation into the paths of an SVG file.
+ * This is a callback made to be used with a `ReactSVG` component.
+ * 
+ * Usage example: `<ReactSVG ... beforeInjection={svg => handleRotateInjection(svg, 'white', () => isItSupposedToBeWhite)}`.
+ * 
+ * @param {*} svg - The svg of the injection methods 
+ * @param {string} size - A string indicator between ['sm', 'md' (default), 'lg']
+ * @param {Function} [predicate=()=>{}] - Takes no parameters, and returns a boolean. Defaulted to `() => true`.
+ * If you use predicate: `() => false`, the injection won't happen.
+ */
+export const handleSizeInjection = (svg, size = 'md', predicate = () => true) => {
+    if (predicate() && sizeList.includes(size)) {
+        svg.setAttribute('width', 12 + sizeList.indexOf(size) * 4);
+        svg.setAttribute('height', 12 + sizeList.indexOf(size) * 4);
+    }
+}
