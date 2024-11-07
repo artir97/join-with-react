@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 
-import IconInput from "../components/base/IconInput";
-import CheckboxIcon from "../components/icons/CheckboxIcon";
 import useViewport from "../hooks/useViewport";
+
+import CheckboxIcon from "../components/icons/CheckboxIcon";
 import MobileSwitch from "../components/base/MobileSwitch";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
 
@@ -24,7 +24,6 @@ const LogIn = () => {
         <>
             <div className="p-10 w-full">
                 <div className="flex items-start">
-
                     <ReactSVG src={`./assets/icons/navbar/${isMobile() ? "medium" : "big"}-join.svg`} className="flex-1" />
                     <MobileSwitch desktopComponent={<SignUpInfo />} />
                 </div>
@@ -37,7 +36,6 @@ const LogIn = () => {
                             value={mail} required
                             type="email"
                             placeholder="username@example.com"
-                            className="lg:w-96"
                             onChange={(e) => setMail(e.target.value)}
                             icon={<ReactSVG src="assets/icons/forms/mail.svg" />}
                         />
@@ -45,7 +43,6 @@ const LogIn = () => {
                             value={password} required
                             type="password"
                             placeholder="*******"
-                            className="lg:w-96"
                             onChange={(e) => setPassword(e.target.value)}
                             icon={<ReactSVG src="assets/icons/forms/lock.svg" />}
                         />
