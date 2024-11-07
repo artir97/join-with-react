@@ -35,14 +35,14 @@ const LogIn = () => {
                         <UnderlineIconInput
                             value={mail} required
                             type="email"
-                            placeholder="username@example.com"
+                            placeholder="Your mail address"
                             onChange={(e) => setMail(e.target.value)}
                             icon={<ReactSVG src="assets/icons/forms/mail.svg" />}
                         />
                         <UnderlineIconInput
                             value={password} required
                             type="password"
-                            placeholder="*******"
+                            placeholder="Your password"
                             onChange={(e) => setPassword(e.target.value)}
                             icon={<ReactSVG src="assets/icons/forms/lock.svg" />}
                         />
