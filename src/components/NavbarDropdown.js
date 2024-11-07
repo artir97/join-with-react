@@ -6,7 +6,7 @@ const NavbarDropdown = () => {
             <div className="dropdown-item"><Link to="/help">Help</Link></div>
             <div className="dropdown-item">Legal Notice</div>
             <div className="dropdown-item">Privacy Policy</div>
-            <div className="dropdown-item">Log out</div>
+            <div className="dropdown-item"><Link to="/login">Log out</Link></div>
         </div>
     );
 }
