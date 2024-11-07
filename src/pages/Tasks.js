@@ -98,6 +98,11 @@ const Tasks = () => {
         }, {}));
     }, [taskList, search]);
 
+    const handleDragAndDrop = (task, newStatus) => {
+        // TODO 1 : Add the edit method from the context here
+        // TODO 3 : You can add the status here (or in the context)
+    }
+
     return (
         <>
             <div className="page-content overflow-y-scroll pt-4">
@@ -114,7 +119,7 @@ const Tasks = () => {
                         key={i}
                         status={s}
                         tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
-                        updateTask={(task) => setTasks(tasks => [...tasks.filter(t => t.id !== task.id), { ...task, status: s }])}
+                        updateTask={(task) => handleDragAndDrop(task, s)}
                         showOverlay={setOverlayTask}
                     />)}
                 </div>
