@@ -15,6 +15,7 @@ import LogIn from './pages/LogIn';
 
 import './App.css';
 import './output.css';
+import SignUp from './pages/SignUp';
 
 // MAIN PAGE
 function App() {
@@ -25,7 +26,7 @@ function App() {
           <Routes>
             {/** Default route in the next line */}
             <Route index element={<Navigate to="/login" replace />} />
-            
+
             <Route path='/' element={<BaseWrapper />}>
 
               <Route path="/summary" element={<Summary />} />
@@ -40,6 +41,7 @@ function App() {
               <Route path="/help" element={<Help />} />
             </Route>
             <Route path='/login' element={<LogIn />} />
+            <Route path='/signup' element={<SignUp />} />
           </Routes>
         </ContactsProvider>
       </BrowserRouter>

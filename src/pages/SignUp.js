@@ -5,31 +5,24 @@ import { ReactSVG } from "react-svg";
 import useViewport from "../hooks/useViewport";
 
 import CheckboxIcon from "../components/icons/CheckboxIcon";
-import MobileSwitch from "../components/base/MobileSwitch";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
+import { handleColorInjection } from "../tools/svg";
 
-const LogIn = () => {
+const SignUp = () => {
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
     const [remember, setRemember] = useState(false);
 
     const { isMobile } = useViewport();
 
-    const SignUpInfo = () => <div className="flex items-center space-x-4">
-        <p>Not a Join user?</p>
-        <Link to="/signup" className="px-2 py-1 bg-blue-500 text-white rounded">Sign up</Link>
-    </div>
-
     return (
-        <>
+        <div className="w-full h-full bg-blue-500">
             <div className="p-10 w-full">
-                <div className="flex items-start">
-                    <ReactSVG src={`./assets/icons/navbar/${isMobile() ? "medium" : "big"}-join.svg`} className="flex-1" />
-                    <MobileSwitch desktopComponent={<SignUpInfo />} />
-                </div>
+                <ReactSVG src={`./assets/icons/navbar/${isMobile() ? "medium" : "big"}-join.svg`} className="flex-1"
+                    beforeInjection={svg => handleColorInjection(svg, "white")} />
             </div>
             <div className="lg:absolute w-full flex flex-col space-y-8 items-center justify-center">
-                <div className="rounded-xl shadow-lg lg:px-28 lg:py-12 max-lg:w-10/12 p-4 flex flex-col items-center space-y-4 lg:space-y-12">
+                <div className="rounded-xl bg-white shadow-lg lg:px-28 lg:py-12 max-lg:w-10/12 p-4 flex flex-col items-center space-y-4 lg:space-y-12">
                     <h1 className="font-bold text-4xl py-4 border-b-2 border-blue-500">Log in</h1>
                     <form className="flex flex-col space-y-4 items-center">
                         <UnderlineIconInput
@@ -57,14 +50,13 @@ const LogIn = () => {
                         <Link to="/summary" className="text-gray-500 px-3 py-1 border-gray-500 border rounded">Guest log in</Link>
                     </div>
                 </div>
-                <MobileSwitch mobileComponent={<SignUpInfo />} />
             </div>
-            <div className="flex w-full absolute bottom-12 justify-center space-x-4 text-gray-500">
+            <div className="flex w-full absolute bottom-12 justify-center space-x-4 text-white">
                 <p>Privacy Policy</p>
                 <p>Legal Notice</p>
             </div>
-        </>
+        </div>
     );
 }
 
-export default LogIn;
+export default SignUp;
