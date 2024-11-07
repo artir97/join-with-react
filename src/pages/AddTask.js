@@ -4,22 +4,8 @@ import { ReactSVG } from "react-svg";
 import { handleColorInjection, handleRotateInjection, handleSizeInjection } from "../tools/svg";
 
 import NameIcon from "../components/icons/NameIcon";
-import IconInput from "../components/base/IconInput";
 import Separator from "../components/base/Separator";
-
-const AddTaskIconInput = ({ value, onChange, placeholder, icon }) => {
-    return (
-        <IconInput
-            value={value} onChange={onChange}
-            placeholder={placeholder}
-            className="font-light"
-            containerClassName="w-full border-b p-2"
-            onFocusContainerClassName="border-blue-500"
-            onFocusClassName="border-0 outline-none"
-            icon={icon}
-        />
-    )
-}
+import UnderlineIconInput from "../components/base/UnderlineIconInput";
 
 const AddTask = () => {
     const [title, setTitle] = useState('');
@@ -193,7 +179,7 @@ const AddTask = () => {
                         }
                         {
                             selectContactsIsOpen && <>
-                                <AddTaskIconInput
+                                <UnderlineIconInput
                                     value={searchContact}
                                     onChange={(e) => setSearchContact(e.target.value)}
                                     placeholder="Enter a name..."
@@ -226,7 +212,7 @@ const AddTask = () => {
                     {selectTaskIsOpen && <SelectTaskDropDown selectTask={selectTask} className="p-2" />}
 
                     <label><b>Subtasks</b> (optional)</label>
-                    <AddTaskIconInput
+                    <UnderlineIconInput
                         value={subtask} onChange={(e) => setSubtask(e.target.value)}
                         placeholder="Add new subtask"
                         icon={<ReactSVG onClick={() => addSubtask(subtask)}
