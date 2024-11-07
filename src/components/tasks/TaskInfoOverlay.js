@@ -8,6 +8,7 @@ import PriorityIcon from '../icons/PriorityIcon';
 import ButtonIcon from '../icons/ButtonIcon';
 
 import '../base/Overlay.css';
+import Separator from '../base/Separator';
 
 
 const TaskInfoOverlay = ({ task, onExit }) => {
@@ -40,9 +41,10 @@ const TaskInfoOverlay = ({ task, onExit }) => {
                     <p className='font-semibold'>Subtasks</p>
                     {task.subtasks.map((s, i) => <Subtask key={i} done={s.done} name={s.name} />)}
                 </div>
-                <div className='flex self-end'>
+                <div className='flex items-center self-end'>
                     <ButtonIcon imageUrl={"./assets/icons/forms/trash.svg"} name={"Delete"} className='px-2 py-1'/>
-                    <ButtonIcon imageUrl={"./assets/icons/forms/edit.svg"} name={"Edit"} className='px-2 py-1 border-l border-gray-200'/>
+                    <Separator/>
+                    <ButtonIcon imageUrl={"./assets/icons/forms/edit.svg"} name={"Edit"} className='px-2 py-1'/>
                 </div>
             </div>
         </div>

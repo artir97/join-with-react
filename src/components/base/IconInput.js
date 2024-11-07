@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const IconInput = ({ className = "", containerClassName = "", onFocusClassName = "", onFocusContainerClassName = "", value, type, placeholder, onChange, iconUrl = "", icon = null }) => {
+const IconInput = ({ className = "", containerClassName = "", onFocusClassName = "", onFocusContainerClassName = "", value, type, placeholder, required, onChange, iconUrl = "", icon = null }) => {
     const [isFocus, setFocus] = useState(false);
 
     return (
@@ -11,9 +11,10 @@ const IconInput = ({ className = "", containerClassName = "", onFocusClassName =
                 onChange={onChange}
                 type={type}
                 onFocus={() => setFocus(true)}
-                onBlur={() => setFocus(false)}/>
+                onBlur={() => setFocus(false)}
+                required={required} />
             {!icon && (iconUrl
-                ? <img src={iconUrl} alt="Input icon" className="m-4"/>
+                ? <img src={iconUrl} alt="Input icon" className="m-4" />
                 : <span className="m-4">lll</span>)
             }
             {icon !== null && icon}

@@ -5,6 +5,7 @@ import { handleColorInjection, handleRotateInjection } from "../tools/svg";
 
 import NameIcon from "../components/icons/NameIcon";
 import IconInput from "../components/base/IconInput";
+import Separator from "../components/base/Separator";
 
 const AddTaskIconInput = ({ value, onChange, placeholder, icon }) => {
     return (
@@ -19,8 +20,6 @@ const AddTaskIconInput = ({ value, onChange, placeholder, icon }) => {
         />
     )
 }
-
-const Separator = () => <span className="px-1 text-gray-300">|</span>
 
 const AddTask = () => {
     const [title, setTitle] = useState('');
