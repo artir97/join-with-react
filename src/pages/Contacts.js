@@ -8,6 +8,7 @@ import MainActionIcon from "../components/icons/MainActionIcon";
 
 const Contacts = () => {
     const {list} = useContactList();
+    const { addContact } = useContactList();
     const [showOverlay, setShowOverlay] = useState(false);
     const [contactsByInitial, setContactsByInitial] = useState({});
 
@@ -32,8 +33,7 @@ const Contacts = () => {
 
 
     const handleAddSubmit = (info) => {
-        const initial = info.name.charAt(0).toUpperCase();
-        setContactsByInitial(map => {return {...map, [initial]: [...map[initial], info]}});
+        addContact(info);
     }
 
     return (
