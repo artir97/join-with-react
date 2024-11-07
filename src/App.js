@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { DragProvider } from './contexts/DragContext';
 import { ContactsProvider } from "./contexts/contactsContext";
@@ -23,7 +23,11 @@ function App() {
       <BrowserRouter>
         <ContactsProvider> {/* Move ContactsProvider here */}
           <Routes>
+            {/** Default route in the next line */}
+            <Route index element={<Navigate to="/login" replace />} />
+            
             <Route path='/' element={<BaseWrapper />}>
+
               <Route path="/summary" element={<Summary />} />
               <Route path="/tasks" element={
                 <DragProvider>
