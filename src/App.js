@@ -13,6 +13,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MobileSwitch from './components/base/MobileSwitch';
 import Sidebar from './components/Sidebar';
 import Help from './pages/Help';
+import {TasksProvider} from "./contexts/TasksContext";
 
 // MAIN PAGE
 function App() {
@@ -24,18 +25,20 @@ function App() {
           <div className='lg:flex lg:full-page-fit'>
             <MobileSwitch desktopComponent={<Sidebar />} />
             <div className='lg:flex-1'>
-              <Routes>
-                <Route path="/summary" element={<Summary />} />
-                <Route path="/tasks" element={
-                  <DragProvider>
-                    <Tasks />
-                  </DragProvider>
-                } />
-                <Route path="/addTask" element={<AddTask />} />
-                <Route path="/contacts" element={<Contacts />} />
-                <Route path="/contact-info/:email" element={<ContactInfo />} />
-                <Route path="/help" element={<Help />} />
-              </Routes>
+              <TasksProvider>
+                <Routes>
+                  <Route path="/summary" element={<Summary />} />
+                  <Route path="/tasks" element={
+                    <DragProvider>
+                      <Tasks />
+                    </DragProvider>
+                  } />
+                  <Route path="/addTask" element={<AddTask />} />
+                  <Route path="/contacts" element={<Contacts />} />
+                  <Route path="/contact-info/:email" element={<ContactInfo />} />
+                  <Route path="/help" element={<Help />} />
+                </Routes>
+              </TasksProvider>
             </div>
           </div>
           <MobileSwitch mobileComponent={<Footer />} />
