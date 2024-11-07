@@ -7,11 +7,12 @@ import { capitalize } from '../../tools/format';
 
 import '../base/Overlay.css';
 
-const OverlayFormInput = ({ value, iconUrl, placeholder, onChange, type = "text" }) => (
+const OverlayFormInput = ({ value, iconUrl, placeholder, onChange, type = "text", required = false }) => (
     <IconInput value={value} iconUrl={iconUrl}
         placeholder={placeholder}
         onChange={onChange}
         type={type}
+        required={required}
         className="input-contact w-full" containerClassName="input-container w-full text-sm lg:text-base lg:w-3/4" />
 );
 
@@ -61,9 +62,9 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                     </div>
                 </div>
                 <form className='flex flex-col items-center space-y-4 w-full px-6 py-12' onSubmit={handleSubmit}>
-                    <OverlayFormInput value={inputName} iconUrl="./assets/icons/forms/person.svg" placeholder="Name" onChange={e => setName(e.target.value)} />
-                    <OverlayFormInput value={inputMail} type="email" iconUrl="./assets/icons/forms/mail.svg" placeholder="Mail address" onChange={e => setMail(e.target.value)} />
-                    <OverlayFormInput value={inputPhone} iconUrl="./assets/icons/forms/phone.svg" placeholder="Phone number" onChange={e => setPhone(e.target.value)} />
+                    <OverlayFormInput required value={inputName} iconUrl="./assets/icons/forms/person.svg" placeholder="Name" onChange={e => setName(e.target.value)} />
+                    <OverlayFormInput required value={inputMail} type="email" iconUrl="./assets/icons/forms/mail.svg" placeholder="Mail address" onChange={e => setMail(e.target.value)} />
+                    <OverlayFormInput required value={inputPhone} iconUrl="./assets/icons/forms/phone.svg" placeholder="Phone number" onChange={e => setPhone(e.target.value)} />
                     {isEditing
                         ? <div className='flex space-x-4 mt-8'>
                             <button className='rounded bg-white p-2 mt-4' onClick={handleDelete}>Delete</button>
