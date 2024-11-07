@@ -184,10 +184,10 @@ const AddTask = () => {
                     <div className="w-full h-12">
                         {
                             !selectContactsIsOpen &&
-                            <div className="border-b border-gray-300 w-full flex justify-between items-center">
-                                <div onClick={handleClickSelectContactsDropDown} className="p-2">Select contacts to assign</div>
+                            <div className="border-b border-gray-300 w-full flex justify-between items-center p-2">
+                                <div onClick={handleClickSelectContactsDropDown}>Select contacts to assign</div>
                                 <ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
-                                    className="p-2"
+                                    className="add-task-icon"
                                     onClick={handleClickSelectContactsDropDown} />
                             </div>
                         }
@@ -199,7 +199,7 @@ const AddTask = () => {
                                     placeholder="Enter a name..."
                                     icon={<ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
                                         onClick={handleClickSelectContactsDropDown}
-                                        className="py-2 pl-2"
+                                        className="add-task-icon"
                                         beforeInjection={svg => handleRotateInjection(svg, 180)} />}
                                 />
                             </>
@@ -217,10 +217,10 @@ const AddTask = () => {
 
                     <label><b>Category</b></label>
                     <div onClick={handleClickSelectTaskDropDown}
-                        className="flex justify-between items-center w-full h-12 border-b border-gray-300">
-                        <div className="p-2">{category}</div>
+                        className="flex justify-between items-center w-full h-12 border-b p-2 border-gray-300">
+                        <div>{category}</div>
                         <ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
-                            className="p-2"
+                            className="add-task-icon" 
                             beforeInjection={svg => handleRotateInjection(svg, 180, () => selectTaskIsOpen)} />
                     </div>
                     {selectTaskIsOpen && <SelectTaskDropDown selectTask={selectTask} className="p-2" />}
@@ -229,7 +229,9 @@ const AddTask = () => {
                     <AddTaskIconInput
                         value={subtask} onChange={(e) => setSubtask(e.target.value)}
                         placeholder="Add new subtask"
-                        icon={<ReactSVG onClick={() => addSubtask(subtask)} src={'./assets/icons/forms/plus.svg'} />}
+                        icon={<ReactSVG onClick={() => addSubtask(subtask)}
+                            className="add-task-icon"
+                            src={'./assets/icons/forms/plus.svg'} />}
                     />
                     <div className="w-full flex flex-col justify-between pr-4 pl-6 pt-4 space-y-4">
                         {subtasks.map((subtask, index) => (
@@ -242,10 +244,12 @@ const AddTask = () => {
                                             <div className="flex items-center">
                                                 <ReactSVG onClick={() => cancelEdit(index)}
                                                     src={'./assets/icons/forms/close-blue.svg'}
+                                                    className="add-task-icon"
                                                     beforeInjection={svg => handleSizeInjection(svg, 'lg')} />
                                                 <Separator />
                                                 <ReactSVG onClick={() => acceptEdit(index, editSubtaskValue)}
                                                     src={'./assets/icons/forms/check.svg'}
+                                                    className="add-task-icon"
                                                     beforeInjection={svg => {
                                                         handleSizeInjection(svg, 'lg');
                                                         handleColorInjection(svg, '#3b82f6')
@@ -262,11 +266,12 @@ const AddTask = () => {
                                             <li>{subtask.name}</li>
                                             <div className="flex">
                                                 <img onClick={() => editSubtask(index)}
+                                                    className="add-task-icon"
                                                     src={'./assets/icons/forms/edit.svg'} alt={"Edit icon"} />
                                                 <Separator />
-                                                <img onClick={() => {
-                                                    deleteSubtask(index)
-                                                }} src={'./assets/icons/forms/trash.svg'} alt={"Delete icon"} />
+                                                <img onClick={() => deleteSubtask(index)}
+                                                    className="add-task-icon"
+                                                    src={'./assets/icons/forms/trash.svg'} alt={"Delete icon"} />
                                             </div>
                                         </>
 
@@ -279,7 +284,8 @@ const AddTask = () => {
                     <div className="buttons-container">
                         <div className="button button-white flex items-center space-x-2">
                             <div onClick={clearAddTaskForm}>Clear</div>
-                            <ReactSVG src={'./assets/icons/forms/close-white.svg'} beforeInjection={svg => handleColorInjection(svg, 'black')} />
+                            <ReactSVG src={'./assets/icons/forms/close-white.svg'}
+                                beforeInjection={svg => handleColorInjection(svg, 'black')} />
                         </div>
                         <button onClick={(e) => { e.preventDefault() }} className="button button-blue flex items-center space-x-2">
                             <div>Create Task</div>

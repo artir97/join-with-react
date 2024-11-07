@@ -152,6 +152,20 @@ textarea:focus {
     border-color: #3b82f6;
 }
 
+.add-task-icon {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    padding: 4px;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-task-icon:hover, .add-task-icon:active {
+    background-color: #bfdbfe;
+}
+
 .add-task-form label {
     color: #42526E;
     width: 100%;
