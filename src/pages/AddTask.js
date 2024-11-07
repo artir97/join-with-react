@@ -123,6 +123,7 @@ const AddTask = () => {
             priority: priority,
             status: 'todo'
         });
+        clearAddTaskForm();
 
     }
     console.log(taskList);
@@ -269,7 +270,7 @@ const AddTask = () => {
                             <div onClick={clearAddTaskForm}>Clear</div>
                             <ReactSVG src={'./assets/icons/forms/close-white.svg'} beforeInjection={svg => handleColorInjection(svg, 'black')} />
                         </div>
-                        <button onClick={handleAddTaskSubmit} className="button button-blue flex items-center space-x-2">
+                        <button onSubmit={handleAddTaskSubmit} className="button button-blue flex items-center space-x-2">
                             <div>Create Task</div>
                             <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"} />
                         </button>
