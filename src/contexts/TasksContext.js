@@ -12,10 +12,8 @@ const taskReducer = (state, action) => {
         case 'delete':
             return {...state}
         case 'edit':
-            // TODO 2 : Arrived here, we give you the modified task, you have to modify your task list now
-            // This was previously done to handle drag and drop locally:
-            // (task) => setTasks(tasks => [...tasks.filter(t => t.id !== task.id), { ...task, status: s }])
-            return {...state}
+            const newTasks = state.taskList.filter(t => t.id !== action.payload.id);
+            return {...state, taskList: [...newTasks, action.payload]};
         default:
             return {...state}
     }
@@ -29,12 +27,9 @@ export const TasksProvider = ({children}) => {
     const addTask = (task) => {
         const nextId = taskId++;
         dispatch({type: 'add', payload: {...task, id: nextId}});
-        console.log(taskList);
     }
 
     const editTask = (task) => {
-        // TODO 3 : You can either modify the status here (or in the handler in Tasks)
-        // If you do it here, you probably need the new status in argument.
         dispatch({type: 'edit', payload: task});
     }
 

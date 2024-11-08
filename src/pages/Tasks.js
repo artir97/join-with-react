@@ -27,7 +27,7 @@ const status = ['To do', 'In progress', 'Awaiting feedback', 'Done'];
 
 const Tasks = () => {
     const { taskList } = useTasks();
-
+    const { editTask } = useTasks();
     const [tasks, setTasks] = useState([{ ...task, id: 0 }, { ...task, id: 1 },
     { ...task, status: "Awaiting feedback", id: 2 }, { ...task, status: "Awaiting feedback", id: 3 }, { ...task, status: "Awaiting feedback", id: 4 },
     { ...task, status: "Done", id: 5 }
@@ -99,8 +99,8 @@ const Tasks = () => {
     }, [taskList, search]);
 
     const handleDragAndDrop = (task, newStatus) => {
-        // TODO 1 : Add the edit method from the context here
-        // TODO 3 : You can add the status here (or in the context)
+        task = {...task, status: newStatus};
+        editTask(task);
     }
 
     return (
