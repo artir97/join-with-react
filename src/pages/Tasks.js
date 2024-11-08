@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import StatusTasks from "../components/tasks/StatusTasks";
 import IconInput from "../components/base/IconInput";
 import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
+import MobileSwitch from "../components/base/MobileSwitch";
+import { Link } from "react-router-dom";
+import { ReactSVG } from "react-svg";
+import { handleColorInjection } from "../tools/svg";
 
 const task = {
     category: "Technical task",
@@ -100,20 +104,30 @@ const Tasks = () => {
             <div className="page-content overflow-y-scroll pt-4">
                 <div className="flex flex-col space-y-4">
                     {/** Search bar */}
-                    <IconInput
-                        containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
-                        iconUrl="./assets/icons/forms/search.svg"
-                        placeholder="Find task..."
-                        onChange={e => setSearch(e.target.value)} />
+                    <div className="flex space-x-4 items-center">
+                        <IconInput
+                            containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
+                            iconUrl="./assets/icons/forms/search.svg"
+                            placeholder="Find task..."
+                            onChange={e => setSearch(e.target.value)} />
+                        <MobileSwitch desktopComponent={
+                            <Link to="/add-task" className="px-2 py-1 rounded bg-blue-500 text-white flex space-x-2 items-center">
+                                <span>Add task</span>
+                                <ReactSVG src="./assets/icons/forms/plus.svg"
+                                    beforeInjection={svg => handleColorInjection(svg, "white")} />
+                            </Link>} />
+                    </div>
 
                     {/** Sorted cards */}
-                    {status.map((s, i) => <StatusTasks
-                        key={i}
-                        status={s}
-                        tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
-                        updateTask={(task) => setTasks(tasks => [...tasks.filter(t => t.id !== task.id), { ...task, status: s }])}
-                        showOverlay={setOverlayTask}
-                    />)}
+                    <div className="flex flex-col space-y-4 lg:space-y-0 lg:space-x-6 lg:flex-row lg:overflow-x-scroll lg:scroll-p-5 lg:snap-x">
+                        {status.map((s, i) => <StatusTasks
+                            key={i}
+                            status={s}
+                            tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
+                            updateTask={(task) => setTasks(tasks => [...tasks.filter(t => t.id !== task.id), { ...task, status: s }])}
+                            showOverlay={setOverlayTask}
+                        />)}
+                    </div>
                 </div>
             </div>
             {/** Task Info Overlay */}
