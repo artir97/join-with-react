@@ -12,10 +12,12 @@ import ContactInfo from './pages/ContactInfo';
 import Tasks from './pages/Tasks';
 import Help from './pages/Help';
 import LogIn from './pages/LogIn';
+import SignUp from './pages/SignUp';
+import LegalNotice from './pages/LegalNotice';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 import './App.css';
 import './output.css';
-import SignUp from './pages/SignUp';
 
 // MAIN PAGE
 function App() {
@@ -39,6 +41,8 @@ function App() {
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/contact-info/:email" element={<ContactInfo />} />
               <Route path="/help" element={<Help />} />
+              <Route path="/legal" element={<LegalNotice />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
             </Route>
             <Route path='/login' element={<LogIn />} />
             <Route path='/signup' element={<SignUp />} />
