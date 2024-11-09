@@ -1,7 +1,7 @@
 const getCategoryColor = (name) => {
     switch (name) {
-        case 'User story': return "#FF7A00";
-        case 'Technical task': return "#0038FF";
+        case 'User Story': return "#FF7A00";
+        case 'Technical Task': return "#0038FF";
         default: throw new Error(`No color defined for this category: ${name}`);
     }
 }

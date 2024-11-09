@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import StatusTasks from "../components/tasks/StatusTasks";
-import IconInput from "../components/base/IconInput";
-import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
-import MobileSwitch from "../components/base/MobileSwitch";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import { handleColorInjection } from "../tools/svg";
 
+import {useTasks} from "../hooks/useDataContext";
+
+import StatusTasks from "../components/tasks/StatusTasks";
+import IconInput from "../components/base/IconInput";
+import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
+import MobileSwitch from "../components/base/MobileSwitch";
+
 const task = {
-    category: "Technical task",
+    category: "Technical Task",
     name: "Find a remote job",
     description: "We're gonna roll in moneeeey",
     assignees: [{
@@ -29,6 +32,8 @@ const task = {
 const status = ['To do', 'In progress', 'Awaiting feedback', 'Done'];
 
 const Tasks = () => {
+    const { taskList } = useTasks();
+    const { editTask } = useTasks();
     const [tasks, setTasks] = useState([{ ...task, id: 0 }, { ...task, id: 1 },
     { ...task, status: "Awaiting feedback", id: 2 }, { ...task, status: "Awaiting feedback", id: 3 }, { ...task, status: "Awaiting feedback", id: 4 },
     { ...task, status: "Done", id: 5 }
@@ -90,14 +95,19 @@ const Tasks = () => {
          * we can write any of the other functions (map, filter, forEach, etc.) with reduce.
          * But that's another story. 
          */
-        setSortedTasks(tasks.filter(filterByNameOrPerson).reduce((acc, t) => {
+        setSortedTasks(taskList.filter(filterByNameOrPerson).reduce((acc, t) => {
             if (!acc[t.status]) {
                 acc[t.status] = [];
             }
             acc[t.status].push(t);
             return acc;
         }, {}));
-    }, [tasks, search]);
+    }, [taskList, search]);
+
+    const handleDragAndDrop = (task, newStatus) => {
+        task = {...task, status: newStatus};
+        editTask(task);
+    }
 
     return (
         <>
@@ -124,7 +134,7 @@ const Tasks = () => {
                             key={i}
                             status={s}
                             tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
-                            updateTask={(task) => setTasks(tasks => [...tasks.filter(t => t.id !== task.id), { ...task, status: s }])}
+                            updateTask={(task) => handleDragAndDrop(task, s)}
                             showOverlay={setOverlayTask}
                         />)}
                     </div>

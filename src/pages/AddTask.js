@@ -3,49 +3,25 @@ import React, { useState } from "react";
 import { ReactSVG } from "react-svg";
 import { handleColorInjection, handleRotateInjection, handleSizeInjection } from "../tools/svg";
 
+import {useTasks} from "../hooks/useDataContext";
+import {useContactList} from "../hooks/useContactList";
+
 import NameIcon from "../components/icons/NameIcon";
 import Separator from "../components/base/Separator";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
+import { useNavigate } from "react-router-dom";
 
 const AddTask = () => {
+    const navigate = useNavigate();
+
+    const { addTask } = useTasks();
+    const { taskList } = useTasks();
+    const { list: contacts } = useContactList();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
     const [priority, setPriority] = useState('');
     const [searchContact, setSearchContact] = useState('');
-    const contacts = [
-        { name: "Artir Guri", mail: "artir.guri@outlook.de", phone: "+49 160 93885857" },
-        { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },
-        { name: "John Doe", mail: "john.doe@example.com", phone: "+49 1234 56 789 0" },
-        { name: "Alice Smith", mail: "alice.smith@example.com", phone: "+49 9876 54 321 0" },
-        { name: "Michael Brown", mail: "michael.brown@example.com", phone: "+49 5555 55 555 5" },
-        { name: "Emily Davis", mail: "emily.davis@example.com", phone: "+49 4444 44 444 4" },
-        { name: "Daniel Garcia", mail: "daniel.garcia@example.com", phone: "+49 3333 33 333 3" },
-        { name: "Sophie Martinez", mail: "sophie.martinez@example.com", phone: "+49 8888 88 888 8" },
-        { name: "James Wilson", mail: "james.wilson@example.com", phone: "+49 7777 77 777 7" },
-        { name: "Charlotte Lee", mail: "charlotte.lee@example.com", phone: "+49 6666 66 666 6" },
-        { name: "Lucas Young", mail: "lucas.young@example.com", phone: "+49 1111 11 111 1" },
-        { name: "Olivia Taylor", mail: "olivia.taylor@example.com", phone: "+49 1234 22 789 3" },
-        { name: "David Harris", mail: "david.harris@example.com", phone: "+49 5678 44 123 9" },
-        { name: "Mia Clark", mail: "mia.clark@example.com", phone: "+49 4321 55 678 0" },
-        { name: "Henry Walker", mail: "henry.walker@example.com", phone: "+49 8765 33 987 6" },
-        { name: "Sophia King", mail: "sophia.king@example.com", phone: "+49 5432 11 210 4" },
-        { name: "Benjamin Allen", mail: "benjamin.allen@example.com", phone: "+49 2109 44 543 8" },
-        { name: "Grace Scott", mail: "grace.scott@example.com", phone: "+49 6789 22 543 9" },
-        { name: "Ella Green", mail: "ella.green@example.com", phone: "+49 9876 99 432 1" },
-        { name: "Alexander Adams", mail: "alexander.adams@example.com", phone: "+49 4567 77 111 0" },
-        { name: "Amelia Baker", mail: "amelia.baker@example.com", phone: "+49 3333 88 222 3" },
-        { name: "Liam Gonzalez", mail: "liam.gonzalez@example.com", phone: "+49 2121 66 333 5" },
-        { name: "Evelyn Perez", mail: "evelyn.perez@example.com", phone: "+49 9090 44 444 4" },
-        { name: "Noah Rodriguez", mail: "noah.rodriguez@example.com", phone: "+49 5432 33 123 9" },
-        { name: "Ava Turner", mail: "ava.turner@example.com", phone: "+49 3210 55 654 1" },
-        { name: "Lucas Hill", mail: "lucas.hill@example.com", phone: "+49 1001 11 789 6" },
-        { name: "Isabella Carter", mail: "isabella.carter@example.com", phone: "+49 8888 44 987 0" },
-        { name: "Ethan Mitchell", mail: "ethan.mitchell@example.com", phone: "+49 7777 99 876 5" },
-        { name: "Mason Roberts", mail: "mason.roberts@example.com", phone: "+49 6565 22 345 2" },
-        { name: "Charlotte Evans", mail: "charlotte.evans@example.com", phone: "+49 4545 77 234 4" },
-        { name: "Scarlett Cooper", mail: "scarlett.cooper@example.com", phone: "+49 3434 33 678 1" }
-    ];
     const [selectedContacts, setSelectedContacts] = useState([]);
     const [subtask, setSubtask] = useState('');
     const [subtasks, setSubtasks] = useState([]);
@@ -124,10 +100,27 @@ const AddTask = () => {
         setSubtasks([]);
     }
 
+    const handleAddTaskSubmit = (e) => {
+        e.preventDefault();
+
+        addTask({
+            category: category,
+            name: title,
+            description: description,
+            assignees: selectedContacts,
+            subtasks: subtasks,
+            dueDate: date,
+            priority: priority,
+            status: 'To do'
+        });
+        clearAddTaskForm();
+        navigate("/tasks");
+    }
+    console.log(taskList);
     return (
         <>
             <div className="container-add-task">
-                <form className="add-task-form">
+                <form onSubmit={handleAddTaskSubmit} className="add-task-form">
                     <input
                         required
                         value={title}
@@ -157,8 +150,8 @@ const AddTask = () => {
                     <label><b>Priority</b></label>
                     <div className="priority-selection">
                         {
-                            ['urgent', 'medium', 'low'].map(p => (
-                                <div onClick={() => setPriority(priority === p ? '' : p)} className={`priority-button ${priority === p ? `priority-${p}` : ""}`}>
+                            ['urgent', 'medium', 'low'].map((p, index) => (
+                                <div key={index} onClick={() => setPriority(priority === p ? '' : p)} className={`priority-button ${priority === p ? `priority-${p}` : ""}`}>
                                     <div className="capitalize">{p}</div>
                                     <ReactSVG src={`./assets/icons/priorities/${p}.svg`} beforeInjection={svg => handleColorInjection(svg, 'white', () => priority === p)} />
                                 </div>
@@ -273,7 +266,7 @@ const AddTask = () => {
                             <ReactSVG src={'./assets/icons/forms/close-white.svg'}
                                 beforeInjection={svg => handleColorInjection(svg, 'black')} />
                         </div>
-                        <button onClick={(e) => { e.preventDefault() }} className="button button-blue flex items-center space-x-2">
+                        <button type="submit" className="button button-blue flex items-center space-x-2">
                             <div>Create Task</div>
                             <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"} />
                         </button>
@@ -287,7 +280,8 @@ const AddTask = () => {
 const ContactsSelection = ({ contacts, selectContact, selectedContacts }) => {
     return (
         <div className="contacts-selection">
-            {contacts.map((contact, index) => {
+            {(contacts.sort((a, b) => a.name.localeCompare(b.name)))
+                .map((contact, index) => {
                 const isSelected = selectedContacts.some(selected => selected.mail === contact.mail);
                 const selectedImg = './assets/icons/forms/checkbox-checked.svg';
                 const defaultImg = './assets/icons/forms/checkbox-empty.svg';

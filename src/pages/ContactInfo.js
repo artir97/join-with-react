@@ -44,7 +44,7 @@ const ContactInfo = () => {
                         <p className="text-3xl font-light">{info.name}</p>
                     </div>
                 </div>
-                <Section title={"Mail address"} value={email} colorClass="text-blue-500" />
+                <Section title={"Mail address"} value={info.mail} colorClass="text-blue-500" />
                 <Section title={"Phone"} value={info.phone} />
             </div>
             <MainActionIcon
