@@ -27,6 +27,10 @@
     height: calc(100% - 160px);
 }
 
+.fixed-h-edit-task-overlay {
+    height: calc(100% - 80px);
+}
+
 .input-contact {
     outline: none;
     padding: 4px 16px;

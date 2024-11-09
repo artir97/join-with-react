@@ -17,7 +17,7 @@ const AddTask = () => {
     const navigate = useNavigate();
     const { statusIndex } = useParams();
 
-    const { addTask, taskList } = useTasks();
+    const { addTask } = useTasks();
     const { list: contacts } = useContactList();
 
     const [title, setTitle] = useState('');
