@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useTasks} from "../../hooks/useDataContext";
 import {useContactList} from "../../hooks/useContactList";
 import React, {useState} from "react";
@@ -15,6 +15,10 @@ const BaseTaskOverlay = (
 ) => {
     const navigate = useNavigate();
     const { statusIndex } = useParams();
+    const location = useLocation();
+    const isOnTasksPage = location.pathname.endsWith("/tasks");
+    const isOnAddTaskPage = location.pathname.endsWith("/addtask");
+
 
     const { addTask } = useTasks();
     const { list: contacts } = useContactList();
@@ -262,23 +266,41 @@ const BaseTaskOverlay = (
                     </div>
 
                     <div className="buttons-container">
-                        <div className="button button-white flex items-center space-x-2">
-                            <div onClick={clearAddTaskForm}>Clear</div>
-                            <ReactSVG src={'./assets/icons/forms/close-white.svg'}
-                                      beforeInjection={svg => handleColorInjection(svg, 'black')} />
-                        </div>
-                        <button type="submit" className="button button-blue flex items-center space-x-2">
-                            <div>Create Task</div>
-                            <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"} />
-                        </button>
+                        {
+                            isOnAddTaskPage &&
+                            <>
+                                <div className="button button-white flex items-center space-x-2">
+                                    <div onClick={clearAddTaskForm}>Clear</div>
+                                    <ReactSVG src={'./assets/icons/forms/close-white.svg'}
+                                              beforeInjection={svg => handleColorInjection(svg, 'black')}/>
+                                </div>
+                                <button type="submit" className="button button-blue flex items-center space-x-2">
+                                    <div>Create Task</div>
+                                    <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"}/>
+                                </button>
+                            </>
+                        }
+
+                        {
+                            isOnTasksPage &&
+                            <>
+                                <div onClick={() => {
+                                    console.log('ok');
+                                }} className="button button-blue flex items-center space-x-2 cursor-pointer">
+                                    <div>Ok</div>
+                                    <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"}/>
+                                </div>
+                            </>
+                        }
+
                     </div>
-                </form >
-            </div >
+                </form>
+            </div>
         </>
     );
 }
 
-const ContactsSelection = ({ contacts, selectContact, selectedContacts }) => {
+const ContactsSelection = ({contacts, selectContact, selectedContacts}) => {
     return (
         <div className="contacts-selection">
             {(contacts.sort((a, b) => a.name.localeCompare(b.name)))
