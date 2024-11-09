@@ -32,10 +32,11 @@ const task = {
     status: 'In progress'
 };
 
-const Tasks = () => {
-    const { editTask, taskList } = useTasks();
-    const statusList = getStatusList();
+const status = ['To do', 'In progress', 'Awaiting feedback', 'Done'];
 
+const Tasks = () => {
+    const { taskList } = useTasks();
+    const { editTask } = useTasks();
     const [tasks, setTasks] = useState([{ ...task, id: 0 }, { ...task, id: 1 },
     { ...task, status: "Awaiting feedback", id: 2 }, { ...task, status: "Awaiting feedback", id: 3 }, { ...task, status: "Awaiting feedback", id: 4 },
     { ...task, status: "Done", id: 5 }
@@ -43,6 +44,7 @@ const Tasks = () => {
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
     const [overlayTask, setOverlayTask] = useState(null);
+    const statusList = getStatusList();
 
     /**
      * Videos #14+: `useEffect` is used when you want to use a callback any time a state changes.
@@ -143,7 +145,7 @@ const Tasks = () => {
                 </div>
             </div>
             {/** Task Info Overlay */}
-            {overlayTask && <TaskInfoOverlay task={task} onExit={() => setOverlayTask(null)} />}
+            {overlayTask && <TaskInfoOverlay task={overlayTask} onExit={() => setOverlayTask(null)} />}
         </>
     );
 }
