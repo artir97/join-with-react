@@ -111,7 +111,7 @@ const Tasks = () => {
                             placeholder="Find task..."
                             onChange={e => setSearch(e.target.value)} />
                         <MobileSwitch desktopComponent={
-                            <Link to="/add-task" className="px-2 py-1 rounded bg-blue-500 text-white flex space-x-2 items-center">
+                            <Link to="/addTask" className="px-2 py-1 rounded bg-blue-500 text-white flex space-x-2 items-center">
                                 <span>Add task</span>
                                 <ReactSVG src="./assets/icons/forms/plus.svg"
                                     beforeInjection={svg => handleColorInjection(svg, "white")} />
