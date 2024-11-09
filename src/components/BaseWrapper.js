@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
-const BaseWrapper = ({children}) => {
+const BaseWrapper = () => {
     return (
         <div>
             <Navbar />
