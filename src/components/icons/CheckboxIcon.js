@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CheckboxIcon = ({ defaultValue = false, onClick }) => {
+const CheckboxIcon = ({ defaultValue = false, onClick = () => {} }) => {
     const [checked, setChecked] = useState(defaultValue);
 
     return (
