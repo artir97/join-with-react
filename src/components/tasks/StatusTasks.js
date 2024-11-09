@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { getStatusIndex } from "../../tools/status";
 
 import { useDrag } from "../../hooks/useDataContext";
-import Drag from "../base/Drag";
-import { Move } from "../base/DropEffectValues";
+import Drag from "../ux/Drag";
+import { Move } from "../ux/DropEffectValues";
 import TaskCard from "./TaskCard";
 import TaskDrop from "./TaskDrop";
 

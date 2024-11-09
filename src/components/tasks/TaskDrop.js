@@ -1,5 +1,5 @@
-import { Move } from '../base/DropEffectValues';
-import DropTarget from '../base/DropTarget';
+import { Move } from '../ux/DropEffectValues';
+import DropTarget from '../ux/DropTarget';
 import './TaskCard.css';
 
 const TaskDrop = ({ onItemDropped }) => {
