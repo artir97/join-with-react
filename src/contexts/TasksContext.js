@@ -1,9 +1,8 @@
-import {createContext, useReducer, useState} from "react";
+import {createContext, useReducer} from "react";
 
 const taskList = [];
 let taskId = 0;
 export const TasksContext = createContext(taskList);
-
 
 const taskReducer = (state, action) => {
     switch (action.type) {
