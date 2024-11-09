@@ -54,7 +54,7 @@ const AddTask = () => {
 
     const addSubtask = (name) => {
         if (!subtasks.some(s => s.name === name)) {
-            setSubtasks([...subtasks, { name, editOpen: false }]);
+            setSubtasks([...subtasks, { name, done: false, editOpen: false }]);
             setSubtask('');
         } else {
             console.error('you can\'t add the same subtask twice');
@@ -119,7 +119,6 @@ const AddTask = () => {
         clearAddTaskForm();
         navigate("/tasks");
     }
-    console.log(taskList);
     return (
         <>
             <div className="container-add-task">

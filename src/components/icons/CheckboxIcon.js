@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CheckboxIcon = ({ defaultValue = false }) => {
+const CheckboxIcon = ({ defaultValue = false, onClick }) => {
     const [checked, setChecked] = useState(defaultValue);
 
     return (
@@ -8,12 +8,12 @@ const CheckboxIcon = ({ defaultValue = false }) => {
             {checked && <img
                 src="./assets/icons/forms/checkbox-checked.svg"
                 alt="Empty checkbox"
-                onClick={() => setChecked(false)}
+                onClick={() => {setChecked(false); onClick();}}
             />}
             {!checked && <img
                 src="./assets/icons/forms/checkbox-empty.svg"
                 alt="Checked checkbox"
-                onClick={() => setChecked(true)}
+                onClick={() => {setChecked(true); onClick();}}
             />}
         </>
     );
