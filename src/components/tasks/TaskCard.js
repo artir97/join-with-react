@@ -14,7 +14,7 @@ const TaskCard = ({ category, name, description = "", subtasks = [], assignees, 
             {/** Task color thing */}
             <div>
                 <p className="text-blue-500 font-semibold">{name}</p>
-                <p className="text-gray-400 font-light">{description}</p>
+                <p className="text-gray-400 font-light break-words text-ellipsis line-clamp-2">{description}</p>
             </div>
             {/** Subtask progress gauge */}{/** Subtask text */}
             {subtasks.length > 0 &&
