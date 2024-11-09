@@ -127,7 +127,8 @@ footer div {
 
 @media (min-width: 1024px) {
     .container-add-task {
-        height: calc(100vh - 80px - 72px);
+        height: calc(100vh - 80px);
+        width: 580px;
         overflow-y: auto;
     }
 }
