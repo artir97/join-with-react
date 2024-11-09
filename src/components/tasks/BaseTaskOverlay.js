@@ -120,7 +120,7 @@ const BaseTaskOverlay = (
     }
     return (
         <>
-            <div className="container-add-task">
+            <div className="container-add-task w-full">
                 <form onSubmit={handleAddTaskSubmit} className="add-task-form">
                     <input
                         required
