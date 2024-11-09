@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
+import { useParams, useNavigate } from "react-router-dom";
+
 import { ReactSVG } from "react-svg";
 import { handleColorInjection, handleRotateInjection, handleSizeInjection } from "../tools/svg";
+import { getStatusFromIndex } from "../tools/status";
 
 import {useTasks} from "../hooks/useDataContext";
 import {useContactList} from "../hooks/useContactList";
@@ -9,14 +12,14 @@ import {useContactList} from "../hooks/useContactList";
 import NameIcon from "../components/icons/NameIcon";
 import Separator from "../components/base/Separator";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
-import { useNavigate } from "react-router-dom";
 
 const AddTask = () => {
     const navigate = useNavigate();
+    const { statusIndex } = useParams();
 
-    const { addTask } = useTasks();
-    const { taskList } = useTasks();
+    const { addTask, taskList } = useTasks();
     const { list: contacts } = useContactList();
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
@@ -104,14 +107,14 @@ const AddTask = () => {
         e.preventDefault();
 
         addTask({
-            category: category,
+            category,
             name: title,
-            description: description,
+            description,
             assignees: selectedContacts,
             subtasks: subtasks,
             dueDate: date,
-            priority: priority,
-            status: 'To do'
+            priority,
+            status: getStatusFromIndex(statusIndex)
         });
         clearAddTaskForm();
         navigate("/tasks");
@@ -199,7 +202,7 @@ const AddTask = () => {
                         className="flex justify-between items-center w-full h-12 border-b p-2 border-gray-300">
                         <div>{category}</div>
                         <ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
-                            className="add-task-icon" 
+                            className="add-task-icon"
                             beforeInjection={svg => handleRotateInjection(svg, 180, () => selectTaskIsOpen)} />
                     </div>
                     {selectTaskIsOpen && <SelectTaskDropDown selectTask={selectTask} className="p-2" />}

@@ -2,7 +2,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { DragProvider } from './contexts/DragContext';
-import { ContactsProvider } from "./contexts/contactsContext";
+import { ContactsProvider } from "./contexts/ContactsContext";
 import { TasksProvider } from "./contexts/TasksContext";
 
 import BaseWrapper from './components/BaseWrapper';
@@ -39,7 +39,7 @@ function App() {
                     <Tasks />
                   </DragProvider>
                 } />
-                <Route path="/addTask" element={<AddTask />} />
+                <Route path="/addTask/:statusIndex?" element={<AddTask />} />
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/contact-info/:email" element={<ContactInfo />} />
                 <Route path="/help" element={<Help />} />

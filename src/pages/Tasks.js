@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
+
 import { handleColorInjection } from "../tools/svg";
+import { getStatusList } from "../tools/status";
 
 import {useTasks} from "../hooks/useDataContext";
 
@@ -9,6 +11,7 @@ import StatusTasks from "../components/tasks/StatusTasks";
 import IconInput from "../components/base/IconInput";
 import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
 import MobileSwitch from "../components/base/MobileSwitch";
+
 
 const task = {
     category: "Technical Task",
@@ -29,11 +32,10 @@ const task = {
     status: 'In progress'
 };
 
-const status = ['To do', 'In progress', 'Awaiting feedback', 'Done'];
-
 const Tasks = () => {
-    const { taskList } = useTasks();
-    const { editTask } = useTasks();
+    const { editTask, taskList } = useTasks();
+    const statusList = getStatusList();
+
     const [tasks, setTasks] = useState([{ ...task, id: 0 }, { ...task, id: 1 },
     { ...task, status: "Awaiting feedback", id: 2 }, { ...task, status: "Awaiting feedback", id: 3 }, { ...task, status: "Awaiting feedback", id: 4 },
     { ...task, status: "Done", id: 5 }
@@ -130,7 +132,7 @@ const Tasks = () => {
 
                     {/** Sorted cards */}
                     <div className="flex flex-col space-y-4 lg:space-y-0 lg:space-x-6 lg:flex-row lg:overflow-x-scroll lg:scroll-p-5 lg:snap-x">
-                        {status.map((s, i) => <StatusTasks
+                        {statusList.map((s, i) => <StatusTasks
                             key={i}
                             status={s}
                             tasks={(sortedTasks[s]) ? sortedTasks[s] : []}

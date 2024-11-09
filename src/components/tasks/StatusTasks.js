@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+
+import { getStatusIndex } from "../../tools/status";
+
 import { useDrag } from "../../hooks/useDataContext";
 import Drag from "../base/Drag";
 import { Move } from "../base/DropEffectValues";
@@ -14,7 +17,7 @@ const StatusTasks = ({ status, tasks, updateTask, showOverlay }) => {
                 <p className="flex-1 text-lg font-semibold ">{status}</p>
                 <div className="text-blue-500 border border-blue-500 rounded-md size-6 flex items-center justify-center text-4xl">
                     {/** TODO Add default status for the different buttons */}
-                    <Link to="/addTask"><img src="./assets/icons/forms/plus.svg" alt="Plus icon" /></Link>
+                    <Link to={`/addTask/${getStatusIndex(status)}`}><img src="./assets/icons/forms/plus.svg" alt="Plus icon" /></Link>
                 </div>
             </div>
 
