@@ -5,6 +5,10 @@ import NavbarDropdown from "./NavbarDropdown";
 import MobileSwitch from "./base/MobileSwitch";
 
 const Navbar = () => {
+    // TODO Get the actual user from Firebase
+    // const { user } = ...
+    const user = null;
+
     const [isOpen, setIsOpen] = useState(false);
     const handleClickDropDown = () => {
         setIsOpen((prevIsOpen) => !prevIsOpen);
@@ -25,7 +29,7 @@ const Navbar = () => {
                 } />
                 <div onClick={handleClickDropDown} className="nav-bar-user">
                     <div className="nav-bar-user-inner">
-                        <span>G</span>
+                        <span className="text-sm">{!user ? "G" : user.name.split(" ").map(n => n.charAt(0)).join("")}</span>
                     </div>
                 </div>
             </nav>

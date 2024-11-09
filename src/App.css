@@ -114,6 +114,7 @@ footer div {
 @media (min-width: 1024px) {
     .page-content {
         height: calc(100vh - 80px);
+        width: calc(100vw - 224px); /* Width of the sidebar */
     }
 }
 
@@ -150,6 +151,20 @@ textarea {
 textarea:focus {
     outline: none;
     border-color: #3b82f6;
+}
+
+.add-task-icon {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    padding: 4px;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-task-icon:hover, .add-task-icon:active {
+    background-color: #bfdbfe;
 }
 
 .add-task-form label {

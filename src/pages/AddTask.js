@@ -1,32 +1,25 @@
 import React, { useState } from "react";
 
+import { useParams, useNavigate } from "react-router-dom";
+
 import { ReactSVG } from "react-svg";
 import { handleColorInjection, handleRotateInjection, handleSizeInjection } from "../tools/svg";
+import { getStatusFromIndex } from "../tools/status";
 
-import NameIcon from "../components/icons/NameIcon";
-import IconInput from "../components/base/IconInput";
-import Separator from "../components/base/Separator";
 import {useTasks} from "../hooks/useDataContext";
 import {useContactList} from "../hooks/useContactList";
 
-const AddTaskIconInput = ({ value, onChange, placeholder, icon }) => {
-    return (
-        <IconInput
-            value={value} onChange={onChange}
-            placeholder={placeholder}
-            className="font-light"
-            containerClassName="w-full border-b p-2"
-            onFocusContainerClassName="border-blue-500"
-            onFocusClassName="border-0 outline-none"
-            icon={icon}
-        />
-    )
-}
+import NameIcon from "../components/icons/NameIcon";
+import Separator from "../components/base/Separator";
+import UnderlineIconInput from "../components/base/UnderlineIconInput";
 
 const AddTask = () => {
-    const { addTask } = useTasks();
-    const { taskList } = useTasks();
+    const navigate = useNavigate();
+    const { statusIndex } = useParams();
+
+    const { addTask, taskList } = useTasks();
     const { list: contacts } = useContactList();
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
@@ -114,17 +107,17 @@ const AddTask = () => {
         e.preventDefault();
 
         addTask({
-            category: category,
+            category,
             name: title,
-            description: description,
+            description,
             assignees: selectedContacts,
             subtasks: subtasks,
             dueDate: date,
-            priority: priority,
-            status: 'To do'
+            priority,
+            status: getStatusFromIndex(statusIndex)
         });
         clearAddTaskForm();
-
+        navigate("/tasks");
     }
     console.log(taskList);
     return (
@@ -173,22 +166,22 @@ const AddTask = () => {
                     <div className="w-full h-12">
                         {
                             !selectContactsIsOpen &&
-                            <div className="border-b border-gray-300 w-full flex justify-between items-center">
-                                <div onClick={handleClickSelectContactsDropDown} className="p-2">Select contacts to assign</div>
+                            <div className="border-b border-gray-300 w-full flex justify-between items-center p-2">
+                                <div onClick={handleClickSelectContactsDropDown}>Select contacts to assign</div>
                                 <ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
-                                    className="p-2"
+                                    className="add-task-icon"
                                     onClick={handleClickSelectContactsDropDown} />
                             </div>
                         }
                         {
                             selectContactsIsOpen && <>
-                                <AddTaskIconInput
+                                <UnderlineIconInput
                                     value={searchContact}
                                     onChange={(e) => setSearchContact(e.target.value)}
                                     placeholder="Enter a name..."
                                     icon={<ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
                                         onClick={handleClickSelectContactsDropDown}
-                                        className="py-2 pl-2"
+                                        className="add-task-icon"
                                         beforeInjection={svg => handleRotateInjection(svg, 180)} />}
                                 />
                             </>
@@ -206,19 +199,21 @@ const AddTask = () => {
 
                     <label><b>Category</b></label>
                     <div onClick={handleClickSelectTaskDropDown}
-                        className="flex justify-between items-center w-full h-12 border-b border-gray-300">
-                        <div className="p-2">{category}</div>
+                        className="flex justify-between items-center w-full h-12 border-b p-2 border-gray-300">
+                        <div>{category}</div>
                         <ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
-                            className="p-2"
+                            className="add-task-icon"
                             beforeInjection={svg => handleRotateInjection(svg, 180, () => selectTaskIsOpen)} />
                     </div>
                     {selectTaskIsOpen && <SelectTaskDropDown selectTask={selectTask} className="p-2" />}
 
                     <label><b>Subtasks</b> (optional)</label>
-                    <AddTaskIconInput
+                    <UnderlineIconInput
                         value={subtask} onChange={(e) => setSubtask(e.target.value)}
                         placeholder="Add new subtask"
-                        icon={<ReactSVG onClick={() => addSubtask(subtask)} src={'./assets/icons/forms/plus.svg'} />}
+                        icon={<ReactSVG onClick={() => addSubtask(subtask)}
+                            className="add-task-icon"
+                            src={'./assets/icons/forms/plus.svg'} />}
                     />
                     <div className="w-full flex flex-col justify-between pr-4 pl-6 pt-4 space-y-4">
                         {subtasks.map((subtask, index) => (
@@ -231,10 +226,12 @@ const AddTask = () => {
                                             <div className="flex items-center">
                                                 <ReactSVG onClick={() => cancelEdit(index)}
                                                     src={'./assets/icons/forms/close-blue.svg'}
+                                                    className="add-task-icon"
                                                     beforeInjection={svg => handleSizeInjection(svg, 'lg')} />
                                                 <Separator />
                                                 <ReactSVG onClick={() => acceptEdit(index, editSubtaskValue)}
                                                     src={'./assets/icons/forms/check.svg'}
+                                                    className="add-task-icon"
                                                     beforeInjection={svg => {
                                                         handleSizeInjection(svg, 'lg');
                                                         handleColorInjection(svg, '#3b82f6')
@@ -251,11 +248,12 @@ const AddTask = () => {
                                             <li>{subtask.name}</li>
                                             <div className="flex">
                                                 <img onClick={() => editSubtask(index)}
+                                                    className="add-task-icon"
                                                     src={'./assets/icons/forms/edit.svg'} alt={"Edit icon"} />
                                                 <Separator />
-                                                <img onClick={() => {
-                                                    deleteSubtask(index)
-                                                }} src={'./assets/icons/forms/trash.svg'} alt={"Delete icon"} />
+                                                <img onClick={() => deleteSubtask(index)}
+                                                    className="add-task-icon"
+                                                    src={'./assets/icons/forms/trash.svg'} alt={"Delete icon"} />
                                             </div>
                                         </>
 
@@ -268,7 +266,8 @@ const AddTask = () => {
                     <div className="buttons-container">
                         <div className="button button-white flex items-center space-x-2">
                             <div onClick={clearAddTaskForm}>Clear</div>
-                            <ReactSVG src={'./assets/icons/forms/close-white.svg'} beforeInjection={svg => handleColorInjection(svg, 'black')} />
+                            <ReactSVG src={'./assets/icons/forms/close-white.svg'}
+                                beforeInjection={svg => handleColorInjection(svg, 'black')} />
                         </div>
                         <button type="submit" className="button button-blue flex items-center space-x-2">
                             <div>Create Task</div>

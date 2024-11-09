@@ -1,10 +1,11 @@
-import {useContext, useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import { useContactList } from "../hooks/useContactList";
+
 import NameIcon from "../components/icons/NameIcon";
 import MainActionIcon from "../components/icons/MainActionIcon";
 import EditContactOverlay from "../components/contacts/EditContactOverlay";
-import {useContactList} from "../hooks/useContactList";
-import {useParams} from "react-router-dom";
-import {ContactsContext} from "../contexts/contactsContext";
 
 const Section = ({ title, value, colorClass = "" }) => (
     <div className="flex flex-col space-y-2">
@@ -14,23 +15,17 @@ const Section = ({ title, value, colorClass = "" }) => (
 );
 
 const ContactInfo = () => {
-    const { list } = useContext(ContactsContext);
-
-    const {email} = useParams();
+    const { email } = useParams();
     const [showOverlay, setShowOverlay] = useState(false);
-    const [info, setInfo] = useState({name: '', mail: '', phone: ''});
-    const { editContact } = useContactList()
+    const [info, setInfo] = useState({ name: '', mail: '', phone: '' });
+    const { list, editContact } = useContactList()
 
-    const getContact = () => {
+    useEffect(() => {
         const contact = list.find((contact) => contact.mail === email);
         if (contact) {
             setInfo(contact);
         }
-    }
-
-    useEffect(() => {
-        getContact();
-    }, [getContact, email]);
+    }, [list, email]);
 
     const handleEditSubmit = (info) => {
         editContact(info)

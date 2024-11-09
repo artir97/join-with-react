@@ -1,34 +1,5 @@
-import { createContext, useContext } from "react";
 import { Link } from "react-router-dom";
-
-const LevelContext = createContext(0);
-
-const Heading = ({ children }) => {
-    const level = useContext(LevelContext);
-
-    switch (level) {
-        case 1: return <h1 className="font-bold text-2xl">{children}</h1>;
-        case 2: return <h2 className="font-semibold text-blue-500 text-xl">{children}</h2>;
-        case 3: return <h3 className="font-semibold text-blue-500 text-lg">{children}</h3>;
-        default: return <p>{children}</p>;
-    }
-}
-
-const Text = ({ children }) => {
-    return <p className="py-1">{children}</p>
-}
-
-const Section = ({ children }) => {
-    const level = useContext(LevelContext);
-
-    return (
-        <section>
-            <LevelContext.Provider value={level + 1}>
-                {children}
-            </LevelContext.Provider>
-        </section>
-    )
-}
+import { Heading, Section, Text } from "../components/text/StylizedText";
 
 const howToList = [
     <>

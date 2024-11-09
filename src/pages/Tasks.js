@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { ReactSVG } from "react-svg";
+
+import { handleColorInjection } from "../tools/svg";
+import { getStatusList } from "../tools/status";
+
+import {useTasks} from "../hooks/useDataContext";
+
 import StatusTasks from "../components/tasks/StatusTasks";
 import IconInput from "../components/base/IconInput";
 import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
-import {useTasks} from "../hooks/useDataContext";
+import MobileSwitch from "../components/base/MobileSwitch";
+
 
 const task = {
     category: "Technical Task",
@@ -23,11 +32,10 @@ const task = {
     status: 'In progress'
 };
 
-const status = ['To do', 'In progress', 'Awaiting feedback', 'Done'];
-
 const Tasks = () => {
-    const { taskList } = useTasks();
-    const { editTask } = useTasks();
+    const { editTask, taskList } = useTasks();
+    const statusList = getStatusList();
+
     const [tasks, setTasks] = useState([{ ...task, id: 0 }, { ...task, id: 1 },
     { ...task, status: "Awaiting feedback", id: 2 }, { ...task, status: "Awaiting feedback", id: 3 }, { ...task, status: "Awaiting feedback", id: 4 },
     { ...task, status: "Done", id: 5 }
@@ -108,20 +116,30 @@ const Tasks = () => {
             <div className="page-content overflow-y-scroll pt-4">
                 <div className="flex flex-col space-y-4">
                     {/** Search bar */}
-                    <IconInput
-                        containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
-                        iconUrl="./assets/icons/forms/search.svg"
-                        placeholder="Find task..."
-                        onChange={e => setSearch(e.target.value)} />
+                    <div className="flex space-x-4 items-center">
+                        <IconInput
+                            containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
+                            iconUrl="./assets/icons/forms/search.svg"
+                            placeholder="Find task..."
+                            onChange={e => setSearch(e.target.value)} />
+                        <MobileSwitch desktopComponent={
+                            <Link to="/addTask" className="px-2 py-1 rounded bg-blue-500 text-white flex space-x-2 items-center">
+                                <span>Add task</span>
+                                <ReactSVG src="./assets/icons/forms/plus.svg"
+                                    beforeInjection={svg => handleColorInjection(svg, "white")} />
+                            </Link>} />
+                    </div>
 
                     {/** Sorted cards */}
-                    {status.map((s, i) => <StatusTasks
-                        key={i}
-                        status={s}
-                        tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
-                        updateTask={(task) => handleDragAndDrop(task, s)}
-                        showOverlay={setOverlayTask}
-                    />)}
+                    <div className="flex flex-col space-y-4 lg:space-y-0 lg:space-x-6 lg:flex-row lg:overflow-x-scroll lg:scroll-p-5 lg:snap-x">
+                        {statusList.map((s, i) => <StatusTasks
+                            key={i}
+                            status={s}
+                            tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
+                            updateTask={(task) => handleDragAndDrop(task, s)}
+                            showOverlay={setOverlayTask}
+                        />)}
+                    </div>
                 </div>
             </div>
             {/** Task Info Overlay */}
