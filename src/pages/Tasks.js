@@ -12,35 +12,9 @@ import IconInput from "../components/base/IconInput";
 import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
 import MobileSwitch from "../components/base/MobileSwitch";
 
-
-const task = {
-    category: "Technical Task",
-    name: "Find a remote job",
-    description: "We're gonna roll in moneeeey",
-    assignees: [{
-        name: 'Artir Guri',
-        mail: 'xxx',
-        phone: '...'
-    }, {
-        name: 'Guy Luong',
-        mail: 'xxx',
-        phone: '...'
-    }],
-    subtasks: [{ name: "test", done: false }, { name: "test2", done: true }],
-    dueDate: "31/12/2024",
-    priority: 'low',
-    status: 'In progress'
-};
-
-const status = ['To do', 'In progress', 'Awaiting feedback', 'Done'];
-
 const Tasks = () => {
     const { taskList } = useTasks();
     const { editTask } = useTasks();
-    const [tasks, setTasks] = useState([{ ...task, id: 0 }, { ...task, id: 1 },
-    { ...task, status: "Awaiting feedback", id: 2 }, { ...task, status: "Awaiting feedback", id: 3 }, { ...task, status: "Awaiting feedback", id: 4 },
-    { ...task, status: "Done", id: 5 }
-    ]);
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
     const [overlayTask, setOverlayTask] = useState(null);
