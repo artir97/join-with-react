@@ -4,10 +4,11 @@ import { ReactSVG } from "react-svg";
 
 import useViewport from "../hooks/useViewport";
 
+import LegalAndPrivacy from "../components/navigation/LegalAndPrivacy";
 import CheckboxIcon from "../components/icons/CheckboxIcon";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
+
 import { handleColorInjection } from "../tools/svg";
-import LegalAndPrivacy from "../components/LegalAndPrivacy";
 
 const SignUp = () => {
     const [name, setName] = useState("");

@@ -5,7 +5,9 @@ import { DragProvider } from './contexts/DragContext';
 import { ContactsProvider } from "./contexts/ContactsContext";
 import { TasksProvider } from "./contexts/TasksContext";
 
-import BaseWrapper from './components/BaseWrapper';
+import BaseWrapper from './components/navigation/BaseWrapper';
+import NavbarWrapper from './components/navigation/NavbarWrapper';
+
 import Summary from './pages/Summary';
 import Contacts from './pages/Contacts';
 import AddTask from "./pages/AddTask";
@@ -19,7 +21,6 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 
 import './App.css';
 import './output.css';
-import NavbarWrapper from './components/NavbarWrapper';
 
 // MAIN PAGE
 function App() {

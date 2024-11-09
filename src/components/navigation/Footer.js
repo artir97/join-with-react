@@ -1,4 +1,4 @@
-import PageLinks from "./base/PageLinks";
+import PageLinks from "../base/PageLinks";
 
 const Footer = () => {
     return (

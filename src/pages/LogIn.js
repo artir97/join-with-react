@@ -4,10 +4,10 @@ import { ReactSVG } from "react-svg";
 
 import useViewport from "../hooks/useViewport";
 
+import LegalAndPrivacy from "../components/navigation/LegalAndPrivacy";
 import CheckboxIcon from "../components/icons/CheckboxIcon";
 import MobileSwitch from "../components/base/MobileSwitch";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
-import LegalAndPrivacy from "../components/LegalAndPrivacy";
 
 const LogIn = () => {
     const [mail, setMail] = useState("");

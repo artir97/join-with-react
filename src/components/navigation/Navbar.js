@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import NavbarDropdown from "./NavbarDropdown";
-import MobileSwitch from "./base/MobileSwitch";
+import MobileSwitch from "../base/MobileSwitch";
 
 const Navbar = ({ simplified = false }) => {
     // TODO Get the actual user from Firebase
