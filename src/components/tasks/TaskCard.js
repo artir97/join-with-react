@@ -10,19 +10,21 @@ const TaskCard = ({ category, name, description = "", subtasks = [], assignees, 
     return (
         <div className="space-y-4 task-card shadow snap-start" onClick={onClick}>
             {/** Category */}
-            <CategoryIcon name={category} className="self-start"/>
+            <CategoryIcon name={category} className="self-start" />
             {/** Task color thing */}
             <div>
                 <p className="text-blue-500 font-semibold">{name}</p>
                 <p className="text-gray-400 font-light">{description}</p>
             </div>
             {/** Subtask progress gauge */}{/** Subtask text */}
-            <div className="flex items-center space-x-2">
-                <div className="h-2 flex-1 rounded-md bg-gray-200">
-                    <div className="rounded-md h-full bg-blue-500" style={{ width: `${Math.floor(progress * 100)}%` }} />
+            {subtasks.length > 0 &&
+                <div className="flex items-center space-x-2">
+                    <div className="h-2 flex-1 rounded-md bg-gray-200">
+                        <div className="rounded-md h-full bg-blue-500" style={{ width: `${Math.floor(progress * 100)}%` }} />
+                    </div>
+                    <p>{subtasks.filter(s => s.done).length}/{subtasks.length} subtasks</p>
                 </div>
-                <p>{subtasks.filter(s => s.done).length}/{subtasks.length} subtasks</p>
-            </div>
+            }
 
             <div className="flex items-center">
                 {/** Assignees */}
