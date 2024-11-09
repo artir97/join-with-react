@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import NavbarDropdown from "./NavbarDropdown";
 import MobileSwitch from "./base/MobileSwitch";
 
-const Navbar = () => {
+const Navbar = ({ simplified = false }) => {
     // TODO Get the actual user from Firebase
     // const { user } = ...
     const user = null;
@@ -22,16 +22,20 @@ const Navbar = () => {
                 <MobileSwitch desktopComponent={
                     <>
                         <span className="text-sm text-white font-light">Kanban Project Management Tool</span>
-                        <Link to="/help">
-                            <img src="./assets/icons/navbar/help.svg" alt="Help logo" />
-                        </Link>
+                        {!simplified &&
+                            <Link to="/help">
+                                <img src="./assets/icons/navbar/help.svg" alt="Help logo" />
+                            </Link>
+                        }
                     </>
                 } />
-                <div onClick={handleClickDropDown} className="nav-bar-user">
-                    <div className="nav-bar-user-inner">
-                        <span className="text-sm">{!user ? "G" : user.name.split(" ").map(n => n.charAt(0)).join("")}</span>
+                {!simplified &&
+                    <div onClick={handleClickDropDown} className="nav-bar-user">
+                        <div className="nav-bar-user-inner">
+                            <span className="text-sm">{!user ? "G" : user.name.split(" ").map(n => n.charAt(0)).join("")}</span>
+                        </div>
                     </div>
-                </div>
+                }
             </nav>
             {isOpen && <NavbarDropdown />}
         </>

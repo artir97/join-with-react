@@ -7,6 +7,7 @@ import useViewport from "../hooks/useViewport";
 import CheckboxIcon from "../components/icons/CheckboxIcon";
 import MobileSwitch from "../components/base/MobileSwitch";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
+import LegalAndPrivacy from "../components/LegalAndPrivacy";
 
 const LogIn = () => {
     const [mail, setMail] = useState("");
@@ -59,10 +60,7 @@ const LogIn = () => {
                 </div>
                 <MobileSwitch mobileComponent={<SignUpInfo />} />
             </div>
-            <div className="flex w-full absolute bottom-12 justify-center space-x-4 text-gray-500">
-                <p>Privacy Policy</p>
-                <p>Legal Notice</p>
-            </div>
+            <LegalAndPrivacy external className="text-gray-500"/>
         </>
     );
 }

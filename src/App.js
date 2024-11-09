@@ -19,6 +19,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 
 import './App.css';
 import './output.css';
+import NavbarWrapper from './components/NavbarWrapper';
 
 // MAIN PAGE
 function App() {
@@ -32,7 +33,6 @@ function App() {
               <Route index element={<Navigate to="/login" replace />} />
 
               <Route path='/' element={<BaseWrapper />}>
-
                 <Route path="/summary" element={<Summary />} />
                 <Route path="/tasks" element={
                   <DragProvider>
@@ -48,6 +48,10 @@ function App() {
               </Route>
               <Route path='/login' element={<LogIn />} />
               <Route path='/signup' element={<SignUp />} />
+              <Route path='/ext' element={<NavbarWrapper />}>
+                <Route path='/ext/legal' element={<LegalNotice />} />
+                <Route path='/ext/privacy' element={<PrivacyPolicy />} />
+              </Route>
             </Routes>
           </TasksProvider>
         </ContactsProvider>

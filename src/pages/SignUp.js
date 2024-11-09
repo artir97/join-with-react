@@ -7,6 +7,7 @@ import useViewport from "../hooks/useViewport";
 import CheckboxIcon from "../components/icons/CheckboxIcon";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
 import { handleColorInjection } from "../tools/svg";
+import LegalAndPrivacy from "../components/LegalAndPrivacy";
 
 const SignUp = () => {
     const [name, setName] = useState("");
@@ -61,19 +62,16 @@ const SignUp = () => {
                         />
                     </form>
                     <div onClick={() => setRemember(b => !b)}
-                            className="flex space-x-4 w-full">
-                            <CheckboxIcon defaultValue={remember} />
-                            <p className="text-sm">I accept the Privacy Policy</p>
-                        </div>
+                        className="flex space-x-4 w-full">
+                        <CheckboxIcon defaultValue={remember} />
+                        <p className="text-sm">I accept the Privacy Policy</p>
+                    </div>
                     <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 flex-col lg:flex-row">
                         <button className="bg-blue-500 px-3 py-1 text-white rounded">Sign up</button>
                     </div>
                 </div>
             </div>
-            <div className="flex w-full absolute bottom-12 justify-center space-x-4 text-white">
-                <p>Privacy Policy</p>
-                <p>Legal Notice</p>
-            </div>
+            <LegalAndPrivacy external className="text-white"/>
         </div>
     );
 }
