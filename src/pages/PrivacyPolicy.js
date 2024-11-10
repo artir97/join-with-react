@@ -1,5 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { ReactSVG } from "react-svg";
+
 import { Heading, Section, Text } from "../components/text/StylizedText";
+import { backOrDefault } from "../tools/navigation";
 
 const contents = [
     {
@@ -13,10 +17,15 @@ const contents = [
 ]
 
 const PrivacyPolicy = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="p-4 lg:p-10 page-content overflow-y-scroll">
             <Section>
-                <Heading>Privacy Policy</Heading>
+                <div className="flex justify-between">
+                    <Heading>Privacy Policy</Heading>
+                    <ReactSVG src="./assets/icons/forms/arrow-left.svg" className="cursor-pointer" onClick={() => navigate(backOrDefault('/login'))} />
+                </div>
 
                 <Section>
                     <Section>
@@ -25,7 +34,7 @@ const PrivacyPolicy = () => {
                                 <Heading>{content.header}</Heading>
                                 {content.texts.map((text, j) =>
                                     <Text key={j}>{text}</Text>
-                                 )}
+                                )}
                             </React.Fragment>
                         )}
                     </Section>
