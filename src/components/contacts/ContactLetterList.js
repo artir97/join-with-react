@@ -20,7 +20,7 @@ const ContactLetterList = ({ letter, list, setContactMail = () => {}}) => {
                                 </div>
                             </Link>
                         } desktopComponent={
-                            <div onClick={() => {setContactMail(info.mail); console.log(setContactMail)}} className="flex space-x-4">
+                            <div onClick={() => setContactMail(info.mail)} className="flex space-x-4">
                                 <NameIcon name={info.name} />
                                 <div className="flex flex-col">
                                     <p>{info.name}</p>
