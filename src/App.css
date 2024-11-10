@@ -116,6 +116,10 @@ footer div {
         height: calc(100vh - 80px);
         width: calc(100vw - 224px); /* Width of the sidebar */
     }
+
+    .content-main-desktop {
+        width: 456px;
+    }
 }
 
 

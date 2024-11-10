@@ -14,18 +14,20 @@ const Section = ({ title, value, colorClass = "" }) => (
     </div>
 );
 
-const ContactInfo = () => {
+const ContactInfo = ({ contactMail = "" }) => {
     const { email } = useParams();
     const [showOverlay, setShowOverlay] = useState(false);
-    const [info, setInfo] = useState({ name: '', mail: '', phone: '' });
+    const [info, setInfo] = useState({name: '', mail: '', phone: ''});
     const { list, editContact } = useContactList()
 
     useEffect(() => {
-        const contact = list.find((contact) => contact.mail === email);
-        if (contact) {
-            setInfo(contact);
+        if (email || contactMail) {
+            const contact = list.find((contact) => contact.mail === email || contact.mail === contactMail);
+            if (contact) {
+                setInfo(contact);
+            }
         }
-    }, [list, email]);
+    }, [list, email, contactMail]);
 
     const handleEditSubmit = (info) => {
         editContact(info)
@@ -33,7 +35,7 @@ const ContactInfo = () => {
 
     return (
         <>
-            <div className="page-content flex flex-col space-y-4 p-4">
+            <div className={`${email ? "page-content" : ""} flex flex-col space-y-4 p-4`}>
                 <div>
                     <div className="flex items-center">
                         <h2 className="font-bold flex-1">Contact information</h2>
