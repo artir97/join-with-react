@@ -47,7 +47,7 @@ const ContactInfo = ({ contactMail = "" }) => {
                         {!email && contactMail && <div className="flex flex-col items-start space-y-2">
                             <p className="text-3xl font-light">{info.name}</p>
                             <div className="flex space-x-2">
-                                <ButtonIcon name="Edit" className="font-light text-sm" imageUrl="./assets/icons/forms/edit.svg" />
+                                <ButtonIcon name="Edit" onClick={() => setShowOverlay(true)} className="font-light text-sm" imageUrl="./assets/icons/forms/edit.svg" />
                                 <ButtonIcon name="Delete" className="font-light text-sm" imageUrl="./assets/icons/forms/trash.svg" />
                             </div>
                         </div>}
