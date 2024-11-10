@@ -27,7 +27,7 @@ const StatusTasks = ({ status, tasks, updateTask, showOverlay }) => {
                         <TaskCard
                             category={t.category}
                             name={t.name}
-                            description={t.description}
+                            description={t.inputDescription}
                             subtasks={t.subtasks}
                             assignees={t.assignees}
                             priority={t.priority}

@@ -10,16 +10,19 @@ import NameIcon from "../icons/NameIcon";
 import Separator from "../base/Separator";
 
 const BaseTaskOverlay = (
-    { name = "", description = "",date = "", selectedPriority = "", taskCategory = "Select task category",
-        assigneesArr = [], subtasksArr = []}
-) => {
+    {taskId, onExit, name = "", description = "",date = "", selectedPriority = "", taskCategory = "Select task category",
+        assigneesArr = [], subtasksArr = []}) => {
+    const { taskList } = useTasks();
+
     const navigate = useNavigate();
     const { statusIndex } = useParams();
     const location = useLocation();
     const isOnTasksPage = location.pathname.endsWith("/tasks");
     const isOnAddTaskPage = location.pathname.endsWith("/addtask");
+    const [showOverlay, setShowOverlay] = useState(false);
 
 
+    const { editTask } = useTasks();
     const { addTask } = useTasks();
     const { list: contacts } = useContactList();
 
@@ -121,6 +124,20 @@ const BaseTaskOverlay = (
         });
         clearAddTaskForm();
         navigate("/tasks");
+    }
+
+    const handleEditTasks = () => {
+        editTask({
+            id: taskId,
+            category,
+            name: title,
+            inputDescription,
+            assignees: selectedContacts,
+            subtasks: subtasks,
+            dueDate: inputDate,
+            priority,
+            status: getStatusFromIndex(statusIndex)
+        });
     }
     return (
         <>
@@ -286,6 +303,9 @@ const BaseTaskOverlay = (
                             <>
                                 <div onClick={() => {
                                     console.log('ok');
+                                    handleEditTasks();
+                                    console.log(taskList);
+                                    onExit();
                                 }} className="button button-blue flex items-center space-x-2 cursor-pointer">
                                     <div>Ok</div>
                                     <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"}/>

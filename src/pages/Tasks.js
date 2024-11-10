@@ -128,7 +128,7 @@ const Tasks = () => {
 
             {/** Task Edit Overlay */}
             {
-                overlayTask && <EditTaskOverlay task={overlayTask} />
+                overlayTask && <EditTaskOverlay task={overlayTask} onExit={() => setOverlayTask(null)} />
             }
         </>
     );

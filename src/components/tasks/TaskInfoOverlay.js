@@ -23,7 +23,7 @@ const TaskInfoOverlay = ({ task, onExit }) => {
                     </div>
 
                     <h2 className='text-3xl font-bold'>{task.name}</h2>
-                    <p className='font-light'>{task.description}</p>
+                    <p className='font-light'>{task.inputDescription}</p>
 
                     <p><span className='font-semibold'>Due date:</span> {task.dueDate}</p>
                     <div className='flex space-x-2 items-center'>
