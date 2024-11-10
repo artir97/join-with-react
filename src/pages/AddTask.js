@@ -12,12 +12,13 @@ import { useContactList } from "../hooks/useContactList";
 import NameIcon from "../components/icons/NameIcon";
 import Separator from "../components/base/Separator";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
+import ButtonIcon from "../components/icons/ButtonIcon";
 
 const AddTask = () => {
     const navigate = useNavigate();
     const { statusIndex } = useParams();
 
-    const { addTask, taskList } = useTasks();
+    const { addTask } = useTasks();
     const { list: contacts } = useContactList();
 
     const [title, setTitle] = useState('');
@@ -263,15 +264,15 @@ const AddTask = () => {
                     </div>
 
                     <div className="buttons-container">
-                        <div className="button button-white flex items-center space-x-2">
-                            <div onClick={clearAddTaskForm}>Clear</div>
-                            <ReactSVG src={'./assets/icons/forms/close-white.svg'}
-                                beforeInjection={svg => handleColorInjection(svg, 'black')} />
-                        </div>
-                        <button type="submit" className="button button-blue flex items-center space-x-2">
-                            <div>Create Task</div>
-                            <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"} />
-                        </button>
+                        <ButtonIcon name="Clear" onClick={clearAddTaskForm}
+                            className="border-gray-500 border button"
+                            side="right"
+                            icon={<ReactSVG src={'./assets/icons/forms/close-white.svg'}
+                                beforeInjection={svg => handleColorInjection(svg, 'black')} />} />
+                        <ButtonIcon type="submit" className="button button-blue flex items-center space-x-2"
+                            name="Create Task"
+                            side="right"
+                            imageUrl="./assets/icons/forms/check.svg" />
                     </div>
                 </form >
             </div >
@@ -284,25 +285,25 @@ const ContactsSelection = ({ contacts, selectContact, selectedContacts }) => {
         <div className="contacts-selection">
             {(contacts.sort((a, b) => a.name.localeCompare(b.name)))
                 .map((contact, index) => {
-                const isSelected = selectedContacts.some(selected => selected.mail === contact.mail);
-                const selectedImg = './assets/icons/forms/checkbox-checked.svg';
-                const defaultImg = './assets/icons/forms/checkbox-empty.svg';
+                    const isSelected = selectedContacts.some(selected => selected.mail === contact.mail);
+                    const selectedImg = './assets/icons/forms/checkbox-checked.svg';
+                    const defaultImg = './assets/icons/forms/checkbox-empty.svg';
 
-                return (
-                    <div onClick={() => selectContact(contact)}
-                        className={`contact ${isSelected ? 'contact-selected' : ''}`}
-                        key={index}>
-                        <div className="flex gap-5 items-center">
-                            <NameIcon name={contact.name} />
-                            {contact.name}
+                    return (
+                        <div onClick={() => selectContact(contact)}
+                            className={`contact ${isSelected ? 'contact-selected' : ''}`}
+                            key={index}>
+                            <div className="flex gap-5 items-center">
+                                <NameIcon name={contact.name} />
+                                {contact.name}
+                            </div>
+                            <div>
+                                <ReactSVG src={isSelected ? selectedImg : defaultImg}
+                                    beforeInjection={svg => handleColorInjection(svg, 'white', () => isSelected, 'stroke')} />
+                            </div>
                         </div>
-                        <div>
-                            <ReactSVG src={isSelected ? selectedImg : defaultImg}
-                                beforeInjection={svg => handleColorInjection(svg, 'white', () => isSelected, 'stroke')} />
-                        </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
         </div>
     )
 }

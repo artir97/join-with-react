@@ -1,21 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+
 import { useContactList } from "../../hooks/useContactList";
-import IconInput from '../base/IconInput';
+import UnderlineIconInput from '../base/UnderlineIconInput';
 import NameIcon from '../icons/NameIcon';
+import ButtonIcon from '../icons/ButtonIcon';
+
 import { capitalize } from '../../tools/format';
 
 import '../base/Overlay.css';
-import UnderlineIconInput from '../base/UnderlineIconInput';
 
-const OverlayFormInput = ({ value, iconUrl, placeholder, onChange, type = "text", required = false }) => (
-    <IconInput value={value} iconUrl={iconUrl}
-        placeholder={placeholder}
-        onChange={onChange}
-        type={type}
-        required={required}
-        className="input-contact w-full" containerClassName="input-container w-full text-sm lg:text-base lg:w-3/4" />
-);
 
 /**
  * Base contact overlay component
@@ -69,13 +63,16 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                     {isEditing
                         ? <div className='flex space-x-4 mt-8'>
                             <button className='rounded bg-white p-2 mt-4' onClick={handleDelete}>Delete</button>
-                            <button className='rounded flex space-x-6 bg-blue-500 text-white p-2 mt-4'>
-                                <p>Save</p><img src="./assets/icons/forms/check.svg" alt="Check icon" />
-                            </button>
+                            <ButtonIcon className='rounded flex space-x-6 bg-blue-500 text-white p-2 mt-4'
+                                name="Save"
+                                imageUrl="./assets/icons/forms/check.svg"
+                                side='right' />
                         </div>
-                        : <button className='rounded flex space-x-2 bg-blue-500 text-white p-2 mt-8'>
-                            <p>Create contact </p><img src="./assets/icons/forms/check.svg" alt="Check icon" />
-                        </button>
+                        : <ButtonIcon className='rounded flex space-x-2 bg-blue-500 text-white p-2 mt-8'
+                            name={"Create contact"}
+                            imageUrl={"./assets/icons/forms/check.svg"}
+                            side='right'
+                        />
                     }
                 </form>
                 <div className='center-icon bg-gray-300'>
