@@ -37,7 +37,7 @@ const Navbar = ({ simplified = false }) => {
                     </div>
                 }
             </nav>
-            {isOpen && <NavbarDropdown />}
+            {isOpen && <NavbarDropdown onClick={() => setIsOpen(false)}/>}
         </>
     );
 }
