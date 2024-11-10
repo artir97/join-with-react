@@ -9,8 +9,8 @@ const NameIcon = ({ name, className, large = false }) => {
 
     return (
         <div className={`${className} border-2 border-white rounded-full ${large ? "size-20 min-h-20 min-w-20 text-3xl" : "size-11 min-h-11 min-w-11 text-sm"} p-1.5 flex justify-center items-center text-white`}
-            style={{ backgroundColor: `hsl(${hue(values[0], values.length > 0 ? values[1] : 0)}, 50%, 50%)` }}>
-            {displayedName}
+            style={{ backgroundColor: `hsl(${hue(values[0], values.at(-1))}, 50%, 50%)` }}>
+            <p className={large ? (displayedName.length > 2 ? `text-xl` : "text-3xl") : (displayedName.length > 2 ? `text-xs` : `text-sm`)}>{displayedName}</p>
         </div>
     )
 }
