@@ -11,7 +11,7 @@ import '../base/Overlay.css';
 import Separator from '../base/Separator';
 
 
-const TaskInfoOverlay = ({ task, onExit }) => {
+const TaskInfoOverlay = ({ task, onExit, onOpenEdit }) => {
     return (
             <div className='mask bg-white bg-opacity-50'>
                 <div className='rounded-2xl flex flex-col mx-8 my-20 p-4 shadow-lg overlay bg-white box-border space-y-4'>
@@ -51,7 +51,7 @@ const TaskInfoOverlay = ({ task, onExit }) => {
                     <div className='flex items-center self-end'>
                         <ButtonIcon imageUrl={"./assets/icons/forms/trash.svg"} name={"Delete"} className='px-2 py-1 cursor-pointer'/>
                         <Separator/>
-                        <ButtonIcon imageUrl={"./assets/icons/forms/edit.svg"} name={"Edit"} className='px-2 py-1 cursor-pointer'/>
+                        <ButtonIcon onClick={onOpenEdit} imageUrl={"./assets/icons/forms/edit.svg"} name={"Edit"} className='px-2 py-1 cursor-pointer'/>
                     </div>
                 </div>
             </div>

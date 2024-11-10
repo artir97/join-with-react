@@ -20,6 +20,7 @@ const Tasks = () => {
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
     const [overlayTask, setOverlayTask] = useState(null);
+    const [overlayEditTask, setOverlayEditTask] = useState(null);
     const statusList = getStatusList();
 
     /**
@@ -122,13 +123,16 @@ const Tasks = () => {
             </div>
             {/** Task Info Overlay */}
             {
-                //comment in again once done
-                //overlayTask && <TaskInfoOverlay task={overlayTask} onExit={() => setOverlayTask(null)} />
+                overlayTask && <TaskInfoOverlay
+                    task={overlayTask}
+                    onExit={() => setOverlayTask(null)}
+                    onOpenEdit={setOverlayEditTask}
+                />
             }
 
             {/** Task Edit Overlay */}
             {
-                overlayTask && <EditTaskOverlay task={overlayTask} onExit={() => setOverlayTask(null)} />
+                overlayEditTask && <EditTaskOverlay task={overlayTask} onExit={() => setOverlayEditTask(null)} />
             }
         </>
     );
