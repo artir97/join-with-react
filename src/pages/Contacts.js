@@ -44,7 +44,7 @@ const Contacts = () => {
     return (
         <>
             <div className="page-content pt-4 flex">
-                <div className="h-full flex flex-col content-main-desktop">
+                <div className="h-full max-lg:w-full flex flex-col content-main-desktop">
                     <MobileSwitch desktopComponent={
                         <ButtonIcon
                             imageUrl={"././assets/icons/contacts/add-contact.svg"}
@@ -53,7 +53,7 @@ const Contacts = () => {
                             side="right"
                             onClick={() => setShowOverlay(true)} />
                     } />
-                    <div className="overflow-y-scroll flex-1">
+                    <div className="overflow-y-scroll w-full flex-1">
                         {[...Object.entries(contactsByInitial)]
                             .filter(e => e[1].length > 0)
                             .sort((a, b) => a[0].charCodeAt(0) - b[0].charCodeAt(0))
