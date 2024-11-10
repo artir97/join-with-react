@@ -13,8 +13,7 @@ import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
 import MobileSwitch from "../components/base/MobileSwitch";
 
 const Tasks = () => {
-    const { taskList } = useTasks();
-    const { editTask } = useTasks();
+    const { editTask, taskList } = useTasks();
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
     const [overlayTask, setOverlayTask] = useState(null);
