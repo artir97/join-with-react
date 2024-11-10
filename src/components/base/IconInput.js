@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const IconInput = ({ className = "", containerClassName = "", onFocusClassName = "", onFocusContainerClassName = "", value, type, placeholder, required, onChange, iconUrl = "", icon = null }) => {
+const IconInput = ({ className = "", containerClassName = "", onFocusClassName = "", onFocusContainerClassName = "", value, type, placeholder = '', required = false, onChange = () => {}, iconUrl = "", icon = null }) => {
     const [isFocus, setFocus] = useState(false);
 
     return (

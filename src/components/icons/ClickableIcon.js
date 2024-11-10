@@ -1,6 +1,6 @@
 import './Icon.css';
 
-const ClickableIcon = ({ url, name, className, onClick }) => {
+const ClickableIcon = ({ url, name, className, onClick = () => {}}) => {
     return (
         <img src={url}
             alt={name}

@@ -1,6 +1,6 @@
 import ClickableIcon from "./ClickableIcon";
 
-const MainActionIcon = ({ onClick, url, name }) => {
+const MainActionIcon = ({ onClick = () => {}, url, name }) => {
     return (
         <ClickableIcon
             url={url}
