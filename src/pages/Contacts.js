@@ -1,14 +1,15 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useContactList } from "../hooks/useContactList";
 
 import ContactLetterList from "../components/contacts/ContactLetterList";
 import AddContactOverlay from "../components/contacts/AddContactOverlay";
 import MainActionIcon from "../components/icons/MainActionIcon";
+import ButtonIcon from "../components/icons/ButtonIcon";
+import MobileSwitch from "../components/base/MobileSwitch";
 
 
 const Contacts = () => {
-    const {list} = useContactList();
-    const { addContact } = useContactList();
+    const { list, addContact } = useContactList();
     const [showOverlay, setShowOverlay] = useState(false);
     const [contactsByInitial, setContactsByInitial] = useState({});
 
@@ -31,23 +32,34 @@ const Contacts = () => {
         setContactsByInitial(newMap);
     }, [list]);
 
-
     const handleAddSubmit = (info) => {
         addContact(info);
     }
 
     return (
         <>
-            <div className="page-content overflow-y-scroll">
-                {[...Object.entries(contactsByInitial)]
-                    .filter(e => e[1].length > 0)
-                    .sort((a, b) => a[0].charCodeAt(0) - b[0].charCodeAt(0))
-                    .map((e, i) => <ContactLetterList key={i} letter={e[0]} list={e[1]} />)}
+            <div className="page-content pt-4 flex flex-col content-main-desktop">
+                <MobileSwitch desktopComponent={
+                    <ButtonIcon
+                        imageUrl={"././assets/icons/contacts/add-contact.svg"}
+                        name={"Add new contact"}
+                        className="sticky px-2 py-1 rounded bg-blue-500 text-white self-center"
+                        side="right"
+                        onClick={() => setShowOverlay(true)} />
+                } />
+                <div className="overflow-y-scroll flex-1">
+                    {[...Object.entries(contactsByInitial)]
+                        .filter(e => e[1].length > 0)
+                        .sort((a, b) => a[0].charCodeAt(0) - b[0].charCodeAt(0))
+                        .map((e, i) => <ContactLetterList key={i} letter={e[0]} list={e[1]} />)}
+                </div>
             </div>
-            <MainActionIcon
-                url="./assets/icons/contacts/add-contact.svg"
-                name={"Add contact icon"}
-                onClick={() => setShowOverlay(true)} />
+            <MobileSwitch mobileComponent={
+                <MainActionIcon
+                    url="./assets/icons/contacts/add-contact.svg"
+                    name={"Add contact icon"}
+                    onClick={() => setShowOverlay(true)} />
+            } />
             {showOverlay && <AddContactOverlay
                 onAddSubmit={handleAddSubmit}
                 onExit={() => setShowOverlay(false)} />}
