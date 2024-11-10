@@ -26,9 +26,10 @@ const TaskCard = ({ category, name, description = "", subtasks = [], assignees, 
                 </div>
             }
 
-            <div className="flex items-center">
+
+            <div className="flex items-center w-full">
                 {/** Assignees */}
-                <div className="flex-1 flex -space-x-2">
+                <div className={`flex-1 flex ${assignees.length <= 5 ? '-space-x-2' : (assignees.length <= 10 ? '-space-x-7' : (assignees.length <= 15 ? '-space-x-9' : '-space-x-10'))} overflow-x-auto`}>
                     {assignees.map((a, i) => <NameIcon name={a.name} key={i} />)}
                 </div>
                 {/** Priority */}
