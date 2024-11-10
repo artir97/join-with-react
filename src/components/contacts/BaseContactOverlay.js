@@ -6,6 +6,7 @@ import NameIcon from '../icons/NameIcon';
 import { capitalize } from '../../tools/format';
 
 import '../base/Overlay.css';
+import UnderlineIconInput from '../base/UnderlineIconInput';
 
 const OverlayFormInput = ({ value, iconUrl, placeholder, onChange, type = "text", required = false }) => (
     <IconInput value={value} iconUrl={iconUrl}
@@ -62,9 +63,9 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                     </div>
                 </div>
                 <form className='flex flex-col items-center space-y-4 w-full px-6 py-12' onSubmit={handleSubmit}>
-                    <OverlayFormInput required value={inputName} iconUrl="./assets/icons/forms/person.svg" placeholder="Name" onChange={e => setName(e.target.value)} />
-                    <OverlayFormInput required value={inputMail} type="email" iconUrl="./assets/icons/forms/mail.svg" placeholder="Mail address" onChange={e => setMail(e.target.value)} />
-                    <OverlayFormInput required value={inputPhone} iconUrl="./assets/icons/forms/phone.svg" placeholder="Phone number" onChange={e => setPhone(e.target.value)} />
+                    <UnderlineIconInput required value={inputName} iconUrl="./assets/icons/forms/person.svg" placeholder="Name" onChange={e => setName(e.target.value)} />
+                    <UnderlineIconInput required value={inputMail} type="email" iconUrl="./assets/icons/forms/mail.svg" placeholder="Mail address" onChange={e => setMail(e.target.value)} />
+                    <UnderlineIconInput required value={inputPhone} iconUrl="./assets/icons/forms/phone.svg" placeholder="Phone number" onChange={e => setPhone(e.target.value)} />
                     {isEditing
                         ? <div className='flex space-x-4 mt-8'>
                             <button className='rounded bg-white p-2 mt-4' onClick={handleDelete}>Delete</button>

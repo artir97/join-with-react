@@ -35,27 +35,27 @@ const SignUp = () => {
                     </div>
                     <form className="flex flex-col space-y-2 items-center">
                         <UnderlineIconInput
-                            value={name} required
+                            value={name} required large
                             placeholder="Name"
                             onChange={(e) => setName(e.target.value)}
                             icon={<ReactSVG src="assets/icons/forms/person.svg" />}
                         />
                         <UnderlineIconInput
-                            value={mail} required
+                            value={mail} required large
                             type="email"
                             placeholder="Mail address"
                             onChange={(e) => setMail(e.target.value)}
                             icon={<ReactSVG src="assets/icons/forms/mail.svg" />}
                         />
                         <UnderlineIconInput
-                            value={password} required
+                            value={password} required large
                             type="password"
                             placeholder="Password"
                             onChange={(e) => setPassword(e.target.value)}
                             icon={<ReactSVG src="assets/icons/forms/lock.svg" />}
                         />
                         <UnderlineIconInput
-                            value={confirmPassword} required
+                            value={confirmPassword} required large
                             type="password"
                             placeholder="Confirm password"
                             onChange={(e) => setConfirmPassword(e.target.value)}

@@ -34,14 +34,14 @@ const LogIn = () => {
                     <h1 className="font-bold text-4xl py-4 border-b-2 border-blue-500">Log in</h1>
                     <form className="flex flex-col space-y-4 items-center">
                         <UnderlineIconInput
-                            value={mail} required
+                            value={mail} required large
                             type="email"
                             placeholder="Your mail address"
                             onChange={(e) => setMail(e.target.value)}
                             icon={<ReactSVG src="assets/icons/forms/mail.svg" />}
                         />
                         <UnderlineIconInput
-                            value={password} required
+                            value={password} required large
                             type="password"
                             placeholder="Your password"
                             onChange={(e) => setPassword(e.target.value)}

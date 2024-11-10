@@ -6,8 +6,8 @@ import { ReactSVG } from "react-svg";
 import { handleColorInjection, handleRotateInjection, handleSizeInjection } from "../tools/svg";
 import { getStatusFromIndex } from "../tools/status";
 
-import {useTasks} from "../hooks/useDataContext";
-import {useContactList} from "../hooks/useContactList";
+import { useTasks } from "../hooks/useDataContext";
+import { useContactList } from "../hooks/useContactList";
 
 import NameIcon from "../components/icons/NameIcon";
 import Separator from "../components/base/Separator";
@@ -175,7 +175,7 @@ const AddTask = () => {
                         {
                             selectContactsIsOpen && <>
                                 <UnderlineIconInput
-                                    value={searchContact}
+                                    value={searchContact} large
                                     onChange={(e) => setSearchContact(e.target.value)}
                                     placeholder="Enter a name..."
                                     icon={<ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
@@ -209,7 +209,7 @@ const AddTask = () => {
                     <label><b>Subtasks</b> (optional)</label>
                     <UnderlineIconInput
                         value={subtask} onChange={(e) => setSubtask(e.target.value)}
-                        placeholder="Add new subtask"
+                        placeholder="Add new subtask" large
                         icon={<ReactSVG onClick={() => addSubtask(subtask)}
                             className="add-task-icon"
                             src={'./assets/icons/forms/plus.svg'} />}
