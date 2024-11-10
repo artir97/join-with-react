@@ -62,7 +62,7 @@ const Contacts = () => {
                 </div>
                 <MobileSwitch desktopComponent={contactMail &&
                     <div className="flex-1">
-                        <ContactInfo contactMail={contactMail} />
+                        <ContactInfo contactMail={contactMail} onExit={() => setContactMail("")} />
                     </div>
                 } />
             </div>

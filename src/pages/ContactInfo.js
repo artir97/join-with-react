@@ -15,11 +15,11 @@ const Section = ({ title, value, colorClass = "" }) => (
     </div>
 );
 
-const ContactInfo = ({ contactMail = "" }) => {
+const ContactInfo = ({ contactMail = "", onExit = () => {} }) => {
     const { email } = useParams();
     const [showOverlay, setShowOverlay] = useState(false);
     const [info, setInfo] = useState({ name: '', mail: '', phone: '' });
-    const { list, editContact } = useContactList()
+    const { list, editContact, deleteContact } = useContactList()
 
     useEffect(() => {
         if (email || contactMail) {
@@ -32,6 +32,11 @@ const ContactInfo = ({ contactMail = "" }) => {
 
     const handleEditSubmit = (info) => {
         editContact(info)
+    }
+
+    const handleDelete = (mail) => {
+        deleteContact(mail);
+        onExit();
     }
 
     return (
@@ -48,7 +53,7 @@ const ContactInfo = ({ contactMail = "" }) => {
                             <p className="text-3xl font-light">{info.name}</p>
                             <div className="flex space-x-2">
                                 <ButtonIcon name="Edit" onClick={() => setShowOverlay(true)} className="font-light text-sm" imageUrl="./assets/icons/forms/edit.svg" />
-                                <ButtonIcon name="Delete" className="font-light text-sm" imageUrl="./assets/icons/forms/trash.svg" />
+                                <ButtonIcon name="Delete" onClick={() => handleDelete(contactMail)} className="font-light text-sm" imageUrl="./assets/icons/forms/trash.svg" />
                             </div>
                         </div>}
                         {email && <p className="text-3xl font-light">{info.name}</p>}
