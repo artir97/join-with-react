@@ -21,7 +21,7 @@ const StatusTasks = ({ status, tasks, updateTask, showOverlay }) => {
                 </div>
             </div>
 
-            <div className="flex lg:flex-col w-full max-lg:overflow-x-scroll max-lg:snap-x lg:overflow-y-scroll lg:snap-y scroll-p-0 lg:space-y-4 max-lg:space-x-4 pb-4">
+            <div className="flex lg:flex-col w-full max-lg:overflow-x-scroll max-lg:snap-x lg:snap-y scroll-p-0 lg:space-y-4 max-lg:space-x-4 pb-4">
                 {tasks.length > 0 && tasks.map((t, i) => (
                     <Drag key={i} dataItem={t} dropEffect={Move}>
                         <TaskCard
