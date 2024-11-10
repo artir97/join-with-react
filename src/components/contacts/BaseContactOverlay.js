@@ -64,12 +64,14 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                         ? <div className='flex space-x-4 mt-8'>
                             <button className='rounded bg-white p-2 mt-4' onClick={handleDelete}>Delete</button>
                             <ButtonIcon className='rounded flex space-x-6 bg-blue-500 text-white p-2 mt-4'
+                                type="submit"
                                 name="Save"
                                 imageUrl="./assets/icons/forms/check.svg"
                                 side='right' />
                         </div>
                         : <ButtonIcon className='rounded flex space-x-2 bg-blue-500 text-white p-2 mt-8'
                             name={"Create contact"}
+                            type="submit"
                             imageUrl={"./assets/icons/forms/check.svg"}
                             side='right'
                         />
