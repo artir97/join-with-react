@@ -23,6 +23,14 @@ const Tasks = () => {
     const [overlayEdit, setOverlayEdit] = useState(false);
     const statusList = getStatusList();
 
+    useEffect(() => {
+        if (overlayTask) {
+            const updatedTask = taskList.find(t => t.id === overlayTask.id);
+            setOverlayTask(updatedTask || null);
+        }
+    }, [taskList, overlayTask]);
+
+
     /**
      * Videos #14+: `useEffect` is used when you want to use a callback any time a state changes.
      * 
