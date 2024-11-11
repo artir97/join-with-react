@@ -12,7 +12,7 @@ import Separator from "../base/Separator";
 const BaseTaskOverlay = (
     {taskId, onExit, name = "", description = "",date = "", selectedPriority = "", taskCategory = "Select task category",
         assigneesArr = [], subtasksArr = []}) => {
-    const { taskList } = useTasks();
+
 
     const navigate = useNavigate();
     const { statusIndex } = useParams();
@@ -22,6 +22,7 @@ const BaseTaskOverlay = (
     const [showOverlay, setShowOverlay] = useState(false);
 
 
+    const { taskList } = useTasks();
     const { editTask } = useTasks();
     const { addTask } = useTasks();
     const { list: contacts } = useContactList();
@@ -113,13 +114,13 @@ const BaseTaskOverlay = (
         e.preventDefault();
 
         addTask({
-            category,
+            category: category,
             name: title,
-            inputDescription,
+            description: inputDescription,
             assignees: selectedContacts,
             subtasks: subtasks,
             dueDate: inputDate,
-            priority,
+            priority: priority,
             status: getStatusFromIndex(statusIndex)
         });
         clearAddTaskForm();
@@ -127,18 +128,27 @@ const BaseTaskOverlay = (
     }
 
     const handleEditTasks = () => {
-        editTask({
-            id: taskId,
-            category,
+        const existingTask = taskList.find(t => t.id === taskId);
+        if (!existingTask) {
+            console.error(`Task with ID ${taskId} not found`);
+            return;
+        }
+
+        const updatedTask = {
+            ...existingTask,
             name: title,
-            inputDescription,
+            description: inputDescription,
             assignees: selectedContacts,
             subtasks: subtasks,
             dueDate: inputDate,
-            priority,
-            status: getStatusFromIndex(statusIndex)
-        });
-    }
+            priority: priority,
+            category: category,
+        };
+
+        editTask(updatedTask);
+        onExit();
+    };
+
     return (
         <>
             <div className="container-add-task w-full">
@@ -302,10 +312,7 @@ const BaseTaskOverlay = (
                             isOnTasksPage &&
                             <>
                                 <div onClick={() => {
-                                    console.log('ok');
                                     handleEditTasks();
-                                    console.log(taskList);
-                                    onExit();
                                 }} className="button button-blue flex items-center space-x-2 cursor-pointer">
                                     <div>Ok</div>
                                     <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"}/>
