@@ -12,7 +12,7 @@ import Separator from '../base/Separator';
 
 import {useTasks} from "../../hooks/useDataContext";
 
-const TaskInfoOverlay = ({ task, onExit, onOpenEdit }) => {
+const TaskInfoOverlay = ({ task, onExit, onOpenEdit, onDeleteTask }) => {
     const { taskList } = useTasks();
     const editedTask = taskList.find((t) => t.id === task.id);
     return (
@@ -52,7 +52,7 @@ const TaskInfoOverlay = ({ task, onExit, onOpenEdit }) => {
                         )}
                     </div>
                     <div className='flex items-center self-end'>
-                        <ButtonIcon imageUrl={"./assets/icons/forms/trash.svg"} name={"Delete"} className='px-2 py-1 cursor-pointer'/>
+                        <ButtonIcon onClick={onDeleteTask} imageUrl={"./assets/icons/forms/trash.svg"} name={"Delete"} className='px-2 py-1 cursor-pointer'/>
                         <Separator/>
                         <ButtonIcon onClick={onOpenEdit} imageUrl={"./assets/icons/forms/edit.svg"} name={"Edit"} className='px-2 py-1 cursor-pointer'/>
                     </div>

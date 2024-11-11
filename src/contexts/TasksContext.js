@@ -9,7 +9,10 @@ const taskReducer = (state, action) => {
         case 'add':
             return {...state, taskList: [...state.taskList, action.payload]};
         case 'delete':
-            return {...state}
+            return {
+                ...state,
+                taskList: state.taskList.filter((task) => task.id !== action.payload.id)
+            };
         case 'edit':
             return {
                 ...state,
@@ -36,8 +39,13 @@ export const TasksProvider = ({children}) => {
         dispatch({type: 'edit', payload: task});
     };
 
+    const deleteTask = (taskId) => {
+        dispatch({ type: 'delete', payload: { id: taskId } });
+    };
+
+
     return (
-        <TasksContext.Provider value={{...state, addTask, editTask}}>
+        <TasksContext.Provider value={{...state, addTask, editTask, deleteTask}}>
             {children}
         </TasksContext.Provider>
     )

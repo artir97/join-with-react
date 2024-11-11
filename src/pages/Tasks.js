@@ -15,7 +15,7 @@ import MobileSwitch from "../components/base/MobileSwitch";
 import EditTaskOverlay from "../components/tasks/EditTaskOverlay";
 
 const Tasks = () => {
-    const { editTask, taskList } = useTasks();
+    const { editTask, deleteTask,  taskList } = useTasks();
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
     const [overlayTask, setOverlayTask] = useState(null);
@@ -97,6 +97,11 @@ const Tasks = () => {
         editTask(task);
     }
 
+    const handleDeleteTask = (task) => {
+        deleteTask(task.id);
+        setOverlayTask(null);
+    }
+
     return (
         <>
             <div className="page-content overflow-y-scroll pt-4">
@@ -132,6 +137,7 @@ const Tasks = () => {
             {
                 overlayTask && <TaskInfoOverlay
                     task={overlayTask}
+                    onDeleteTask={() => handleDeleteTask(overlayTask)}
                     onExit={() => setOverlayTask(null)}
                     onOpenEdit={() => setOverlayEdit(true)}
                 />
