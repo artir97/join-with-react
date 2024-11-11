@@ -16,7 +16,7 @@ const links = [
         name: "Board"
     },
     {
-        path: "/addtask",
+        path: "/addTask",
         iconUrl: "./assets/icons/navigation/add-task.svg",
         name: "Add Task"
     },

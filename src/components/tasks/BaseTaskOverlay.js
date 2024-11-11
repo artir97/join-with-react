@@ -18,7 +18,7 @@ const BaseTaskOverlay = (
     const { statusIndex } = useParams();
     const location = useLocation();
     const isOnTasksPage = location.pathname.endsWith("/tasks");
-    const isOnAddTaskPage = location.pathname.endsWith("/addtask");
+    const isOnAddTaskPage = (location.pathname.includes("/addTask"));
 
     const { taskList } = useTasks();
     const { editTask } = useTasks();
