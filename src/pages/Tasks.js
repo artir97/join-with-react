@@ -9,15 +9,26 @@ import {useTasks} from "../hooks/useDataContext";
 
 import StatusTasks from "../components/tasks/StatusTasks";
 import IconInput from "../components/base/IconInput";
+// TaskInfoOverlay is used but just commented out at the moment -> see down below
 import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
 import MobileSwitch from "../components/base/MobileSwitch";
+import EditTaskOverlay from "../components/tasks/EditTaskOverlay";
 
 const Tasks = () => {
     const { editTask, taskList } = useTasks();
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
     const [overlayTask, setOverlayTask] = useState(null);
+    const [overlayEdit, setOverlayEdit] = useState(false);
     const statusList = getStatusList();
+
+    useEffect(() => {
+        if (overlayTask) {
+            const updatedTask = taskList.find(t => t.id === overlayTask.id);
+            setOverlayTask(updatedTask || null);
+        }
+    }, [taskList, overlayTask]);
+
 
     /**
      * Videos #14+: `useEffect` is used when you want to use a callback any time a state changes.
@@ -118,7 +129,20 @@ const Tasks = () => {
                 </div>
             </div>
             {/** Task Info Overlay */}
-            {overlayTask && <TaskInfoOverlay task={overlayTask} onExit={() => setOverlayTask(null)} />}
+            {
+                overlayTask && <TaskInfoOverlay
+                    task={overlayTask}
+                    onExit={() => setOverlayTask(null)}
+                    onOpenEdit={() => setOverlayEdit(true)}
+                />
+            }
+
+            {/** Task Edit Overlay */}
+            {
+                overlayEdit && <EditTaskOverlay task={overlayTask} onExit={() => {
+                    setOverlayEdit(false);
+                }} />
+            }
         </>
     );
 }

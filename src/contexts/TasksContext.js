@@ -11,8 +11,12 @@ const taskReducer = (state, action) => {
         case 'delete':
             return {...state}
         case 'edit':
-            const newTasks = state.taskList.filter(t => t.id !== action.payload.id);
-            return {...state, taskList: [...newTasks, action.payload]};
+            return {
+                ...state,
+                taskList: state.taskList.map(task =>
+                    task.id === action.payload.id ? {...task, ...action.payload} : task
+                )
+            };
         default:
             return {...state}
     }
@@ -30,7 +34,7 @@ export const TasksProvider = ({children}) => {
 
     const editTask = (task) => {
         dispatch({type: 'edit', payload: task});
-    }
+    };
 
     return (
         <TasksContext.Provider value={{...state, addTask, editTask}}>
