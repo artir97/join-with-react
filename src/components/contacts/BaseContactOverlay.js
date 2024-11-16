@@ -45,7 +45,7 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
     }
 
     return (
-        <div className="bg-opacity-50 bg-white mask">
+        <div className="bg-opacity-50 bg-white mask overflow-x-hidden">
             <div className="rounded-2xl flex flex-col items-center mx-8 my-20 shadow-lg overlay fixed-h-overlay bg-white box-border">
                 <div className="h-2/5 flex flex-col w-full text-white space-y-16 p-4 bg-blue-600 rounded-t-2xl">
                     <div className="flex flex-row-reverse w-full" onClick={onExit}>
