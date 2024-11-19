@@ -16,7 +16,10 @@ const contactsReducer = (state, action) => {
                  contact.phone = action.payload.phone;
             return {...state};
         case 'add':
-            return {...state, list: [...state.list, action.payload]};
+            if (state.list.some(contact => contact.mail === action.payload.mail)) {
+                return state;
+            }
+            return { ...state, list: [...state.list, action.payload] };
         default:
             return state;
 
@@ -66,9 +69,15 @@ export const ContactsProvider = ({children}) => {
         dispatch({ type: 'edit', payload: contact})
     }
 
-    const addContact = (contact) => {
-        dispatch({ type: 'add', payload: contact})
-    }
+    const addContact = async (contact) => {
+        try {
+            await projectFirestore.collection('contacts').add(contact);
+            dispatch({ type: 'add', payload: contact });
+        } catch (err) {
+            console.error('Failed to add contact:', err);
+        }
+    };
+
 
     return (
         <ContactsContext.Provider value={{ ...state, changeContactList, deleteContact, editContact, addContact}}>

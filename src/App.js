@@ -42,7 +42,7 @@ function App() {
                 } />
                 <Route path="/addTask/:statusIndex?" element={<AddTask />} />
                 <Route path="/contacts" element={<Contacts />} />
-                <Route path="/contact-info/:email" element={<ContactInfo />} />
+                <Route path="/contact-info/:id" element={<ContactInfo />} />
                 <Route path="/help" element={<Help />} />
                 <Route path="/legal" element={<LegalNotice />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />

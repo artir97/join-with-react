@@ -7,6 +7,7 @@ import NameIcon from "../components/icons/NameIcon";
 import MainActionIcon from "../components/icons/MainActionIcon";
 import EditContactOverlay from "../components/contacts/EditContactOverlay";
 import ButtonIcon from "../components/icons/ButtonIcon";
+import {projectFirestore} from "../firebase/config";
 
 const Section = ({ title, value, colorClass = "" }) => (
     <div className="flex flex-col space-y-2">
@@ -16,25 +17,49 @@ const Section = ({ title, value, colorClass = "" }) => (
 );
 
 const ContactInfo = ({ contactMail = "", onExit = () => {} }) => {
+    const { id } = useParams()
     const { email } = useParams();
     const [showOverlay, setShowOverlay] = useState(false);
     const [info, setInfo] = useState({ name: '', mail: '', phone: '' });
-    const { list, editContact, deleteContact } = useContactList()
+    const [error, setError] = useState('');
+    const { list, editContact, deleteContact } = useContactList();
+
 
     useEffect(() => {
-        if (email || contactMail) {
-            const contact = list.find((contact) => contact.mail === email || contact.mail === contactMail);
+        if (id) {
+            // Fetch from Firestore only if `id` is provided
+            projectFirestore
+                .collection('contacts').doc(id).get().then((doc) => {
+                    if (doc.exists) {
+                        setInfo(doc.data());
+                    } else {
+                        setError('Could not find that contact info');
+                    }
+                })
+                .catch((err) => {
+                    setError('Failed to fetch contact info');
+                    console.error(err);
+                });
+        } else if (email || contactMail) {
+            // Use local data if `email` or `contactMail` is provided
+            const contact = list.find(
+                (contact) => contact.mail === email || contact.mail === contactMail
+            );
             if (contact) {
                 setInfo(contact);
+            } else {
+                setError('Could not find that contact info locally');
             }
         }
-    }, [list, email, contactMail]);
+    }, [id, email, contactMail, list]);
+
 
     const handleEditSubmit = (info) => {
         editContact(info)
     }
 
     const handleDelete = (mail) => {
+        console.log(id);
         deleteContact(mail);
         onExit();
     }
