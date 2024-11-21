@@ -3,6 +3,7 @@ import BigTaskCounter from "../components/summary/BigTaskCounter";
 import TaskCounter from "../components/summary/TaskCounter";
 import UrgentTaskCounter from "../components/summary/UrgentTaskCounter";
 import {useTasks} from "../hooks/useDataContext";
+import { getEnvironmentLink } from "../tools/navigation";
 
 
 const MobileSummary = () => (
@@ -12,12 +13,12 @@ const MobileSummary = () => (
 
         <div className="flex flex-col w-full space-y-4 justify-center">
             <div className="space-x-4 flex w-full">
-                <TaskCounter iconUrl="/assets/icons/summary/on-board.svg" name={"Tasks on board"} count={5} />
-                <TaskCounter iconUrl="/assets/icons/summary/in-progress.svg" name={"Tasks in progress"} count={2} />
+                <TaskCounter iconUrl={getEnvironmentLink("assets/icons/summary/on-board.svg")} name={"Tasks on board"} count={5} />
+                <TaskCounter iconUrl={getEnvironmentLink("assets/icons/summary/in-progress.svg")} name={"Tasks in progress"} count={2} />
             </div>
             <div className="space-x-4 flex w-full">
-                <TaskCounter iconUrl="/assets/icons/summary/awaiting-feedback.svg" name={"Awaiting feedback"} count={2} />
-                <TaskCounter iconUrl="/assets/icons/summary/tasks-done.svg" name={"Tasks done"} count={5} />
+                <TaskCounter iconUrl={getEnvironmentLink("assets/icons/summary/awaiting-feedback.svg")} name={"Awaiting feedback"} count={2} />
+                <TaskCounter iconUrl={getEnvironmentLink("assets/icons/summary/tasks-done.svg")} name={"Tasks done"} count={5} />
             </div>
         </div>
     </div>

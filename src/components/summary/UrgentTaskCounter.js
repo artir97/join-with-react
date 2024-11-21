@@ -1,3 +1,4 @@
+import { getEnvironmentLink } from '../../tools/navigation';
 import './TaskCounter.css';
 
 const UrgentTaskCounter = ({ count, date, className = "" }) => {
@@ -6,7 +7,8 @@ const UrgentTaskCounter = ({ count, date, className = "" }) => {
             <div className='flex space-x-2 justify-center items-center lg:hover:scale-125 duration-300'>
                 <div className="flex flex-col justify-center items-center px-2">
                     <div className="flex items-center space-x-1">
-                        <img src="./assets/icons/summary/urgent-tasks.svg" className="task-counter-icon" alt="Urgent icon" />
+                        <img src={getEnvironmentLink("assets/icons/summary/urgent-tasks.svg")}
+                            className="task-counter-icon" alt="Urgent icon" />
                         <p className="font-bold text-3xl pr-2">{count}</p>
                     </div>
                     <p className="font-extralight text-center">Urgent tasks</p>

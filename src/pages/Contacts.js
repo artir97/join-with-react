@@ -7,6 +7,7 @@ import MainActionIcon from "../components/icons/MainActionIcon";
 import ButtonIcon from "../components/icons/ButtonIcon";
 import MobileSwitch from "../components/base/MobileSwitch";
 import ContactInfo from "./ContactInfo";
+import { getEnvironmentLink } from "../tools/navigation";
 
 
 const Contacts = () => {
@@ -47,7 +48,7 @@ const Contacts = () => {
                 <div className="h-full max-lg:w-full flex flex-col content-main-desktop">
                     <MobileSwitch desktopComponent={
                         <ButtonIcon
-                            imageUrl={"././assets/icons/contacts/add-contact.svg"}
+                            imageUrl={getEnvironmentLink("assets/icons/contacts/add-contact.svg")}
                             name={"Add new contact"}
                             className="sticky px-2 py-1 rounded bg-blue-500 text-white self-center"
                             side="right"
@@ -68,7 +69,7 @@ const Contacts = () => {
             </div>
             <MobileSwitch mobileComponent={
                 <MainActionIcon
-                    url="./assets/icons/contacts/add-contact.svg"
+                    url={getEnvironmentLink("assets/icons/contacts/add-contact.svg")}
                     name={"Add contact icon"}
                     onClick={() => setShowOverlay(true)} />
             } />

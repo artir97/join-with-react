@@ -8,6 +8,7 @@ import LegalAndPrivacy from "../components/navigation/LegalAndPrivacy";
 import CheckboxIcon from "../components/icons/CheckboxIcon";
 import MobileSwitch from "../components/base/MobileSwitch";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
+import { getEnvironmentLink } from "../tools/navigation";
 
 const LogIn = () => {
     const [mail, setMail] = useState("");
@@ -25,7 +26,7 @@ const LogIn = () => {
         <>
             <div className="p-10 w-full">
                 <div className="flex items-start">
-                    <ReactSVG src={`./assets/icons/navbar/${isMobile() ? "medium" : "big"}-join.svg`} className="flex-1" />
+                    <ReactSVG src={`${getEnvironmentLink(`assets/icons/navbar/${isMobile() ? "medium" : "big"}-join.svg`)}`} className="flex-1" />
                     <MobileSwitch desktopComponent={<SignUpInfo />} />
                 </div>
             </div>
@@ -38,14 +39,14 @@ const LogIn = () => {
                             type="email"
                             placeholder="Your mail address"
                             onChange={(e) => setMail(e.target.value)}
-                            icon={<ReactSVG src="assets/icons/forms/mail.svg" />}
+                            icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/mail.svg")} />}
                         />
                         <UnderlineIconInput
                             value={password} required large
                             type="password"
                             placeholder="Your password"
                             onChange={(e) => setPassword(e.target.value)}
-                            icon={<ReactSVG src="assets/icons/forms/lock.svg" />}
+                            icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/lock.svg")} />}
                         />
                         <div onClick={() => setRemember(b => !b)}
                             className="flex space-x-4 self-start w-full">

@@ -9,6 +9,7 @@ import CheckboxIcon from "../components/icons/CheckboxIcon";
 import UnderlineIconInput from "../components/base/UnderlineIconInput";
 
 import { handleColorInjection } from "../tools/svg";
+import { getEnvironmentLink } from "../tools/navigation";
 
 const SignUp = () => {
     const [name, setName] = useState("");
@@ -22,14 +23,14 @@ const SignUp = () => {
     return (
         <div className="w-full h-full bg-blue-500">
             <div className="p-10 w-full">
-                <ReactSVG src={`./assets/icons/navbar/${isMobile() ? "medium" : "big"}-join.svg`} className="flex-1"
+                <ReactSVG src={`${getEnvironmentLink(`assets/icons/navbar/${isMobile() ? "medium" : "big"}-join.svg`)}`} className="flex-1"
                     beforeInjection={svg => handleColorInjection(svg, "white")} />
             </div>
             <div className="lg:absolute w-full flex flex-col space-y-8 items-center justify-center">
                 <div className="relative rounded-xl bg-white shadow-lg lg:px-28 max-lg:w-10/12 p-8 flex flex-col items-center space-y-2 lg:space-y-12">
                     <div>
                         <Link to="/login" className="absolute left-10 top-10">
-                            <ReactSVG src={'./assets/icons/forms/arrow-left.svg'} />
+                            <ReactSVG src={getEnvironmentLink("assets/icons/forms/arrow-left.svg")} />
                         </Link>
                         <h1 className="font-bold text-4xl border-b-2 border-blue-500">Sign up</h1>
                     </div>
@@ -38,28 +39,28 @@ const SignUp = () => {
                             value={name} required large
                             placeholder="Name"
                             onChange={(e) => setName(e.target.value)}
-                            icon={<ReactSVG src="assets/icons/forms/person.svg" />}
+                            icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/person.svg")} />}
                         />
                         <UnderlineIconInput
                             value={mail} required large
                             type="email"
                             placeholder="Mail address"
                             onChange={(e) => setMail(e.target.value)}
-                            icon={<ReactSVG src="assets/icons/forms/mail.svg" />}
+                            icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/mail.svg")} />}
                         />
                         <UnderlineIconInput
                             value={password} required large
                             type="password"
                             placeholder="Password"
                             onChange={(e) => setPassword(e.target.value)}
-                            icon={<ReactSVG src="assets/icons/forms/lock.svg" />}
+                            icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/lock.svg")} />}
                         />
                         <UnderlineIconInput
                             value={confirmPassword} required large
                             type="password"
                             placeholder="Confirm password"
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            icon={<ReactSVG src="assets/icons/forms/lock.svg" />}
+                            icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/lock.svg")} />}
                         />
                     </form>
                     <div onClick={() => setRemember(b => !b)}

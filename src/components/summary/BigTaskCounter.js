@@ -1,10 +1,11 @@
+import { getEnvironmentLink } from '../../tools/navigation';
 import './TaskCounter.css';
 
 const BigTaskCounter = ({ count, className = "" }) => {
     const CounterIcon = () => {
         return (
             <div className='flex space-x-4 lg:space-x-2 items-center'>
-                <img src="./assets/icons/summary/to-do.svg" alt="To-do icon" className="task-counter-icon" />
+                <img src={getEnvironmentLink("assets/icons/summary/to-do.svg")} alt="To-do icon" className="task-counter-icon" />
                 <p className="font-bold text-4xl text-black">{count}</p>
             </div>
         );

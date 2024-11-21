@@ -7,6 +7,7 @@ import Drag from "../ux/Drag";
 import { Move } from "../ux/DropEffectValues";
 import TaskCard from "./TaskCard";
 import TaskDrop from "./TaskDrop";
+import { getEnvironmentLink } from "../../tools/navigation";
 
 const StatusTasks = ({ status, tasks, updateTask, showOverlay }) => {
     const { isDragging } = useDrag();
@@ -17,7 +18,7 @@ const StatusTasks = ({ status, tasks, updateTask, showOverlay }) => {
                 <p className="text-lg font-semibold ">{status}</p>
                 <div className="text-blue-500 border border-blue-500 rounded-md size-6 flex items-center justify-center text-4xl">
                     {/** TODO Add default status for the different buttons */}
-                    <Link to={`/addTask/${getStatusIndex(status)}`}><img src="./assets/icons/forms/plus.svg" alt="Plus icon" /></Link>
+                    <Link to={`/addTask/${getStatusIndex(status)}`}><img src={getEnvironmentLink("assets/icons/forms/plus.svg")} alt="Plus icon" /></Link>
                 </div>
             </div>
 
