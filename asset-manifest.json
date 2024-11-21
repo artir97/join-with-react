@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/join-with-react/static/css/main.05fdbbe7.css",
+    "main.js": "/join-with-react/static/js/main.bce59d2c.js",
+    "index.html": "/join-with-react/index.html",
+    "main.05fdbbe7.css.map": "/join-with-react/static/css/main.05fdbbe7.css.map",
+    "main.bce59d2c.js.map": "/join-with-react/static/js/main.bce59d2c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.05fdbbe7.css",
+    "static/js/main.bce59d2c.js"
+  ]
+}
