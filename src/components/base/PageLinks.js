@@ -3,26 +3,27 @@ import { ReactSVG } from "react-svg";
 import useViewport from "../../hooks/useViewport";
 
 import { handleColorInjection } from "../../tools/svg";
+import { getEnvironmentLink } from "../../tools/navigation";
 
 const links = [
     {
         path: "/summary",
-        iconUrl: "./assets/icons/navigation/summary.svg",
+        iconUrl: getEnvironmentLink("assets/icons/navigation/summary.svg"),
         name: "Summary"
     },
     {
         path: "/tasks",
-        iconUrl: "./assets/icons/navigation/tasks.svg",
+        iconUrl: getEnvironmentLink("assets/icons/navigation/tasks.svg"),
         name: "Board"
     },
     {
         path: "/addTask",
-        iconUrl: "./assets/icons/navigation/add-task.svg",
+        iconUrl: getEnvironmentLink("assets/icons/navigation/add-task.svg"),
         name: "Add Task"
     },
     {
         path: "/contacts",
-        iconUrl: "./assets/icons/navigation/contacts.svg",
+        iconUrl: getEnvironmentLink("assets/icons/navigation/contacts.svg"),
         name: "Contacts"
     }
 ];

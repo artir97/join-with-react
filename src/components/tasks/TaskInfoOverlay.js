@@ -11,6 +11,7 @@ import '../base/Overlay.css';
 import Separator from '../base/Separator';
 
 import {useTasks} from "../../hooks/useDataContext";
+import { getEnvironmentLink } from '../../tools/navigation';
 
 const TaskInfoOverlay = ({ task, onExit, onOpenEdit, onDeleteTask }) => {
     const { taskList } = useTasks();
@@ -22,7 +23,7 @@ const TaskInfoOverlay = ({ task, onExit, onOpenEdit, onDeleteTask }) => {
                         <CategoryIcon name={editedTask.category} />
                         <div className='flex-1'/>
                         <ReactSVG className='p-4 self-end text-blue-500 cursor-pointer' onClick={onExit}
-                            src="./assets/icons/forms/close-blue.svg"/>
+                            src={getEnvironmentLink("assets/icons/forms/close-blue.svg")}/>
                     </div>
 
                     <h2 className='text-3xl font-bold'>{editedTask.name}</h2>
@@ -52,9 +53,9 @@ const TaskInfoOverlay = ({ task, onExit, onOpenEdit, onDeleteTask }) => {
                         )}
                     </div>
                     <div className='flex items-center self-end'>
-                        <ButtonIcon onClick={onDeleteTask} imageUrl={"./assets/icons/forms/trash.svg"} name={"Delete"} className='px-2 py-1 cursor-pointer'/>
+                        <ButtonIcon onClick={onDeleteTask} imageUrl={getEnvironmentLink("assets/icons/forms/trash.svg")} name={"Delete"} className='px-2 py-1 cursor-pointer'/>
                         <Separator/>
-                        <ButtonIcon onClick={onOpenEdit} imageUrl={"./assets/icons/forms/edit.svg"} name={"Edit"} className='px-2 py-1 cursor-pointer'/>
+                        <ButtonIcon onClick={onOpenEdit} imageUrl={getEnvironmentLink("assets/icons/forms/edit.svg")} name={"Edit"} className='px-2 py-1 cursor-pointer'/>
                     </div>
                 </div>
             </div>

@@ -13,6 +13,7 @@ import IconInput from "../components/base/IconInput";
 import TaskInfoOverlay from "../components/tasks/TaskInfoOverlay";
 import MobileSwitch from "../components/base/MobileSwitch";
 import EditTaskOverlay from "../components/tasks/EditTaskOverlay";
+import { getEnvironmentLink } from "../tools/navigation";
 
 const Tasks = () => {
     const { editTask, deleteTask,  taskList } = useTasks();
@@ -110,13 +111,13 @@ const Tasks = () => {
                     <div className="flex space-x-4 items-center">
                         <IconInput
                             containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
-                            iconUrl="./assets/icons/forms/search.svg"
+                            iconUrl={getEnvironmentLink("assets/icons/forms/search.svg")}
                             placeholder="Find task..."
                             onChange={e => setSearch(e.target.value)} />
                         <MobileSwitch desktopComponent={
                             <Link to="/addTask" className="px-2 py-1 rounded bg-blue-500 text-white flex space-x-2 items-center">
                                 <span>Add task</span>
-                                <ReactSVG src="./assets/icons/forms/plus.svg"
+                                <ReactSVG src={getEnvironmentLink("assets/icons/forms/plus.svg")}
                                     beforeInjection={svg => handleColorInjection(svg, "white")} />
                             </Link>} />
                     </div>

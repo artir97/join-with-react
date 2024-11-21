@@ -8,6 +8,7 @@ import MainActionIcon from "../components/icons/MainActionIcon";
 import EditContactOverlay from "../components/contacts/EditContactOverlay";
 import ButtonIcon from "../components/icons/ButtonIcon";
 import {projectFirestore} from "../firebase/config";
+import { getEnvironmentLink } from "../tools/navigation";
 
 const Section = ({ title, value, colorClass = "" }) => (
     <div className="flex flex-col space-y-2">
@@ -77,8 +78,8 @@ const ContactInfo = ({ contactMail = "", onExit = () => {} }) => {
                         {!email && contactMail && <div className="flex flex-col items-start space-y-2">
                             <p className="text-3xl font-light">{info.name}</p>
                             <div className="flex space-x-2">
-                                <ButtonIcon name="Edit" onClick={() => setShowOverlay(true)} className="font-light text-sm" imageUrl="./assets/icons/forms/edit.svg" />
-                                <ButtonIcon name="Delete" onClick={() => handleDelete(contactMail)} className="font-light text-sm" imageUrl="./assets/icons/forms/trash.svg" />
+                                <ButtonIcon name="Edit" onClick={() => setShowOverlay(true)} className="font-light text-sm" imageUrl={getEnvironmentLink("assets/icons/forms/edit.svg")} />
+                                <ButtonIcon name="Delete" onClick={() => handleDelete(contactMail)} className="font-light text-sm" imageUrl={getEnvironmentLink("assets/icons/forms/trash.svg")} />
                             </div>
                         </div>}
                         {email && <p className="text-3xl font-light">{info.name}</p>}
@@ -88,7 +89,7 @@ const ContactInfo = ({ contactMail = "", onExit = () => {} }) => {
                 <Section title={"Phone"} value={info.phone} />
             </div>
             {email && <MainActionIcon
-                url="./assets/icons/contacts/more.svg"
+                url={getEnvironmentLink("assets/icons/contacts/more.svg")}
                 name={"Add contact icon"}
                 onClick={() => setShowOverlay(true)} />}
             {showOverlay && <EditContactOverlay

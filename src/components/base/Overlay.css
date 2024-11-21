@@ -15,6 +15,14 @@
     width: calc(100% - 64px);
     position: relative;
     box-sizing: border-box;
+    animation: sliding 1s forwards;
+    left: 100vw;
+}
+
+@keyframes sliding {
+    100% {
+        left: 0;
+    }
 }
 
 @media (min-width: 1024px) {

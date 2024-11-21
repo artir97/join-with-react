@@ -21,39 +21,41 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 
 import './App.css';
 import './output.css';
+import { NotificationProvider } from './contexts/NotificationContext';
 
 // MAIN PAGE
 function App() {
   return (
     <div className='h-screen w-screen'>
-      <BrowserRouter>
+      <BrowserRouter basename='/join-with-react'>
         <ContactsProvider>
           <TasksProvider>
-            <Routes>
-              {/** Default route in the next line */}
-              <Route index element={<Navigate to="/login" replace />} />
-
-              <Route path='/' element={<BaseWrapper />}>
-                <Route path="/summary" element={<Summary />} />
-                <Route path="/tasks" element={
-                  <DragProvider>
-                    <Tasks />
-                  </DragProvider>
-                } />
-                <Route path="/addTask/:statusIndex?" element={<AddTask />} />
-                <Route path="/contacts" element={<Contacts />} />
-                <Route path="/contact-info/:id" element={<ContactInfo />} />
-                <Route path="/help" element={<Help />} />
-                <Route path="/legal" element={<LegalNotice />} />
-                <Route path="/privacy" element={<PrivacyPolicy />} />
-              </Route>
-              <Route path='/login' element={<LogIn />} />
-              <Route path='/signup' element={<SignUp />} />
-              <Route path='/ext' element={<NavbarWrapper />}>
-                <Route path='/ext/legal' element={<LegalNotice />} />
-                <Route path='/ext/privacy' element={<PrivacyPolicy />} />
-              </Route>
-            </Routes>
+            <NotificationProvider>
+              <Routes>
+                {/** Default route in the next line */}
+                <Route index element={<Navigate to="/login" replace />} />
+                <Route path='/' element={<BaseWrapper />}>
+                  <Route path="/summary" element={<Summary />} />
+                  <Route path="/tasks" element={
+                    <DragProvider>
+                      <Tasks />
+                    </DragProvider>
+                  } />
+                  <Route path="/addTask/:statusIndex?" element={<AddTask />} />
+                  <Route path="/contacts" element={<Contacts />} />
+                  <Route path="/contact-info/:email" element={<ContactInfo />} />
+                  <Route path="/help" element={<Help />} />
+                  <Route path="/legal" element={<LegalNotice />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                </Route>
+                <Route path='/login' element={<LogIn />} />
+                <Route path='/signup' element={<SignUp />} />
+                <Route path='/ext' element={<NavbarWrapper />}>
+                  <Route path='/ext/legal' element={<LegalNotice />} />
+                  <Route path='/ext/privacy' element={<PrivacyPolicy />} />
+                </Route>
+              </Routes>
+            </NotificationProvider>
           </TasksProvider>
         </ContactsProvider>
       </BrowserRouter>

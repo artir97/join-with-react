@@ -12,12 +12,8 @@ const LegalAndPrivacy = ({ vertical = false, external = false, className }) => {
                 </div>
             }
             {vertical &&
-                (external
-                    ? <div className="flex flex-col-reverse space-y-8 p-4 w-56 shadow text-gray-500">
-                        <Link to={`${externalPrefix}/legal`} className="p-2">Legal Notice</Link>
-                        <Link to={`${externalPrefix}/privacy`} className="p-2">Privacy Policy</Link>
-                    </div>
-                    : <div className="flex flex-col-reverse text-gray-500">
+                (!external &&
+                    <div className="flex flex-col-reverse text-gray-500">
                         <Link to={`${externalPrefix}/legal`} className="p-2">Legal Notice</Link>
                         <Link to={`${externalPrefix}/privacy`} className="p-2">Privacy Policy</Link>
                     </div>

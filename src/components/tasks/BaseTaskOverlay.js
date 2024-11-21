@@ -8,6 +8,7 @@ import {handleColorInjection, handleRotateInjection, handleSizeInjection} from "
 import UnderlineIconInput from "../base/UnderlineIconInput";
 import NameIcon from "../icons/NameIcon";
 import Separator from "../base/Separator";
+import { getEnvironmentLink } from "../../tools/navigation";
 
 const BaseTaskOverlay = (
     {taskId, onExit, name = "", description = "",date = "", selectedPriority = "", taskCategory = "Select task category",
@@ -183,7 +184,7 @@ const BaseTaskOverlay = (
                             ['urgent', 'medium', 'low'].map((p, index) => (
                                 <div key={index} onClick={() => setPriority(priority === p ? '' : p)} className={`priority-button ${priority === p ? `priority-${p}` : ""}`}>
                                     <div className="capitalize">{p}</div>
-                                    <ReactSVG src={`./assets/icons/priorities/${p}.svg`} beforeInjection={svg => handleColorInjection(svg, 'white', () => priority === p)} />
+                                    <ReactSVG src={`${getEnvironmentLink(`assets/icons/priorities/${p}.svg`)}`} beforeInjection={svg => handleColorInjection(svg, 'white', () => priority === p)} />
                                 </div>
                             ))
                         }
@@ -195,7 +196,7 @@ const BaseTaskOverlay = (
                             !selectContactsIsOpen &&
                             <div className="border-b border-gray-300 w-full flex justify-between items-center p-2">
                                 <div onClick={handleClickSelectContactsDropDown}>Select contacts to assign</div>
-                                <ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
+                                <ReactSVG src={getEnvironmentLink("assets/icons/forms/arrow-drop-down.svg")}
                                           className="add-task-icon"
                                           onClick={handleClickSelectContactsDropDown} />
                             </div>
@@ -206,7 +207,7 @@ const BaseTaskOverlay = (
                                     value={searchContact}
                                     onChange={(e) => setSearchContact(e.target.value)}
                                     placeholder="Enter a name..."
-                                    icon={<ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
+                                    icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/arrow-drop-down.svg")}
                                                     onClick={handleClickSelectContactsDropDown}
                                                     className="add-task-icon"
                                                     beforeInjection={svg => handleRotateInjection(svg, 180)} />}
@@ -228,7 +229,7 @@ const BaseTaskOverlay = (
                     <div onClick={handleClickSelectTaskDropDown}
                          className="flex justify-between items-center w-full h-12 border-b p-2 border-gray-300">
                         <div>{category}</div>
-                        <ReactSVG src="./assets/icons/forms/arrow-drop-down.svg"
+                        <ReactSVG src={getEnvironmentLink("assets/icons/forms/arrow-drop-down.svg")}
                                   className="add-task-icon"
                                   beforeInjection={svg => handleRotateInjection(svg, 180, () => selectTaskIsOpen)} />
                     </div>
@@ -240,7 +241,7 @@ const BaseTaskOverlay = (
                         placeholder="Add new subtask"
                         icon={<ReactSVG onClick={() => addSubtask(subtask)}
                                         className="add-task-icon"
-                                        src={'./assets/icons/forms/plus.svg'} />}
+                                        src={getEnvironmentLink("assets/icons/forms/plus.svg")} />}
                     />
                     <div className="w-full flex flex-col justify-between pr-4 pl-6 pt-4 space-y-4">
                         {subtasks.map((subtask, index) => (
@@ -252,12 +253,12 @@ const BaseTaskOverlay = (
                                             <input value={editSubtaskValue} className='w-full' onChange={(e) => setEditSubtaskValue(e.target.value)} />
                                             <div className="flex items-center">
                                                 <ReactSVG onClick={() => cancelEdit(index)}
-                                                          src={'./assets/icons/forms/close-blue.svg'}
+                                                          src={getEnvironmentLink("assets/icons/forms/close-blue.svg")}
                                                           className="add-task-icon"
                                                           beforeInjection={svg => handleSizeInjection(svg, 'lg')} />
                                                 <Separator />
                                                 <ReactSVG onClick={() => acceptEdit(index, editSubtaskValue)}
-                                                          src={'./assets/icons/forms/check.svg'}
+                                                          src={getEnvironmentLink("assets/icons/forms/check.svg")}
                                                           className="add-task-icon"
                                                           beforeInjection={svg => {
                                                               handleSizeInjection(svg, 'lg');
@@ -276,11 +277,11 @@ const BaseTaskOverlay = (
                                             <div className="flex">
                                                 <img onClick={() => editSubtask(index)}
                                                      className="add-task-icon"
-                                                     src={'./assets/icons/forms/edit.svg'} alt={"Edit icon"} />
+                                                     src={getEnvironmentLink("assets/icons/forms/edit.svg")} alt={"Edit icon"} />
                                                 <Separator />
                                                 <img onClick={() => deleteSubtask(index)}
                                                      className="add-task-icon"
-                                                     src={'./assets/icons/forms/trash.svg'} alt={"Delete icon"} />
+                                                     src={getEnvironmentLink("assets/icons/forms/trash.svg")} alt={"Delete icon"} />
                                             </div>
                                         </>
 
@@ -296,12 +297,12 @@ const BaseTaskOverlay = (
                             <>
                                 <div className="button button-white flex items-center space-x-2">
                                     <div onClick={clearAddTaskForm}>Clear</div>
-                                    <ReactSVG src={'./assets/icons/forms/close-white.svg'}
+                                    <ReactSVG src={getEnvironmentLink("assets/icons/forms/close-white.svg")}
                                               beforeInjection={svg => handleColorInjection(svg, 'black')}/>
                                 </div>
                                 <button type="submit" className="button button-blue flex items-center space-x-2">
                                     <div>Create Task</div>
-                                    <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"}/>
+                                    <img src={getEnvironmentLink("assets/icons/forms/check.svg")} alt={"Check icon"}/>
                                 </button>
                             </>
                         }
@@ -313,7 +314,7 @@ const BaseTaskOverlay = (
                                     handleEditTasks();
                                 }} className="button button-blue flex items-center space-x-2 cursor-pointer">
                                     <div>Ok</div>
-                                    <img src={'./assets/icons/forms/check.svg'} alt={"Check icon"}/>
+                                    <img src={getEnvironmentLink("assets/icons/forms/check.svg")} alt={"Check icon"}/>
                                 </div>
                             </>
                         }
@@ -331,8 +332,8 @@ const ContactsSelection = ({contacts, selectContact, selectedContacts}) => {
             {(contacts.sort((a, b) => a.name.localeCompare(b.name)))
                 .map((contact, index) => {
                     const isSelected = selectedContacts.some(selected => selected.mail === contact.mail);
-                    const selectedImg = './assets/icons/forms/checkbox-checked.svg';
-                    const defaultImg = './assets/icons/forms/checkbox-empty.svg';
+                    const selectedImg = getEnvironmentLink("assets/icons/forms/checkbox-checked.svg");
+                    const defaultImg = getEnvironmentLink("assets/icons/forms/checkbox-empty.svg");
 
                     return (
                         <div onClick={() => selectContact(contact)}

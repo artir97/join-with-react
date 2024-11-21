@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getEnvironmentLink } from "../../tools/navigation";
 
 const CheckboxIcon = ({ defaultValue = false, onClick = () => {} }) => {
     const [checked, setChecked] = useState(defaultValue);
@@ -6,12 +7,12 @@ const CheckboxIcon = ({ defaultValue = false, onClick = () => {} }) => {
     return (
         <>
             {checked && <img
-                src="./assets/icons/forms/checkbox-checked.svg"
+                src={getEnvironmentLink("assets/icons/forms/checkbox-checked.svg")}
                 alt="Empty checkbox"
                 onClick={() => {setChecked(false); onClick();}}
             />}
             {!checked && <img
-                src="./assets/icons/forms/checkbox-empty.svg"
+                src={getEnvironmentLink("assets/icons/forms/checkbox-empty.svg")}
                 alt="Checked checkbox"
                 onClick={() => {setChecked(true); onClick();}}
             />}

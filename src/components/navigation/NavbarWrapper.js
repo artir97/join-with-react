@@ -6,7 +6,7 @@ const NavbarWrapper = () => {
     return (
         <>
             <Navbar simplified />
-            <div className="flex">
+            <div className="flex flex-1">
                 <LegalAndPrivacy external vertical />
                 <Outlet />
             </div>
