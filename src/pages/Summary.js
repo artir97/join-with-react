@@ -63,12 +63,12 @@ const DesktopSummary = ({ name = "", taskList }) => (
             : <h1 className="text-5xl font-bold">Good {getTimeOfDay()}</h1>}
         <div className="grid grid-cols-4 grid-rows-2 gap-4">
             <UrgentTaskCounter count={getUrgentTasks(taskList).length} date={"November 27, 2024"} className="col-span-3" />
-            <TaskCounter iconUrl="/assets/icons/summary/on-board.svg" name={"Tasks on board"} count={taskList.length} />
+            <TaskCounter iconUrl={getEnvironmentLink("assets/icons/summary/on-board.svg")} name={"Tasks on board"} count={taskList.length} />
 
             <BigTaskCounter count={getTasks('To do', taskList).length} />
-            <TaskCounter iconUrl="/assets/icons/summary/in-progress.svg" name={"Tasks in progress"} count={getTasks('In progress', taskList).length} />
-            <TaskCounter iconUrl="/assets/icons/summary/awaiting-feedback.svg" name={"Awaiting feedback"} count={getTasks('Awaiting feedback', taskList).length} />
-            <TaskCounter iconUrl="/assets/icons/summary/tasks-done.svg" name={"Tasks done"} count={getTasks('Done', taskList).length} />
+            <TaskCounter iconUrl={getEnvironmentLink("/assets/icons/summary/in-progress.svg")} name={"Tasks in progress"} count={getTasks('In progress', taskList).length} />
+            <TaskCounter iconUrl={getEnvironmentLink("/assets/icons/summary/awaiting-feedback.svg")} name={"Awaiting feedback"} count={getTasks('Awaiting feedback', taskList).length} />
+            <TaskCounter iconUrl={getEnvironmentLink("/assets/icons/summary/tasks-done.svg")} name={"Tasks done"} count={getTasks('Done', taskList).length} />
         </div>
     </div>
 );
