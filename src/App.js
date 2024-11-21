@@ -26,7 +26,7 @@ import './output.css';
 function App() {
   return (
     <div className='h-screen w-screen'>
-      <BrowserRouter>
+      <BrowserRouter basename='/join-with-react'>
         <ContactsProvider>
           <TasksProvider>
             <Routes>
