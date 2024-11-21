@@ -1,4 +1,5 @@
-import {createContext, useReducer} from 'react';
+import { createContext, useReducer } from 'react';
+import { useNotifications } from '../hooks/useDataContext';
 
 const list = [
     { name: "Tatiana Wolf", mail: "wolf@gmail.com", phone: "+49 2222 22 222 2" },
@@ -42,30 +43,31 @@ export const ContactsContext = createContext(list);
 const contactsReducer = (state, action) => {
     switch (action.type) {
         case 'CHANGE_CONTACT_LIST':
-            return {...state, list: action.payload };
+            return { ...state, list: action.payload };
         case 'delete':
-            return {...state, list: state.list.filter((contact) => contact.mail !== action.payload)};
+            return { ...state, list: state.list.filter((contact) => contact.mail !== action.payload) };
         case 'edit':
             const contact = state.list.find((contact) => contact.mail === action.payload.mail)
-                 contact.name = action.payload.name;
-                 contact.mail = action.payload.mail;
-                 contact.phone = action.payload.phone;
-            return {...state};
+            contact.name = action.payload.name;
+            contact.mail = action.payload.mail;
+            contact.phone = action.payload.phone;
+            return { ...state };
         case 'add':
-            return {...state, list: [...state.list, action.payload]};
+            return { ...state, list: [...state.list, action.payload] };
         default:
             return state;
 
     }
 }
 
-export const ContactsProvider = ({children}) => {
+export const ContactsProvider = ({ children }) => {
+    const { pushNotificationInfo } = useNotifications();
     const [state, dispatch] = useReducer(contactsReducer, {
         list
     })
 
     const changeContactList = (list) => {
-        dispatch({type: 'CHANGE_CONTACT_LIST', payload: list})
+        dispatch({ type: 'CHANGE_CONTACT_LIST', payload: list })
     }
 
     const deleteContact = (contactMail) => {
@@ -73,15 +75,17 @@ export const ContactsProvider = ({children}) => {
     };
 
     const editContact = (contact) => {
-        dispatch({ type: 'edit', payload: contact})
+        dispatch({ type: 'edit', payload: contact });
+        pushNotificationInfo("Contact deleted.");
     }
 
     const addContact = (contact) => {
-        dispatch({ type: 'add', payload: contact})
+        dispatch({ type: 'add', payload: contact });
+        pushNotificationInfo("Contact successfully added.");
     }
 
     return (
-        <ContactsContext.Provider value={{ ...state, changeContactList, deleteContact, editContact, addContact}}>
+        <ContactsContext.Provider value={{ ...state, changeContactList, deleteContact, editContact, addContact }}>
             {children}
         </ContactsContext.Provider>
     )

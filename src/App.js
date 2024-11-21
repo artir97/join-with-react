@@ -27,10 +27,10 @@ import { NotificationProvider } from './contexts/NotificationContext';
 function App() {
   return (
     <div className='h-screen w-screen'>
-      <BrowserRouter basename='/join-with-react'>
-        <ContactsProvider>
-          <TasksProvider>
-            <NotificationProvider>
+      <NotificationProvider>
+        <BrowserRouter basename='/join-with-react'>
+          <ContactsProvider>
+            <TasksProvider>
               <Routes>
                 {/** Default route in the next line */}
                 <Route index element={<Navigate to="/login" replace />} />
@@ -56,11 +56,12 @@ function App() {
                   <Route path='/ext/privacy' element={<PrivacyPolicy />} />
                 </Route>
               </Routes>
-            </NotificationProvider>
-          </TasksProvider>
-        </ContactsProvider>
-      </BrowserRouter>
-    </div>
+
+            </TasksProvider>
+          </ContactsProvider>
+        </BrowserRouter>
+      </NotificationProvider>
+    </div >
   );
 }
 

@@ -20,7 +20,7 @@ export const NotificationProvider = ({ children }) => {
             setData(data => {
                 return {
                     ...data,
-                    // This would have worked if there is no way to close the notification early.
+                    // This would have worked if there was no way to close the notification early.
                     // notifications: data.notifications.slice(1)
                     notifications: data.notifications.filter(n => n.id !== notification.id)
                 }
@@ -36,6 +36,10 @@ export const NotificationProvider = ({ children }) => {
         pushNotification({ type: "error", message });
     }
 
+    const pushNotificationSuccess = (message) => {
+        pushNotification({ type: "success", message });
+    }
+
     const closeNotification = (id) => {
         setData(data => {
             return {
@@ -48,7 +52,7 @@ export const NotificationProvider = ({ children }) => {
     }
 
     return (
-        <NotificationContext.Provider value={{ ...data, pushNotificationInfo, pushNotificationError, closeNotification }}>
+        <NotificationContext.Provider value={{ ...data, pushNotificationInfo, pushNotificationError, pushNotificationSuccess, closeNotification }}>
             {children}
         </NotificationContext.Provider>
     )

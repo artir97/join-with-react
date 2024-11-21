@@ -5,6 +5,7 @@ const getColorClassFromType = (type) => {
     switch (type) {
         case "info": return "bg-blue-500";
         case "error": return "bg-red-500";
+        case "success": return "bg-green-500";
         default: throw new Error(`Notification: Type does not have a color class associated: ${type}`);
     }
 }
@@ -12,6 +13,7 @@ const getColorClassFromType = (type) => {
 /**
  * 
  * @param {Object} param0
+ * @param {Number} id - Notification ID, used to delete on click if needed.
  * @param {string} type - [`"info"`, `"error"`] - Type of notification. Effectively changes the color of the push notification. 
  * @param {string} message - Content of the notification
  */
