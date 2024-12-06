@@ -5,7 +5,7 @@ export const backOrDefault = (defaultPath) => {
 }
 
 const isLocal = window.location.hostname === 'localhost';
-const basePath = isLocal ? '/join-with-react/' : './';
+const basePath = isLocal ? '/join-with-react/' : './join-with-react/';
 
 console.log(window.location.hostname);
 
