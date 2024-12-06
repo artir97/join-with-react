@@ -61,13 +61,31 @@ export const ContactsProvider = ({children}) => {
         dispatch({type: 'CHANGE_CONTACT_LIST', payload: list})
     }
 
-    const deleteContact = (contactMail) => {
-        dispatch({ type: 'delete', payload: contactMail }); // Pass the mail of the contact to delete
+    const deleteContact = async (contactMail) => {
+        try {
+            const doc = await projectFirestore.collection('contacts').where('mail', '==', contactMail).get();
+            if (!doc.empty) {
+                await doc.docs[0].ref.delete();
+                dispatch({ type: 'delete', payload: contactMail });
+            }
+        } catch (err) {
+            console.error('Failed to delete contact:', err);
+        }
     };
 
-    const editContact = (contact) => {
-        dispatch({ type: 'edit', payload: contact})
-    }
+
+    const editContact = async (contact) => {
+        try {
+            const doc = await projectFirestore.collection('contacts').where('mail', '==', contact.mail).get();
+            if (!doc.empty) {
+                await doc.docs[0].ref.update(contact);
+                dispatch({ type: 'edit', payload: contact });
+            }
+        } catch (err) {
+            console.error('Failed to edit contact:', err);
+        }
+    };
+
 
     const addContact = async (contact) => {
         try {
