@@ -34,7 +34,6 @@ function App() {
               <Routes>
                 {/** Default route in the next line */}
                 <Route index element={<Navigate to="/login" replace />} />
-
                 <Route path='/' element={<BaseWrapper />}>
                   <Route path="/summary" element={<Summary />} />
                   <Route path="/tasks" element={

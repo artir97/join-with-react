@@ -12,7 +12,7 @@ const ContactLetterList = ({ letter, list, setContactMail = () => {}}) => {
                 {list.sort((a, b) => a.name > b.name)
                     .map((info, i) => <div key={i} className="py-4">
                         <MobileSwitch mobileComponent={
-                            <Link to={`/contact-info/${info.mail}`} className="flex space-x-4">
+                            <Link to={`/contact-info/${info.id}`} className="flex space-x-4">
                                 <NameIcon name={info.name} />
                                 <div className="flex flex-col">
                                     <p>{info.name}</p>
