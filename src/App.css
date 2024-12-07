@@ -142,7 +142,6 @@ footer div {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .container-add-task .add-task-form .no-icon-input,
