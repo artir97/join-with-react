@@ -150,7 +150,7 @@ const BaseTaskOverlay = (
 
     return (
         <>
-            <div className="container-add-task w-full">
+            <div className="container-add-task max-lg:w-full">
                 <form onSubmit={handleAddTaskSubmit} className="add-task-form">
                     <input
                         required
@@ -191,11 +191,11 @@ const BaseTaskOverlay = (
                     </div>
 
                     <label><b>Assigned to</b> (optional)</label>
-                    <div className="w-full h-12">
+                    <div className="h-12">
                         {
                             !selectContactsIsOpen &&
                             <div className="border-b border-gray-300 w-full flex justify-between items-center p-2">
-                                <div onClick={handleClickSelectContactsDropDown}>Select contacts to assign</div>
+                                <div onClick={handleClickSelectContactsDropDown} className="w-full">Select contacts to assign</div>
                                 <ReactSVG src={getEnvironmentLink("assets/icons/forms/arrow-drop-down.svg")}
                                           className="add-task-icon"
                                           onClick={handleClickSelectContactsDropDown} />
@@ -203,7 +203,7 @@ const BaseTaskOverlay = (
                         }
                         {
                             selectContactsIsOpen && <>
-                                <UnderlineIconInput
+                                <UnderlineIconInput large
                                     value={searchContact}
                                     onChange={(e) => setSearchContact(e.target.value)}
                                     placeholder="Enter a name..."
@@ -236,7 +236,7 @@ const BaseTaskOverlay = (
                     {selectTaskIsOpen && <SelectTaskDropDown selectTask={selectTask} className="p-2" />}
 
                     <label><b>Subtasks</b> (optional)</label>
-                    <UnderlineIconInput
+                    <UnderlineIconInput large
                         value={subtask} onChange={(e) => setSubtask(e.target.value)}
                         placeholder="Add new subtask"
                         icon={<ReactSVG onClick={() => addSubtask(subtask)}
