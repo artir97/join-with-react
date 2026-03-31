@@ -50,7 +50,7 @@ const Contacts = () => {
                         <ButtonIcon
                             imageUrl={getEnvironmentLink("assets/icons/contacts/add-contact.svg")}
                             name={"Add new contact"}
-                            className="sticky px-2 py-1 rounded bg-blue-500 text-white self-center"
+                            className="sticky px-2 py-1 rounded-sm bg-blue-500 text-white self-center"
                             side="right"
                             onClick={() => setShowOverlay(true)} />
                     } />

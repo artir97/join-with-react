@@ -19,7 +19,7 @@ const LogIn = () => {
 
     const SignUpInfo = () => <div className="flex items-center space-x-4">
         <p>Not a Join user?</p>
-        <Link to="/signup" className="px-2 py-1 bg-blue-500 text-white rounded">Sign up</Link>
+        <Link to="/signup" className="px-2 py-1 bg-blue-500 text-white rounded-sm">Sign up</Link>
     </div>
 
     return (
@@ -55,8 +55,8 @@ const LogIn = () => {
                         </div>
                     </form>
                     <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 flex-col lg:flex-row">
-                        <button className="bg-blue-500 px-3 py-1 text-white rounded">Log in</button>
-                        <Link to="/summary" className="text-gray-500 px-3 py-1 border-gray-500 border rounded">Guest log in</Link>
+                        <button className="bg-blue-500 px-3 py-1 text-white rounded-sm">Log in</button>
+                        <Link to="/summary" className="text-gray-500 px-3 py-1 border-gray-500 border rounded-sm">Guest log in</Link>
                     </div>
                 </div>
                 <MobileSwitch mobileComponent={<SignUpInfo />} />

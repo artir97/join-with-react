@@ -69,7 +69,7 @@ const SignUp = () => {
                         <p className="text-sm">I accept the Privacy Policy</p>
                     </div>
                     <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 flex-col lg:flex-row">
-                        <button className="bg-blue-500 px-3 py-1 text-white rounded">Sign up</button>
+                        <button className="bg-blue-500 px-3 py-1 text-white rounded-sm">Sign up</button>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ const UnderlineIconInput = ({ value, large = false, onChange = () => {}, require
             className="font-light"
             containerClassName={`w-full ${large ? "" : "lg:w-3/4"} border-b p-1`}
             onFocusContainerClassName="border-blue-500"
-            onFocusClassName="border-0 outline-none"
+            onFocusClassName="border-0 outline-hidden"
             icon={icon}
             iconUrl={iconUrl}
         />

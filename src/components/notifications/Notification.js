@@ -21,7 +21,7 @@ const Notification = ({ id, type = "info", message = "" }) => {
     const { closeNotification } = useNotifications();
 
     return (
-        <div className={`flex items-center space-x-2 px-2 py-1 rounded ${getColorClassFromType(type)} text-white duration-300 ease-in-out`}>
+        <div className={`flex items-center space-x-2 px-2 py-1 rounded-sm ${getColorClassFromType(type)} text-white duration-300 ease-in-out`}>
             <p>{message}</p>
             <img className="size-4" src={getEnvironmentLink("assets/icons/forms/close-white.svg")}
                 alt="Close icon"

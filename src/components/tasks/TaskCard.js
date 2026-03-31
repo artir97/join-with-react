@@ -8,13 +8,13 @@ const TaskCard = ({ category, name, description = "", subtasks = [], assignees, 
     const progress = subtasks.filter(s => s.done).length / subtasks.length;
 
     return (
-        <div className="space-y-4 task-card shadow snap-start" onClick={onClick}>
+        <div className="space-y-4 task-card shadow-sm snap-start" onClick={onClick}>
             {/** Category */}
             <CategoryIcon name={category} className="self-start" />
             {/** Task color thing */}
             <div>
                 <p className="text-blue-500 font-semibold">{name}</p>
-                <p className="text-gray-400 font-light break-words text-ellipsis line-clamp-2">{description}</p>
+                <p className="text-gray-400 font-light wrap-break-word text-ellipsis line-clamp-2">{description}</p>
             </div>
             {/** Subtask progress gauge */}{/** Subtask text */}
             {subtasks.length > 0 &&

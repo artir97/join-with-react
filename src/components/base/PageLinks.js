@@ -36,7 +36,7 @@ const PageLinks = () => {
         <>
             {links.map(l => (
                 <Link key={l.path} to={l.path}>
-                    <div className={`${location.pathname === l.path && "lg:bg-blue-200"} lg:flex lg:space-x-2 lg:p-2 rounded`}>
+                    <div className={`${location.pathname === l.path && "lg:bg-blue-200"} lg:flex lg:space-x-2 lg:p-2 rounded-sm`}>
                         <ReactSVG src={l.iconUrl} beforeInjection={svg => handleColorInjection(svg, '#3b82f6',  () => location.pathname === l.path && isMobile())} />
                         <span className={isMobile && location.pathname === l.path ? "max-lg:text-blue-500" : ""}>{l.name}</span>
                     </div>

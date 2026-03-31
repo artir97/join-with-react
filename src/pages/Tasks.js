@@ -110,12 +110,12 @@ const Tasks = () => {
                     {/** Search bar */}
                     <div className="flex space-x-4 items-center">
                         <IconInput
-                            containerClassName="border border-gray-500 rounded-lg" className="outline-none px-4"
+                            containerClassName="border border-gray-500 rounded-lg" className="outline-hidden px-4"
                             iconUrl={getEnvironmentLink("assets/icons/forms/search.svg")}
                             placeholder="Find task..."
                             onChange={e => setSearch(e.target.value)} />
                         <MobileSwitch desktopComponent={
-                            <Link to="/addTask" className="px-2 py-1 rounded bg-blue-500 text-white flex space-x-2 items-center">
+                            <Link to="/addTask" className="px-2 py-1 rounded-sm bg-blue-500 text-white flex space-x-2 items-center">
                                 <span>Add task</span>
                                 <ReactSVG src={getEnvironmentLink("assets/icons/forms/plus.svg")}
                                     beforeInjection={svg => handleColorInjection(svg, "white")} />

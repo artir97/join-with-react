@@ -63,14 +63,14 @@ const BaseContactOverlay = ({ onSubmit, onExit, title, flavorText, isEditing, na
                     <UnderlineIconInput required value={inputPhone} iconUrl={getEnvironmentLink("assets/icons/forms/phone.svg")} placeholder="Phone number" onChange={e => setPhone(e.target.value)} />
                     {isEditing
                         ? <div className='flex space-x-4 mt-8'>
-                            <button className='rounded bg-white p-2 mt-4' onClick={handleDelete}>Delete</button>
-                            <ButtonIcon className='rounded flex space-x-6 bg-blue-500 text-white p-2 mt-4'
+                            <button className='rounded-sm bg-white p-2 mt-4' onClick={handleDelete}>Delete</button>
+                            <ButtonIcon className='rounded-sm flex space-x-6 bg-blue-500 text-white p-2 mt-4'
                                 type="submit"
                                 name="Save"
                                 imageUrl={getEnvironmentLink("assets/icons/forms/check.svg")}
                                 side='right' />
                         </div>
-                        : <ButtonIcon className='rounded flex space-x-2 bg-blue-500 text-white p-2 mt-8'
+                        : <ButtonIcon className='rounded-sm flex space-x-2 bg-blue-500 text-white p-2 mt-8'
                             name={"Create contact"}
                             type="submit"
                             imageUrl={getEnvironmentLink("assets/icons/forms/check.svg")}
