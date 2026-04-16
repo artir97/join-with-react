@@ -66,7 +66,7 @@ const SignUp = () => {
                     <div onClick={() => setRemember(b => !b)}
                         className="flex space-x-4 w-full">
                         <CheckboxIcon defaultValue={remember} />
-                        <p className="text-sm">I accept the Privacy Policy</p>
+                        <p className="text-sm">I accept the <Link to={`/ext/privacy`} className="underline text-blue-800">Privacy Policy</Link></p>
                     </div>
                     <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 flex-col lg:flex-row">
                         <button className="bg-blue-500 px-3 py-1 text-white rounded-sm">Sign up</button>
