@@ -16,7 +16,7 @@ import EditTaskOverlay from "../components/tasks/EditTaskOverlay";
 import { getEnvironmentLink } from "../tools/navigation";
 
 const Tasks = () => {
-    const { editTask, deleteTask,  taskList } = useTasks();
+    const { editTask, deleteTask, taskList } = useTasks();
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
     const [overlayTask, setOverlayTask] = useState(null);
@@ -105,8 +105,8 @@ const Tasks = () => {
 
     return (
         <>
-            <div className="page-content overflow-y-scroll pt-4">
-                <div className="flex flex-col space-y-4">
+            <div className="page-content overflow-y-scroll">
+                <div className="flex flex-col space-y-4 mt-4">
                     {/** Search bar */}
                     <div className="flex space-x-4 items-center">
                         <IconInput

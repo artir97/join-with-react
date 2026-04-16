@@ -44,8 +44,8 @@ const Contacts = () => {
 
     return (
         <>
-            <div className="page-content pt-4 flex">
-                <div className="h-full max-lg:w-full flex flex-col content-main-desktop">
+            <div className="page-content flex">
+                <div className="h-full max-lg:w-full flex flex-col content-main-desktop pt-4">
                     <MobileSwitch desktopComponent={
                         <ButtonIcon
                             imageUrl={getEnvironmentLink("assets/icons/contacts/add-contact.svg")}

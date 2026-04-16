@@ -5,7 +5,7 @@ body {
 /* Page */
 @media (min-width: 1024px) {
     .lg\:full-page-fit {
-        height: calc(100% - 80px); /* 80 for the navbar */
+        height: calc(100vh - 80px); /* 80 for the navbar */
     }
 }
 
