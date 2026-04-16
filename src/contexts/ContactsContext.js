@@ -1,6 +1,7 @@
 import { createContext, useReducer, useEffect, useState } from 'react';
 import { projectFirestore } from "../firebase/config";
 import { useNotifications } from '../hooks/useDataContext';
+import { getDocs, collection, query, where, addDoc } from 'firebase/firestore';
 
 export const ContactsContext = createContext({
     list: []
@@ -41,23 +42,23 @@ export const ContactsProvider = ({ children }) => {
     useEffect(() => {
         setIsPending(true);
 
-        projectFirestore.collection('contacts').get().then((snapshot) => {
-            if (snapshot.empty) {
-                setError('no contacts to load');
+        getDocs(collection(projectFirestore, "contacts")).then((snapshot) => {
+                if (snapshot.empty) {
+                    setError('no contacts to load');
+                    setIsPending(false);
+                } else {
+                    let results = [];
+                    snapshot.docs.forEach((doc) => {
+                        results.push({ id: doc.id, ...doc.data() });
+                    });
+                    dispatch({ type: 'CHANGE_CONTACT_LIST', payload: results });
+                    setIsPending(false);
+                }
+            }).catch(err => {
+                setError(err);
                 setIsPending(false);
-            } else {
-                let results = [];
-                snapshot.docs.forEach((doc) => {
-                    results.push({ id: doc.id, ...doc.data() });
-                });
-                dispatch({ type: 'CHANGE_CONTACT_LIST', payload: results });
-                setIsPending(false);
-            }
-        }).catch(err => {
-            setError(err);
-            setIsPending(false);
-            pushNotificationError(`Failed to load contacts: ${err}`);
-        });
+                pushNotificationError(`Failed to load contacts: ${err}`);
+            });
     }, [pushNotificationError]);
 
 
@@ -67,9 +68,12 @@ export const ContactsProvider = ({ children }) => {
 
     const deleteContact = async (contactMail) => {
         try {
-            const doc = await projectFirestore.collection('contacts').where('mail', '==', contactMail).get();
-            if (!doc.empty) {
-                await doc.docs[0].ref.delete();
+            const q = query(collection(projectFirestore, "contacts"), where('mail', '==', contactMail));
+
+            const docs = await getDocs(q);
+
+            if (!docs.empty) {
+                await docs.docs[0].ref.delete();
                 dispatch({ type: 'delete', payload: contactMail });
             }
         } catch (err) {
@@ -81,9 +85,10 @@ export const ContactsProvider = ({ children }) => {
 
     const editContact = async (contact) => {
         try {
-            const doc = await projectFirestore.collection('contacts').where('mail', '==', contact.mail).get();
-            if (!doc.empty) {
-                await doc.docs[0].ref.update(contact);
+            const q = query(collection(projectFirestore, "contacts"), where('mail', '==', contact.mail));
+            const docs = await getDocs(q);
+            if (!docs.empty) {
+                await docs.docs[0].ref.update(contact);
                 dispatch({ type: 'edit', payload: contact });
                 pushNotificationSuccess(`Successfully edited: ${contact.name}`);
             }
@@ -96,7 +101,7 @@ export const ContactsProvider = ({ children }) => {
 
     const addContact = async (contact) => {
         try {
-            await projectFirestore.collection('contacts').add(contact);
+            await addDoc(collection(projectFirestore, "contacts"), contact);
             dispatch({ type: 'add', payload: contact });
             pushNotificationSuccess(`Successfully added: ${contact.name}`);
         } catch (err) {

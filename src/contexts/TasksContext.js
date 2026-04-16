@@ -1,6 +1,7 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 import { projectFirestore } from "../firebase/config";
 import { useNotifications } from "../hooks/useDataContext";
+import { getDocs, collection, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 export const TasksContext = createContext({ taskList: [] });
 
@@ -36,8 +37,7 @@ export const TasksProvider = ({ children }) => {
     // Fetch tasks from Firestore on mount
     useEffect(() => {
         setIsPending(true);
-        projectFirestore.collection("tasks").get()
-            .then(snapshot => {
+        getDocs(collection(projectFirestore, "tasks")).then(snapshot => {
                 if (snapshot.empty) {
                     setError("No tasks found.");
                     setIsPending(false);
@@ -58,7 +58,7 @@ export const TasksProvider = ({ children }) => {
 
     const addTask = async (task) => {
         try {
-            const docRef = await projectFirestore.collection("tasks").add(task);
+            const docRef = await addDoc(collection(projectFirestore, "tasks"), task);
             dispatch({ type: 'ADD_TASK', payload: { id: docRef.id, ...task } });
             pushNotificationSuccess("Task successfully added.");
         } catch (err) {
@@ -69,7 +69,7 @@ export const TasksProvider = ({ children }) => {
 
     const editTask = async (task) => {
         try {
-            await projectFirestore.collection("tasks").doc(task.id).update(task);
+            await updateDoc(doc(projectFirestore, "tasks", task.id), task);
             dispatch({ type: 'EDIT_TASK', payload: task });
             pushNotificationSuccess("Task successfully edited.");
         } catch (err) {
@@ -80,7 +80,7 @@ export const TasksProvider = ({ children }) => {
 
     const deleteTask = async (taskId) => {
         try {
-            await projectFirestore.collection("tasks").doc(taskId).delete();
+            await deleteDoc(doc(projectFirestore, "tasks", taskId));
             dispatch({ type: 'DELETE_TASK', payload: taskId });
             pushNotificationSuccess("Task deleted.");
         } catch (err) {
