@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## To-do list
+
+[ ] Authentication
+- [ ] Display user name
+- [ ] Display own contacts / tasks
+
+[ ] Realtime changes
+- [ ] Add / Delete / Edit changes reflected on other tabs / windows
+
+[ ] Demo
+- [ ] Demo account on guest
+- [ ] Function: Reset database every day if possible
