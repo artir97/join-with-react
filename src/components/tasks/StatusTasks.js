@@ -39,7 +39,7 @@ const StatusTasks = ({ status, tasks, updateTask, showOverlay }) => {
                 ))}
                 {tasks.length === 0 && !isDragging && (
                     <div className="border-dashed border w-full border-gray-300 bg-gray-100 rounded-lg text-center py-3 min-w-64">
-                        <p className="text-gray-400">No task {status}</p>
+                        <p className="text-gray-400">No task {status.toLowerCase()}</p>
                     </div>
                 )}
                 {isDragging && <TaskDrop onItemDropped={updateTask} />}
