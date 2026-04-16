@@ -28,7 +28,7 @@ const tasksReducer = (state, action) => {
 };
 
 export const TasksProvider = ({ children }) => {
-    const { pushNotificationInfo } = useNotifications();
+    const { pushNotificationInfo, pushNotificationSuccess, pushNotificationError } = useNotifications();
     const [state, dispatch] = useReducer(tasksReducer, { taskList: [] });
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(null);
@@ -60,9 +60,10 @@ export const TasksProvider = ({ children }) => {
         try {
             const docRef = await projectFirestore.collection("tasks").add(task);
             dispatch({ type: 'ADD_TASK', payload: { id: docRef.id, ...task } });
-            pushNotificationInfo("Task successfully added.");
+            pushNotificationSuccess("Task successfully added.");
         } catch (err) {
             console.error("Failed to add task:", err);
+            pushNotificationError(`Failed to add task: ${err}`);
         }
     };
 
@@ -70,9 +71,10 @@ export const TasksProvider = ({ children }) => {
         try {
             await projectFirestore.collection("tasks").doc(task.id).update(task);
             dispatch({ type: 'EDIT_TASK', payload: task });
-            pushNotificationInfo("Task successfully edited.");
+            pushNotificationSuccess("Task successfully edited.");
         } catch (err) {
             console.error("Failed to edit task:", err);
+            pushNotificationError(`Failed to edit task: ${err}`);
         }
     };
 
@@ -80,9 +82,10 @@ export const TasksProvider = ({ children }) => {
         try {
             await projectFirestore.collection("tasks").doc(taskId).delete();
             dispatch({ type: 'DELETE_TASK', payload: taskId });
-            pushNotificationInfo("Task deleted.");
+            pushNotificationSuccess("Task deleted.");
         } catch (err) {
             console.error("Failed to delete task:", err);
+            pushNotificationError(`Failed to delete task: ${err}`);
         }
     };
 

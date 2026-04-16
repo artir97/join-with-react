@@ -1,20 +1,23 @@
-import {createContext, useReducer, useEffect, useState} from 'react';
+import { createContext, useReducer, useEffect, useState } from 'react';
 import { projectFirestore } from "../firebase/config";
+import { useNotifications } from '../hooks/useDataContext';
 
-export const ContactsContext = createContext({list: []});
+export const ContactsContext = createContext({
+    list: []
+});
 
 const contactsReducer = (state, action) => {
     switch (action.type) {
         case 'CHANGE_CONTACT_LIST':
-            return {...state, list: action.payload };
+            return { ...state, list: action.payload };
         case 'delete':
-            return {...state, list: state.list.filter((contact) => contact.mail !== action.payload)};
+            return { ...state, list: state.list.filter((contact) => contact.mail !== action.payload) };
         case 'edit':
             const contact = state.list.find((contact) => contact.mail === action.payload.mail)
-                 contact.name = action.payload.name;
-                 contact.mail = action.payload.mail;
-                 contact.phone = action.payload.phone;
-            return {...state};
+            contact.name = action.payload.name;
+            contact.mail = action.payload.mail;
+            contact.phone = action.payload.phone;
+            return { ...state };
         case 'add':
             if (state.list.some(contact => contact.mail === action.payload.mail)) {
                 return state;
@@ -26,10 +29,10 @@ const contactsReducer = (state, action) => {
     }
 }
 
-export const ContactsProvider = ({children}) => {
+export const ContactsProvider = ({ children }) => {
+    const { pushNotificationSuccess, pushNotificationError } = useNotifications();
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(false);
-
 
     const [state, dispatch] = useReducer(contactsReducer, {
         list: []
@@ -40,8 +43,8 @@ export const ContactsProvider = ({children}) => {
 
         projectFirestore.collection('contacts').get().then((snapshot) => {
             if (snapshot.empty) {
-               setError('no contacts to load');
-               setIsPending(false);
+                setError('no contacts to load');
+                setIsPending(false);
             } else {
                 let results = [];
                 snapshot.docs.forEach((doc) => {
@@ -53,12 +56,13 @@ export const ContactsProvider = ({children}) => {
         }).catch(err => {
             setError(err);
             setIsPending(false);
+            pushNotificationError(`Failed to load contacts: ${err}`);
         });
-    }, []);
+    }, [pushNotificationError]);
 
 
     const changeContactList = (list) => {
-        dispatch({type: 'CHANGE_CONTACT_LIST', payload: list})
+        dispatch({ type: 'CHANGE_CONTACT_LIST', payload: list })
     }
 
     const deleteContact = async (contactMail) => {
@@ -70,6 +74,7 @@ export const ContactsProvider = ({children}) => {
             }
         } catch (err) {
             console.error('Failed to delete contact:', err);
+            pushNotificationError(`Failed to delete contact: ${err}`);
         }
     };
 
@@ -80,9 +85,11 @@ export const ContactsProvider = ({children}) => {
             if (!doc.empty) {
                 await doc.docs[0].ref.update(contact);
                 dispatch({ type: 'edit', payload: contact });
+                pushNotificationSuccess(`Successfully edited: ${contact.name}`);
             }
         } catch (err) {
             console.error('Failed to edit contact:', err);
+            pushNotificationError(`Failed to edit contact: ${err}`);
         }
     };
 
@@ -91,14 +98,16 @@ export const ContactsProvider = ({children}) => {
         try {
             await projectFirestore.collection('contacts').add(contact);
             dispatch({ type: 'add', payload: contact });
+            pushNotificationSuccess(`Successfully added: ${contact.name}`);
         } catch (err) {
             console.error('Failed to add contact:', err);
+            pushNotificationError(`Failed to add contact: ${err}`);
         }
     };
 
 
     return (
-        <ContactsContext.Provider value={{ ...state, changeContactList, deleteContact, editContact, addContact}}>
+        <ContactsContext.Provider value={{ ...state, changeContactList, deleteContact, editContact, addContact }}>
             {children}
         </ContactsContext.Provider>
     )
