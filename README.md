@@ -81,3 +81,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 [ ] Demo
 - [ ] Demo account on guest
 - [ ] Function: Reset database every day if possible
+
+[ ] Cookies
+- [ ] Save login info if checked on login
