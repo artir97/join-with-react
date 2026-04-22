@@ -1,12 +1,12 @@
 import IconInput from "./IconInput"
 
-const UnderlineIconInput = ({ value, type, large = false, onChange = () => {}, required = false, placeholder = "", icon = null, iconUrl = "" }) => {
+const UnderlineIconInput = ({ name, type, large = false, required = false, placeholder = "", icon = null, iconUrl = "" }) => {
     return (
         <IconInput
-            value={value} onChange={onChange}
             required={required}
             placeholder={placeholder}
             type={type}
+            name={name}
             className="font-light"
             containerClassName={`w-full ${large ? "" : "lg:w-3/4"} border-b p-1`}
             onFocusContainerClassName="border-blue-500"

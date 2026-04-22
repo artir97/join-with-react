@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-const IconInput = ({ className = "", containerClassName = "", onFocusClassName = "", onFocusContainerClassName = "", value, type, placeholder = '', required = false, onChange = () => {}, iconUrl = "", icon = null }) => {
+const IconInput = ({ className = "", containerClassName = "", onFocusClassName = "", onFocusContainerClassName = "", name, type, placeholder = '', required = false, iconUrl = "", icon = null }) => {
     const [isFocus, setFocus] = useState(false);
 
     return (
         <div className={`${containerClassName} flex items-center ${isFocus ? onFocusContainerClassName : ""}`}>
             <input className={`${className} flex-1 ${isFocus ? onFocusClassName : ""}`}
-                value={value}
                 placeholder={placeholder}
-                onChange={onChange}
                 type={type}
+                name={name}
                 onFocus={() => setFocus(true)}
                 onBlur={() => setFocus(false)}
                 required={required} />

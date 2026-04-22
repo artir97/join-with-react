@@ -10,15 +10,60 @@ import UnderlineIconInput from "../components/base/UnderlineIconInput";
 
 import { handleColorInjection } from "../tools/svg";
 import { getEnvironmentLink } from "../tools/navigation";
+import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
+import { useNotifications } from "../hooks/useDataContext";
 
 const SignUp = () => {
-    const [name, setName] = useState("");
-    const [mail, setMail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [remember, setRemember] = useState(false);
+    const { pushNotificationError, pushNotificationInfo } = useNotifications();
 
     const { isMobile } = useViewport();
+
+    /**
+     * 
+     * @param {FormData} formData 
+     */
+    function handleSignUp(formData) {
+        const email = formData.get("email");
+        const password = formData.get("password");
+        const confirmPassword = formData.get("confirm-password");
+
+        // User input tests
+        if (password !== confirmPassword) {
+            pushNotificationError("The two passwords are not identical.");
+            return;
+        }
+        if (password.length < 6) {
+            pushNotificationError("Your password should have more than 6 characters.");
+            return;
+        }
+
+        // Signing up
+        console.log(`Attempting to sign up: ${email}.`);
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed up 
+                const user = userCredential.user;
+                const displayName = formData.get("name")
+
+                console.log("User successfully created.");
+
+                updateProfile(user, {
+                    displayName
+                }).then(() => {
+                    console.log("User name updated.");
+                    pushNotificationInfo(`Welcome, ${displayName}.`);
+                }).catch((error) => {
+                    console.error(`${error.code}: ${error.message}`);
+                    pushNotificationError(`${error.code}: ${error.message}`);
+                })
+            })
+            .catch((error) => {
+                console.error(`${error.code}: ${error.message}`);
+                pushNotificationError(`${error.code}: ${error.message}`);
+            });
+    }
 
     return (
         <div className="w-full h-full bg-blue-500">
@@ -34,46 +79,46 @@ const SignUp = () => {
                         </Link>
                         <h1 className="font-bold text-4xl border-b-2 border-blue-500">Sign up</h1>
                     </div>
-                    <form className="flex flex-col space-y-2 items-center">
+                    <form className="flex flex-col space-y-2 items-center" action={handleSignUp}>
                         <UnderlineIconInput
-                            value={name} required large
+                            required large
+                            name="name"
                             placeholder="Name"
-                            onChange={(e) => setName(e.target.value)}
                             icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/person.svg")} />}
                         />
                         <UnderlineIconInput
-                            value={mail} required large
+                            required large
                             type="email"
+                            name="email"
                             placeholder="Mail address"
-                            onChange={(e) => setMail(e.target.value)}
                             icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/mail.svg")} />}
                         />
                         <UnderlineIconInput
-                            value={password} required large
+                            required large
                             type="password"
+                            name="password"
                             placeholder="Password"
-                            onChange={(e) => setPassword(e.target.value)}
                             icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/lock.svg")} />}
                         />
                         <UnderlineIconInput
-                            value={confirmPassword} required large
+                            required large
                             type="password"
+                            name="confirm-password"
                             placeholder="Confirm password"
-                            onChange={(e) => setConfirmPassword(e.target.value)}
                             icon={<ReactSVG src={getEnvironmentLink("assets/icons/forms/lock.svg")} />}
                         />
+                        <div onClick={() => setRemember(b => !b)}
+                            className="flex space-x-4 w-full">
+                            <CheckboxIcon defaultValue={remember} />
+                            <p className="text-sm">I accept the <Link to={`/ext/privacy`} className="underline text-blue-800">Privacy Policy</Link></p>
+                        </div>
+                        <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 flex-col lg:flex-row">
+                            <button type="submit" className="bg-blue-500 px-3 py-1 text-white rounded-sm">Sign up</button>
+                        </div>
                     </form>
-                    <div onClick={() => setRemember(b => !b)}
-                        className="flex space-x-4 w-full">
-                        <CheckboxIcon defaultValue={remember} />
-                        <p className="text-sm">I accept the <Link to={`/ext/privacy`} className="underline text-blue-800">Privacy Policy</Link></p>
-                    </div>
-                    <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 flex-col lg:flex-row">
-                        <button className="bg-blue-500 px-3 py-1 text-white rounded-sm">Sign up</button>
-                    </div>
                 </div>
             </div>
-            <LegalAndPrivacy external className="text-white"/>
+            <LegalAndPrivacy external className="text-white" />
         </div>
     );
 }
