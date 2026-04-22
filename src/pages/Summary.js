@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import MobileSwitch from "../components/base/MobileSwitch";
 import BigTaskCounter from "../components/summary/BigTaskCounter";
 import TaskCounter from "../components/summary/TaskCounter";
@@ -75,12 +76,14 @@ const DesktopSummary = ({ name = "", taskList }) => (
 
 const Summary = () => {
     const { taskList } = useTasks();
+    const auth = getAuth();
+    const user = auth.currentUser;
 
     return (
         <div className="page-content flex items-center justify-center">
             <MobileSwitch
                 mobileComponent={<MobileSummary />}
-                desktopComponent={<DesktopSummary name="Artir Guri" taskList={taskList}/>} />
+                desktopComponent={<DesktopSummary name={user ? user.displayName : "Guest user"} taskList={taskList}/>} />
         </div>
     );
 }
