@@ -9,8 +9,8 @@ const getCategoryColor = (name) => {
 const CategoryIcon = ({ name, className }) => {
     return (
         <div
-            className={`rounded-md py-1 px-4 font-extralight text-white ${className}`}
-            style={{ backgroundColor: getCategoryColor(name) }}>
+            className={`rounded-md py-1 px-4 font-extralight text-white ${!name ? "min-h-8 min-w-20 h-8 w-20" : ""} ${className}`}
+            style={{ backgroundColor: name ? getCategoryColor(name) : "#99a1af"}}>
             {name}
         </div>
     );

@@ -1,7 +1,8 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 import { projectFirestore } from "../firebase/config";
 import { useNotifications } from "../hooks/useDataContext";
-import { getDocs, collection, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { getDocs, collection, addDoc, deleteDoc, doc, updateDoc, query, where } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 export const TasksContext = createContext({ taskList: [] });
 
@@ -37,19 +38,28 @@ export const TasksProvider = ({ children }) => {
     // Fetch tasks from Firestore on mount
     useEffect(() => {
         setIsPending(true);
-        getDocs(collection(projectFirestore, "tasks")).then(snapshot => {
-                if (snapshot.empty) {
-                    setError("No tasks found.");
-                    setIsPending(false);
-                } else {
-                    const tasks = snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        ...doc.data(),
-                    }));
-                    dispatch({ type: 'SET_TASK_LIST', payload: tasks });
-                    setIsPending(false);
-                }
-            })
+
+        const auth = getAuth();
+        const user = auth?.currentUser;
+
+        const q = (user
+            ? query(collection(projectFirestore, "tasks"), where("user", "==", user.email))
+            : query(collection(projectFirestore, "tasks"), where("demo", "==", true))
+        );
+
+        getDocs(q).then(snapshot => {
+            if (snapshot.empty) {
+                setError("No tasks found.");
+                setIsPending(false);
+            } else {
+                const tasks = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                dispatch({ type: 'SET_TASK_LIST', payload: tasks });
+                setIsPending(false);
+            }
+        })
             .catch(err => {
                 setError(err.message);
                 setIsPending(false);
@@ -58,7 +68,9 @@ export const TasksProvider = ({ children }) => {
 
     const addTask = async (task) => {
         try {
-            const docRef = await addDoc(collection(projectFirestore, "tasks"), task);
+            const auth = getAuth();
+            const user = auth?.currentUser;
+            const docRef = await addDoc(collection(projectFirestore, "tasks"), user ? { ...task, user: user.email } : { ...task, demo: true });
             dispatch({ type: 'ADD_TASK', payload: { id: docRef.id, ...task } });
             pushNotificationSuccess("Task successfully added.");
         } catch (err) {

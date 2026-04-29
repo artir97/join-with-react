@@ -17,3 +17,11 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 }
+
+.skeleton {
+  @apply animate-pulse rounded;
+}
+
+.skeleton-circle {
+  @apply animate-pulse rounded-full;
+}

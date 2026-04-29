@@ -8,8 +8,9 @@ import { Move } from "../ux/DropEffectValues";
 import TaskCard from "./TaskCard";
 import TaskDrop from "./TaskDrop";
 import { getEnvironmentLink } from "../../tools/navigation";
+import SkeletonTaskCard from "./SkeletonTaskCard";
 
-const StatusTasks = ({ status, tasks, updateTask, showOverlay }) => {
+const StatusTasks = ({ status, isPending, tasks, updateTask, showOverlay }) => {
     const { isDragging } = useDrag();
 
     return (
@@ -23,26 +24,29 @@ const StatusTasks = ({ status, tasks, updateTask, showOverlay }) => {
             </div>
 
             <div className="flex lg:flex-col w-full max-lg:overflow-x-scroll max-lg:snap-x lg:snap-y scroll-p-0 lg:space-y-4 max-lg:space-x-4 pb-4">
-                {tasks.length > 0 && tasks.map((t, i) => (
-                    <Drag key={i} dataItem={t} dropEffect={Move}>
-                        <TaskCard
-                            category={t.category}
-                            name={t.name}
-                            description={t.description}
-                            subtasks={t.subtasks}
-                            assignees={t.assignees}
-                            priority={t.priority}
-                            onClick={() => showOverlay(t)}
-                        />
-                    </Drag>
+                {isPending
+                    ? <SkeletonTaskCard />
+                    : (tasks.length > 0
+                        ? tasks.map((t, i) => (
+                            <Drag key={i} dataItem={t} dropEffect={Move}>
+                                <TaskCard
+                                    category={t.category}
+                                    name={t.name}
+                                    description={t.description}
+                                    subtasks={t.subtasks}
+                                    assignees={t.assignees}
+                                    priority={t.priority}
+                                    onClick={() => showOverlay(t)}
+                                />
+                            </Drag>
 
-                ))}
-                {tasks.length === 0 && !isDragging && (
-                    <div className="border-dashed border w-full border-gray-300 bg-gray-100 rounded-lg text-center py-3 min-w-64">
-                        <p className="text-gray-400">No task {status.toLowerCase()}</p>
-                    </div>
-                )}
-                {isDragging && <TaskDrop onItemDropped={updateTask} />}
+                        ))
+                        : (!isDragging
+                            ? <div className="border-dashed border w-full border-gray-300 bg-gray-100 rounded-lg text-center py-3 min-w-64">
+                                <p className="text-gray-400">No task {status.toLowerCase()}</p>
+                            </div>
+                            : <TaskDrop onItemDropped={updateTask} />
+                        ))}
             </div>
         </div>
     );

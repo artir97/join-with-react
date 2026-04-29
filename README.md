@@ -72,7 +72,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## To-do list
 
 [ ] Authentication
-- [ ] Display user name
+- [x] Display user name
 - [ ] Display own contacts / tasks
 
 [ ] Realtime changes
@@ -81,6 +81,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 [ ] Demo
 - [ ] Demo account on guest
 - [ ] Function: Reset database every day if possible
+
+[ ] Firebase DB
+- [ ] Subtask progression
+- [x] While loading: Skeletons
+    - [ ] Set animation
 
 [ ] Cookies
 - [ ] Save login info if checked on login

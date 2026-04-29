@@ -5,7 +5,7 @@ import { ReactSVG } from "react-svg";
 import { handleColorInjection } from "../tools/svg";
 import { getStatusList } from "../tools/status";
 
-import {useTasks} from "../hooks/useDataContext";
+import { useTasks } from "../hooks/useDataContext";
 
 import StatusTasks from "../components/tasks/StatusTasks";
 import IconInput from "../components/base/IconInput";
@@ -16,7 +16,7 @@ import EditTaskOverlay from "../components/tasks/EditTaskOverlay";
 import { getEnvironmentLink } from "../tools/navigation";
 
 const Tasks = () => {
-    const { editTask, deleteTask, taskList } = useTasks();
+    const { editTask, deleteTask, taskList, isPending } = useTasks();
     const [search, setSearch] = useState("");
     const [sortedTasks, setSortedTasks] = useState([]);
     const [overlayTask, setOverlayTask] = useState(null);
@@ -94,7 +94,7 @@ const Tasks = () => {
     }, [taskList, search]);
 
     const handleDragAndDrop = (task, newStatus) => {
-        task = {...task, status: newStatus};
+        task = { ...task, status: newStatus };
         editTask(task);
     }
 
@@ -124,13 +124,15 @@ const Tasks = () => {
 
                     {/** Sorted cards */}
                     <div className="flex flex-col space-y-4 lg:space-y-0 lg:space-x-6 lg:flex-row lg:overflow-x-scroll lg:scroll-p-5 lg:snap-x">
-                        {statusList.map((s, i) => <StatusTasks
-                            key={i}
-                            status={s}
-                            tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
-                            updateTask={(task) => handleDragAndDrop(task, s)}
-                            showOverlay={setOverlayTask}
-                        />)}
+                        {isPending
+                            ? statusList.map((s, i) => <StatusTasks isPending={true} key={i} status={s} tasks={[]} />)
+                            : statusList.map((s, i) => <StatusTasks
+                                key={i}
+                                status={s}
+                                tasks={(sortedTasks[s]) ? sortedTasks[s] : []}
+                                updateTask={(task) => handleDragAndDrop(task, s)}
+                                showOverlay={setOverlayTask}
+                            />)}
                     </div>
                 </div>
             </div>
