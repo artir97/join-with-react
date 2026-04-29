@@ -73,7 +73,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 [ ] Authentication
 - [x] Display user name
-- [ ] Display own contacts / tasks
+- [~] Display own contacts / tasks
+    - [x] Tasks
+    - [ ] Contacts
 
 [ ] Realtime changes
 - [ ] Add / Delete / Edit changes reflected on other tabs / windows
@@ -85,7 +87,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 [ ] Firebase DB
 - [ ] Subtask progression
 - [x] While loading: Skeletons
-    - [ ] Set animation
+    - [x] Set animation
 
 [ ] Cookies
 - [ ] Save login info if checked on login
+
+[ ] Deployment
+- [ ] Full CSS
