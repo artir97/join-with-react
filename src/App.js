@@ -20,7 +20,6 @@ import LegalNotice from './pages/LegalNotice';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 
 import './App.css';
-import './output.css';
 import { NotificationProvider } from './contexts/NotificationContext';
 
 // MAIN PAGE
