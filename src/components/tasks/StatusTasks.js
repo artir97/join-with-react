@@ -39,14 +39,12 @@ const StatusTasks = ({ status, isPending, tasks, updateTask, showOverlay }) => {
                                     onClick={() => showOverlay(t)}
                                 />
                             </Drag>
-
                         ))
-                        : (!isDragging
-                            ? <div className="border-dashed border w-full border-gray-300 bg-gray-100 rounded-lg text-center py-3 min-w-64">
-                                <p className="text-gray-400">No task {status.toLowerCase()}</p>
-                            </div>
-                            : <TaskDrop onItemDropped={updateTask} />
-                        ))}
+                        : !isDragging && <div className="border-dashed border w-full border-gray-300 bg-gray-100 rounded-lg text-center py-3 min-w-64">
+                            <p className="text-gray-400">No task {status.toLowerCase()}</p>
+                        </div>
+                    )}
+                {isDragging && <TaskDrop onItemDropped={updateTask} />}
             </div>
         </div>
     );
